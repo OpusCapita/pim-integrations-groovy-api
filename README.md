@@ -1,0 +1,1 @@
+# pim-integrations-groovy-api
