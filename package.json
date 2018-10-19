@@ -1,0 +1,32 @@
+{
+  "name": "pim-integrations-groovy-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "husky": "^1.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpusCapita/pim-integrations-groovy-api.git"
+  },
+  "author": "Dennis Brüseke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OpusCapita/pim-integrations-groovy-api/issues"
+  },
+  "homepage": "https://github.com/OpusCapita/pim-integrations-groovy-api#readme"
+  {
+  "husky": {
+    "hooks": {
+      "pre-commit": "",
+      "pre-push": "cd build/groovydoc &&  groovydoc ../customizationArea/ -d groovydoc",
+      "...": "..."
+    }
+  }
+}
+}
