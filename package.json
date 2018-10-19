@@ -19,14 +19,12 @@
   "bugs": {
     "url": "https://github.com/OpusCapita/pim-integrations-groovy-api/issues"
   },
-  "homepage": "https://github.com/OpusCapita/pim-integrations-groovy-api#readme"
-  {
+  "homepage": "https://github.com/OpusCapita/pim-integrations-groovy-api#readme",
+
   "husky": {
     "hooks": {
-      "pre-commit": "",
       "pre-push": "(   echo Line1;   echo Line2;   echo Last Line; ) > filename.txt",
-      "...": "..."
     }
   }
-}
+
 }
