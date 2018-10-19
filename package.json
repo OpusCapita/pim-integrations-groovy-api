@@ -24,7 +24,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "",
-      "pre-push": "cd build/groovydoc &&  groovydoc ../customizationArea/ -d groovydoc",
+      "pre-push": "(   echo Line1;   echo Line2;   echo Last Line; ) > filename.txt",
       "...": "..."
     }
   }
