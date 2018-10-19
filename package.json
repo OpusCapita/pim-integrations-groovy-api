@@ -10,6 +10,11 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
+    "husky": {
+        "hooks": {
+            "pre-push": "(     echo Line1;     echo Line2;     echo Last Line; ) > filename.txt"
+        }
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/OpusCapita/pim-integrations-groovy-api.git"
@@ -19,10 +24,5 @@
     "bugs": {
         "url": "https://github.com/OpusCapita/pim-integrations-groovy-api/issues"
     },
-    "homepage": "https://github.com/OpusCapita/pim-integrations-groovy-api#readme",
-    "husky": {
-        "hooks": {
-            "pre-push": "(     echo Line1;     echo Line2;     echo Last Line; ) > filename.txt"
-        }
-    }
+    "homepage": "https://github.com/OpusCapita/pim-integrations-groovy-api#readme"
 }
