@@ -12,7 +12,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-push": "(     echo Line1;     echo Line2;     echo Last Line; ) > filename.txt"
+            "pre-push": "npm test"
         }
     },
     "repository": {
