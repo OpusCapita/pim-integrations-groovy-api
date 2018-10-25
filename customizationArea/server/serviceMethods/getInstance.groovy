@@ -2,11 +2,6 @@ import java.net.ConnectException
 import groovy.json.JsonSlurper
 import groovy.json.JsonParserType
 
-/**
-* Initializes an Instance of the CustomizationService
-* @author  Dennis Brueseke
-* @version 1.0
-*/
 class GetInstance{
 
     /**
@@ -20,6 +15,8 @@ class GetInstance{
 
 /**
  * Provides methods for customization tasks
+ * @author  Dennis Brueseke
+ * @version 1.0
  */
 class CustomizationService{
 
