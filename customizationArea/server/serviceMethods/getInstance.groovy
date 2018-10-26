@@ -15,8 +15,8 @@ class GetInstance{
  */
 class CustomizationService{
 
-    private URL url
-    private final static basePath = '/api/'
+    String host, accessToken
+    int port
 
     /**
      * Creates CustomizationService from the host, port number and access token
@@ -25,21 +25,23 @@ class CustomizationService{
      * @param accessToken Valid access token
      */
     public CustomizationService(String host, int port, String accessToken){
-        url = host.toURL
-        url.port = port
-        url.path = basePath
-        url.query = 'token='+accessToken
+        this.host = host
+        this.port = port
+        this.accessToken = accessToken
     }
 
     /**
      * Ping the PIT
      * @return             Ping response
      */
-    private static boolean ping(){
-        url.path = basePath + 'ping/'
-        String response = url.getText()
-        url.path = basePath
+    public String ping(){
+        URL url = getUrl('ping')
+        def response = url.getText()
         response
     }
 
+    URL getUrl(String method){
+        String urlAsString = "$host:$port/api/$method/?token=$accessToken".toString()
+        urlAsString.toURL()
+    }
 }
