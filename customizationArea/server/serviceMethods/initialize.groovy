@@ -27,7 +27,7 @@ class Initialize{
 class CustomizationService{
 
     String host, accessToken
-    def port = 80
+    int port
     /**
      * Creates CustomizationService from the host, port number and access token
      * @param  host                         [description]
@@ -82,7 +82,8 @@ class CustomizationService{
 
     private URL getURL(String method = null){
         method = method ? method + '/' : ''
-        String urlAsString = "$host:$port/api/$method?token=$accessToken".toString()
+        def port_string = port ? ":$port" : ''
+        String urlAsString = "$host$port_string/api/$method?token=$accessToken".toString()
         urlAsString.toURL()
     }
 
