@@ -1,4 +1,7 @@
+import groovy.json.JsonSlurper
 import org.apache.commons.validator.routines.UrlValidator
+import javax.ws.rs.InternalServerErrorException
+import java.util.concurrent.TimeoutException
 class Initialize{
 
     /**
@@ -8,10 +11,13 @@ class Initialize{
      * @param  accessToken                  [description]
      * @return                              [description]
      * @throws IllegalArgumentException     [description]
-     * @throws InternalServerErrorException [description]
      */
-    CustomizationService execute(String host, int port, String accessToken)throws IllegalArgumentException, InternalServerErrorException{
-        new CustomizationService(host, port, accessToken)
+    CustomizationService execute(String host, def port = null, String accessToken)throws IllegalArgumentException{
+        if(port){
+            new CustomizationService(host, port, accessToken)
+        }else{
+            new CustomizationService(host, accessToken)
+        }
     }
 }
 
@@ -21,50 +27,54 @@ class Initialize{
 class CustomizationService{
 
     String host, accessToken
-    int port
-
+    def port = 80
     /**
      * Creates CustomizationService from the host, port number and access token
      * @param  host                         [description]
      * @param  null                         [description]
      * @param  accessToken                  [description]
      * @throws IllegalArgumentException     [description]
-     * @throws InternalServerErrorException [description]
      */
-    public CustomizationService(String host, int port = null, String accessToken) throws IllegalArgumentException, InternalServerErrorException{
+    public CustomizationService(String host, def port = null, String accessToken) throws IllegalArgumentException{
         this.host = host
-        this.port = port ?: 5000
+        this.port = port ?: this.port
         this.accessToken = accessToken
         String url = getURL()
         if(!isValidURL(url)){
-            throw new IllegalArgumentException("Error: the host you have provided is not valid.")
+            throw new IllegalArgumentException("Error: the host url you have provided is not valid.")
         }
-        ping() // verify access token
     }
 
     /**
      * Checks your installation by connecting to PIM.
      * @return pong on success, or a descriptive error on failure.
-     * @throws IllegalArgumentException <br>
+     * @throws UnauthorizedException<br>
      * 401 Unauthorized - Occurs e.g. when the token you have provided is not valid. <br>
-     * 404 Not Found - Occurs e.g. when the host you have provided is not valid.
      * @throws InternalServerErrorException<br>
-     * 500 Internal Server Error - Occurs only on unknown errors. If you encounter a 500, this is most likely a bug. <br>
-     * 580 PIM Access Denied - This occurs when the PIM user you are using is not allowed to perform an operation.<br>
-     * 581 PIM Unreachable - The connection to PIM was unsuccessful, most likely because your configuration of the host is wrong.<br>
-     * 582 PIM Internal Error Exception - The connection to PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.<br>
-     * 583 PIM 404 - The connection to the PIM host was successful, but it returned a 404.
+     * 500 Internal Server Error - Occurs only on unknown errors. If you encounter a 500, this is most likely a bug.
+     * @throws ServerTimeoutException<br>
+     * 501 Server Timeout Error - Occurs when the PIT is not reachable. Check for valid host/port.
+     * @throws UnknownHostException<br>
+     * 502 Host Error: The host you provided is not reachable.
      */
-    public def ping() throws IllegalArgumentException, InternalServerErrorException{
+    public def ping() throws UnauthorizedException, InternalServerErrorException, ServerTimeoutException, UnknownHostException{
         URL url = getURL('ping')
-        def response = url.getText()
-        def jsonResponse = asJson(response)
-        int status = ping.status
+        def response
+        try{
+            response = url.getText([connectTimeout: 3000])
+        }catch (SocketTimeoutException e){
+            throw new ServerTimeoutException("Error 501: PIT is not reachable. Port or host you have provided might be not valid")
+        }catch (UnknownHostException e){
+            throw new UnknownHostException("Error 502: The host you provided is not reachable.")
+        }catch (IOException e){
+            throw new UnauthorizedException("Error 401: the access-token you have provided is not valid.")
+        }
 
-        if(status == 401){
-            throw new IllegalArgumentException("Error $status: the token you have provided is not vali.")
-        }else if(status > 500){
-            throw new InternalServerErrorException("TODO")
+        def jsonResponse = asResultJson(response)
+        int status = jsonResponse.status
+
+        if(status > 500){
+            throw new InternalServerErrorException("Internal Server Error 500: Occurs only on unknown errors. If you encounter a 500, this is most likely a bug.")
         }
 
         jsonResponse
@@ -82,7 +92,22 @@ class CustomizationService{
         urlValidator.isValid(url)
     }
 
-    private def asJson(String jsonString){
-        new JsonSlurper().parseText(jsonString)
+    private def asResultJson(String jsonString){
+        def map = new JsonSlurper().parseText(jsonString)
+        map.put('value',map.result)
+        map.remove('result')
+        map
+    }
+}
+
+class UnauthorizedException extends IllegalArgumentException{
+    public UnauthorizedException(String message){
+        super(message)
+    }
+}
+
+class ServerTimeoutException extends TimeoutException{
+    public ServerTimeoutException(String message){
+        super(message)
     }
 }
