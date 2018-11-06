@@ -2,7 +2,13 @@ import groovy.json.JsonSlurper
 import org.apache.commons.validator.routines.UrlValidator
 import javax.ws.rs.InternalServerErrorException
 import java.util.concurrent.TimeoutException
-class Initialize{
+import groovyx.net.http.HttpResponseException
+import groovyx.net.http.RESTClient
+import org.apache.http.entity.ContentType
+import org.apache.http.conn.ConnectTimeoutException
+import org.apache.http.conn.HttpHostConnectException
+import javax.ws.rs.NotAuthorizedException
+class Initialize {
 
     /**
      * [execute description]
@@ -12,103 +18,95 @@ class Initialize{
      * @return                              [description]
      * @throws IllegalArgumentException     [description]
      */
-    CustomizationService execute(String host, def port = null, String accessToken)throws IllegalArgumentException{
-        if(port){
-            new CustomizationService(host, port, accessToken)
-        }else{
-            new CustomizationService(host, accessToken)
-        }
+    CustomizationService execute(String host, String accessToken, int port = null) throws IllegalArgumentException {
+        new CustomizationService(host, accessToken, port)
     }
 }
 
 /**
  * Provides methods for customization tasks
  */
-class CustomizationService{
+class CustomizationService {
 
-    String host, accessToken
-    int port
+    String accessToken
+    RESTClient restClient
+    final static Integer TIMEOUT = new Integer(1000)
+
     /**
-     * Creates CustomizationService from the host, port number and access token
-     * @param  host                         [description]
-     * @param  null                         [description]
-     * @param  accessToken                  [description]
-     * @throws IllegalArgumentException     [description]
+     * Creates customizationService that provides several methods for customization
+     * @param  host                         The URL PIT runs on
+     * @param  accessToken                  Accesstoken that is provided by the PIT
+     * @param  port                         The port PIT runs on
+     * @throws IllegalArgumentException     Host or port is not valid.
      */
-    public CustomizationService(String host, def port = null, String accessToken) throws IllegalArgumentException{
-        this.host = host
-        this.port = port ?: this.port
-        this.accessToken = accessToken
-        String url = getURL()
-        if(!isValidURL(url)){
-            throw new IllegalArgumentException("Error: the host url you have provided is not valid.")
+    public CustomizationService(String host, String accessToken, int port = null) throws IllegalArgumentException {
+        String portString = port ? ":$port" : ''
+        String url = host + portString
+
+        if (isValidURL(url)) {
+            this.accessToken = accessToken
+            restClient = new RESTClient(url)
+            restClient.client.getParams().setParameter("http.socket.timeout", TIMEOUT)
+            restClient.client.getParams().setParameter("http.connection.timeout", TIMEOUT)
+        } else {
+            throw new IllegalArgumentException("Error: host or port is not valid.")
         }
     }
 
     /**
      * Checks your installation by connecting to PIM.
      * @return pong on success, or a descriptive error on failure.
-     * @throws UnauthorizedException<br>
-     * 401 Unauthorized - Occurs e.g. when the token you have provided is not valid. <br>
+     * @throws NotAuthorizedException<br>
+     * 401 NotAuthorizedException - Occurs e.g. when the token you have provided is not valid. <br>
      * @throws InternalServerErrorException<br>
-     * 500 Internal Server Error - Occurs only on unknown errors. If you encounter a 500, this is most likely a bug.
-     * @throws ServerTimeoutException<br>
-     * 501 Server Timeout Error - Occurs when the PIT is not reachable. Check for valid host/port.
+     * Internal Server Error - Occurs on internal connection issues.
      * @throws UnknownHostException<br>
-     * 502 Host Error: The host you provided is not reachable.
+     * 402 Unknown Host Error: The host you provided is not available this might be due to invalid host or port.
      */
-    public def ping() throws UnauthorizedException, InternalServerErrorException, ServerTimeoutException, UnknownHostException{
-        URL url = getURL('ping')
+    public def ping() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
         def response
-        try{
-            response = url.getText([connectTimeout: 3000])
-        }catch (SocketTimeoutException e){
-            throw new ServerTimeoutException("Error 501: PIT is not reachable. Port or host you have provided might be not valid")
-        }catch (UnknownHostException e){
-            throw new UnknownHostException("Error 502: The host you provided is not reachable.")
-        }catch (IOException e){
-            throw new UnauthorizedException("Error 401: the access-token you have provided is not valid.")
+
+        try {
+            response = restClient.get([path: '/api/ping',
+                contentType: ContentType.APPLICATION_JSON,
+                query: [
+                    token: accessToken
+                ]
+            ])
+        } catch (HttpResponseException e) {
+            def responseStatus = e.response.data.status
+            def responseMessage = e.response.data.message
+            String errorMessage = "Error $responseStatus: $responseMessage"
+
+            if (responseStatus == 580) {
+                throw new NotAuthorizedException(errorMessage)
+            } else if (responseStatus in [500, 581, 582, 583]) {
+                throw new InternalServerErrorException(errorMessage)
+            } else {
+                println responseMessage
+                println responseStatus
+                throw e
+            }
+        } catch (HttpHostConnectException | ConnectTimeoutException e) {
+            throw new UnknownHostException("Error 584: Host is not available this might be due to invalid host or port. Reason: $e.message")
         }
 
-        def jsonResponse = asResultJson(response)
-        int status = jsonResponse.status
-
-        if(status > 500){
-            throw new InternalServerErrorException("Internal Server Error 500: Occurs only on unknown errors. If you encounter a 500, this is most likely a bug.")
-        }
+        def jsonResponse = transforToEndResult(response.data)
 
         jsonResponse
     }
 
-    private URL getURL(String method = null){
-        method = method ? method + '/' : ''
-        def port_string = port ? ":$port" : ''
-        String urlAsString = "$host$port_string/api/$method?token=$accessToken".toString()
-        urlAsString.toURL()
-    }
 
-    private boolean isValidURL(String url){
-        String[] schemes = ["http","https"]
+    private boolean isValidURL(String url) {
+        String[] schemes = ["http", "https"]
         UrlValidator urlValidator = new UrlValidator(schemes)
         urlValidator.isValid(url)
     }
 
-    private def asResultJson(String jsonString){
-        def map = new JsonSlurper().parseText(jsonString)
-        map.put('value',map.result)
+    private def transforToEndResult(def json) {
+        def map = json
+        map.put('value', map.result)
         map.remove('result')
         map
-    }
-}
-
-class UnauthorizedException extends IllegalArgumentException{
-    public UnauthorizedException(String message){
-        super(message)
-    }
-}
-
-class ServerTimeoutException extends TimeoutException{
-    public ServerTimeoutException(String message){
-        super(message)
     }
 }
