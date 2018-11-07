@@ -57,13 +57,15 @@ class CustomizationService {
      * Checks your installation by connecting to PIM.
      * @return pong on success, or a descriptive error on failure.
      * @throws NotAuthorizedException<br>
-     * 401 NotAuthorizedException - Occurs e.g. when the token you have provided is not valid. <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
      * @throws UnknownHostException<br>
-     * 402 Unknown Host Error: The host you provided is not available this might be due to invalid host or port.
-     * @throws AccessDeniedException<br>
-     * 580 PIM Access Denied - This occurs when the configured PIM user is not allowed to perform an operation.
+     * 402 Unknown Host Error: The host you have provided is not available.
      * @throws InternalServerErrorException<br>
-     * Internal Server Error - Occurs on internal connection issues.
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.<br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.<br>
+     * 583 PIM 404 - The connection between PIT and the PIM host was successful, but PIM returned a 404.
      */
     public def ping() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
         def response
@@ -77,7 +79,7 @@ class CustomizationService {
             ])
         } catch (HttpResponseException e) {
             if (!e.response.data) {
-                throw new UnknownHostException("Error 584: Host is not available this might be due to invalid host or port.")
+                throw new UnknownHostException("Error 402: Host is not available this might be due to invalid host or port.")
             }
 
             def responseStatus = e.response.data.status
@@ -86,15 +88,13 @@ class CustomizationService {
 
             if (responseStatus == 401) {
                 throw new NotAuthorizedException(errorMessage)
-            } else if (responseStatus in [500, 581, 582, 583]) {
+            } else if (responseStatus >= 500) {
                 throw new InternalServerErrorException(errorMessage)
-            } else if (responseStatus == 580) {
-                throw new AccessDeniedException(errorMessage)
             } else {
                 throw e
             }
         } catch (UnknownHostException | HttpHostConnectException | ConnectTimeoutException e) {
-            throw new UnknownHostException("Error 584: Host is not available this might be due to invalid host or port. Reason: $e.message")
+            throw new UnknownHostException("Error 402: Host is not available this might be due to invalid host or port. Reason: $e.message")
         }
 
         new Response(response.data)
@@ -127,12 +127,6 @@ class Response {
 
 class InternalServerErrorException extends RuntimeException {
     public InternalServerErrorException(String message) {
-        super(message)
-    }
-}
-
-class AccessDeniedException extends RuntimeException {
-    public AccessDeniedException(String message) {
         super(message)
     }
 }
