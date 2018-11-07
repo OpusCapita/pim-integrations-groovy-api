@@ -8,8 +8,8 @@ import org.apache.http.entity.ContentType
 import org.apache.http.conn.ConnectTimeoutException
 import org.apache.http.conn.HttpHostConnectException
 import javax.ws.rs.NotAuthorizedException
+import groovy.json.internal.LazyMap
 class Initialize {
-
     /**
      * [execute description]
      * @param  host                         [description]
@@ -18,7 +18,7 @@ class Initialize {
      * @return                              [description]
      * @throws IllegalArgumentException     [description]
      */
-    CustomizationService execute(String host, String accessToken, int port = null) throws IllegalArgumentException {
+    CustomizationService execute(String host, String accessToken, def port = null) throws IllegalArgumentException {
         new CustomizationService(host, accessToken, port)
     }
 }
@@ -39,18 +39,18 @@ class CustomizationService {
      * @param  port                         The port PIT runs on
      * @throws IllegalArgumentException     Host or port is not valid.
      */
-    public CustomizationService(String host, String accessToken, int port = null) throws IllegalArgumentException {
+    public CustomizationService(String host, String accessToken, def port = null) throws IllegalArgumentException {
         String portString = port ? ":$port" : ''
         String url = host + portString
 
-        if (isValidURL(url)) {
-            this.accessToken = accessToken
-            restClient = new RESTClient(url)
-            restClient.client.getParams().setParameter("http.socket.timeout", TIMEOUT)
-            restClient.client.getParams().setParameter("http.connection.timeout", TIMEOUT)
-        } else {
+        if (!isValidURL(url)) {
             throw new IllegalArgumentException("Error: host or port is not valid.")
         }
+
+        this.accessToken = accessToken
+        restClient = new RESTClient(url)
+        restClient.client.getParams().setParameter("http.socket.timeout", TIMEOUT)
+        restClient.client.getParams().setParameter("http.connection.timeout", TIMEOUT)
     }
 
     /**
@@ -58,10 +58,12 @@ class CustomizationService {
      * @return pong on success, or a descriptive error on failure.
      * @throws NotAuthorizedException<br>
      * 401 NotAuthorizedException - Occurs e.g. when the token you have provided is not valid. <br>
-     * @throws InternalServerErrorException<br>
-     * Internal Server Error - Occurs on internal connection issues.
      * @throws UnknownHostException<br>
      * 402 Unknown Host Error: The host you provided is not available this might be due to invalid host or port.
+     * @throws AccessDeniedException<br>
+     * 580 PIM Access Denied - This occurs when the configured PIM user is not allowed to perform an operation.
+     * @throws InternalServerErrorException<br>
+     * Internal Server Error - Occurs on internal connection issues.
      */
     public def ping() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
         def response
@@ -74,28 +76,29 @@ class CustomizationService {
                 ]
             ])
         } catch (HttpResponseException e) {
+            if (!e.response.data) {
+                throw new UnknownHostException("Error 584: Host is not available this might be due to invalid host or port.")
+            }
+
             def responseStatus = e.response.data.status
             def responseMessage = e.response.data.message
             String errorMessage = "Error $responseStatus: $responseMessage"
 
-            if (responseStatus == 580) {
+            if (responseStatus == 401) {
                 throw new NotAuthorizedException(errorMessage)
             } else if (responseStatus in [500, 581, 582, 583]) {
                 throw new InternalServerErrorException(errorMessage)
+            } else if (responseStatus == 580) {
+                throw new AccessDeniedException(errorMessage)
             } else {
-                println responseMessage
-                println responseStatus
                 throw e
             }
-        } catch (HttpHostConnectException | ConnectTimeoutException e) {
+        } catch (UnknownHostException | HttpHostConnectException | ConnectTimeoutException e) {
             throw new UnknownHostException("Error 584: Host is not available this might be due to invalid host or port. Reason: $e.message")
         }
 
-        def jsonResponse = transforToEndResult(response.data)
-
-        jsonResponse
+        new Response(response.data)
     }
-
 
     private boolean isValidURL(String url) {
         String[] schemes = ["http", "https"]
@@ -103,10 +106,39 @@ class CustomizationService {
         urlValidator.isValid(url)
     }
 
-    private def transforToEndResult(def json) {
-        def map = json
-        map.put('value', map.result)
-        map.remove('result')
-        map
+}
+
+class Response {
+    private LazyMap json
+
+    public Response(LazyMap json) {
+        this.json = json
+    }
+
+    public def getValue() {
+        json.result
+    }
+
+    public def getStatus() {
+        json.status
+    }
+
+}
+
+class InternalServerErrorException extends RuntimeException {
+    public InternalServerErrorException(String message) {
+        super(message)
+    }
+}
+
+class AccessDeniedException extends RuntimeException {
+    public AccessDeniedException(String message) {
+        super(message)
+    }
+}
+
+class NotAuthorizedException extends RuntimeException {
+    public NotAuthorizedException(String message) {
+        super(message)
     }
 }
