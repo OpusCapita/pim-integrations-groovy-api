@@ -1,14 +1,11 @@
 {
     "name": "pim-integrations-groovy-api",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "",
     "main": "index.js",
     "dependencies": {},
     "devDependencies": {
         "husky": "^1.1.2"
-    },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "husky": {
         "hooks": {
@@ -19,8 +16,7 @@
         "type": "git",
         "url": "git+https://github.com/OpusCapita/pim-integrations-groovy-api.git"
     },
-    "author": "Dennis Brüseke",
-    "license": "ISC",
+    "license": "UNLICENSED",
     "bugs": {
         "url": "https://github.com/OpusCapita/pim-integrations-groovy-api/issues"
     },
