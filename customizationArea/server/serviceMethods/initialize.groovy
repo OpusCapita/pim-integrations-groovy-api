@@ -1,7 +1,5 @@
-import groovy.json.JsonSlurper
 import org.apache.commons.validator.routines.UrlValidator
 import javax.ws.rs.InternalServerErrorException
-import java.util.concurrent.TimeoutException
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 import org.apache.http.entity.ContentType
@@ -9,7 +7,8 @@ import org.apache.http.conn.ConnectTimeoutException
 import org.apache.http.conn.HttpHostConnectException
 import javax.ws.rs.NotAuthorizedException
 import groovy.json.internal.LazyMap
-class Initialize {
+
+public class Initialize {
     /**
      * [execute description]
      * @param  host                         [description]
@@ -27,10 +26,9 @@ class Initialize {
  * Provides methods for customization tasks
  */
 class CustomizationService {
-
-    String accessToken
-    RESTClient restClient
-    final static Integer TIMEOUT = new Integer(1000)
+    private String accessToken
+    private RESTClient restClient
+    private final static Integer TIMEOUT = new Integer(1000)
 
     /**
      * Creates customizationService that provides several methods for customization
@@ -67,7 +65,7 @@ class CustomizationService {
      * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.<br>
      * 583 PIM 404 - The connection between PIT and the PIM host was successful, but PIM returned a 404.
      */
-    public def ping() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
+    public Response ping() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
         def response
 
         try {
@@ -77,27 +75,88 @@ class CustomizationService {
                     token: accessToken
                 ]
             ])
-        } catch (HttpResponseException e) {
-            if (!e.response.data) {
-                throw new UnknownHostException("Error 402: Host is not available this might be due to invalid host or port.")
-            }
-
-            def responseStatus = e.response.data.status
-            def responseMessage = e.response.data.message
-            String errorMessage = "Error $responseStatus: $responseMessage"
-
-            if (responseStatus == 401) {
-                throw new NotAuthorizedException(errorMessage)
-            } else if (responseStatus >= 500) {
-                throw new InternalServerErrorException(errorMessage)
-            } else {
-                throw e
-            }
-        } catch (UnknownHostException | HttpHostConnectException | ConnectTimeoutException e) {
-            throw new UnknownHostException("Error 402: Host is not available this might be due to invalid host or port. Reason: $e.message")
+        } catch (Exception e) {
+            handleException(e)
         }
 
         new Response(response.data)
+    }
+
+    /**
+     * Creates an evaluated Product for data consumption
+     * @param  productId ProductId of the desired product
+     * @param  catalogId CatalogId of the desired product
+     * @param  languageId   Optional - All language-specific fields will be filtered to only include languages with the matching languageId. If not provided, all language-specific fields are returned in all languages.
+     * @param  parameters   Optional - Possible parameters are exclude and include to specify the returned Product
+     * [
+     * exclude : A list of field ids. If defined, the result will not include the defined fields. If not provided, all fields will be returned.
+     * Available values : attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId,
+     * prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
+     * ]
+     * @return           A fully evaluated, JSON like representation of a Product
+     * @throws NotAuthorizedException<br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException<br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException<br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.<br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.<br>
+     * 583 PIM 404 - The connection between PIT and the PIM host was successful, but PIM returned a 404.
+     */
+    public Response getProduct(String catalogId, String productId, ArrayList < String > languageIds = [], HashMap parameters = [: ]) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
+
+        def response
+        def query = [token: accessToken]
+
+        if (languageIds) {
+            query.put('languageIds', languageIds.join(','))
+        }
+        if (parameters) {
+            if (parameters.exclude) {
+                query.put('exclude', parameters.exclude.join(','))
+            }
+        }
+
+        String path = "/api/catalog/$catalogId/product/$productId"
+
+        try {
+            response = restClient.get([path: path,
+                contentType: ContentType.APPLICATION_JSON,
+                query: query
+            ])
+        } catch (Exception e) {
+            handleException(e)
+        }
+        
+        new Response(response.data)
+    }
+
+    private static void handleException(Exception e) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
+        switch (e.class) {
+            case HttpResponseException:
+                if (!e.response.data) {
+                    throw new UnknownHostException("Error 402: Host is not available this might be due to invalid host or port.")
+                }
+
+                def responseStatus = e.response.data.status
+                def responseMessage = e.response.data.message
+                String errorMessage = "Error $responseStatus: $responseMessage"
+
+                if (responseStatus == 401) {
+                    throw new NotAuthorizedException(errorMessage)
+                } else if (responseStatus >= 500) {
+                    throw new InternalServerErrorException(errorMessage)
+                }
+
+                throw e
+
+            case [UnknownHostException, HttpHostConnectException, ConnectTimeoutException]:
+                throw new UnknownHostException("Error 402: Host is not available this might be due to invalid host or port. Reason: $e.message")
+            default:
+                throw e
+        }
     }
 
     private boolean isValidURL(String url) {
@@ -105,7 +164,6 @@ class CustomizationService {
         UrlValidator urlValidator = new UrlValidator(schemes)
         urlValidator.isValid(url)
     }
-
 }
 
 class Response {
@@ -122,7 +180,6 @@ class Response {
     public def getStatus() {
         json.status
     }
-
 }
 
 class InternalServerErrorException extends RuntimeException {
