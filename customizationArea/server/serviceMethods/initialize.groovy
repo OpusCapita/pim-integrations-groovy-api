@@ -30,6 +30,9 @@ class CustomizationService {
     private RESTClient restClient
     private final static Integer TIMEOUT = new Integer(1000)
 
+    private Closure pingPath = { -> "/api/ping"}
+    private Closure productPath = {catalogId, productId -> "/api/catalog/$catalogId/product/$productId"}
+
     /**
      * Creates customizationService that provides several methods for customization
      * @param  host                         The URL PIT runs on
@@ -68,7 +71,7 @@ class CustomizationService {
         def response
 
         try {
-            response = restClient.get([path: '/api/ping',
+            response = restClient.get([path: pingPath(),
                 contentType: ContentType.APPLICATION_JSON,
                 query: [
                     token: accessToken
@@ -120,7 +123,7 @@ class CustomizationService {
             query.put('include', include.join(','))
         }
 
-        String path = "/api/catalog/$catalogId/product/$productId"
+        String path = productPath(catalogId,productId)
 
         try {
             response = restClient.get([path: path,
@@ -175,6 +178,7 @@ class CustomizationService {
 
 class Response {
     private LazyMap json
+    private boolean isEmpty
 
     public Response(LazyMap json) {
         this.json = json
