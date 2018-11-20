@@ -62,8 +62,7 @@ class CustomizationService {
      * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
      * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
      * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.<br>
-     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.<br>
-     * 583 PIM 404 - The connection between PIT and the PIM host was successful, but PIM returned a 404.
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
      */
     public Response ping() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
         def response
@@ -83,17 +82,19 @@ class CustomizationService {
     }
 
     /**
-     * Creates an evaluated Product for data consumption
+     * Creates a product for data consumption
      * @param  productId ProductId of the desired product
      * @param  catalogId CatalogId of the desired product
-     * @param  languageId   Optional - All language-specific fields will be filtered to only include languages with the matching languageId. If not provided, all language-specific fields are returned in all languages.
-     * @param  parameters   Optional - Possible parameters are exclude and include to specify the returned Product
-     * [
-     * exclude : A list of field ids. If defined, the result will not include the defined fields. If not provided, all fields will be returned.
+     * @param  languageIds   Optional - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
+     * @param  exclude   Optional - A list of field ids. If defined, the result will not include the defined fields. If not provided, all fields will be returned.
      * Available values : attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId,
      * prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
-     * ]
-     * @return           A fully evaluated, JSON like representation of a Product
+     *
+     * @param  include   Optional - A list of field ids. If defined, the result will include the defined fields.
+     * Available values : attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId,
+     * prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
+     *
+     * @return           A Response that contains the product
      * @throws NotAuthorizedException<br>
      * 401 NotAuthorizedException - The token you have provided is not valid.
      * @throws UnknownHostException<br>
@@ -102,10 +103,9 @@ class CustomizationService {
      * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
      * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
      * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.<br>
-     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.<br>
-     * 583 PIM 404 - The connection between PIT and the PIM host was successful, but PIM returned a 404.
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
      */
-    public Response getProduct(String catalogId, String productId, ArrayList < String > languageIds = [], HashMap parameters = [: ]) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
+    public Response getProduct(String catalogId, String productId, ArrayList <String> languageIds = [], ArrayList <String> exclude = [] , ArrayList <String> include = []) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
 
         def response
         def query = [token: accessToken]
@@ -113,10 +113,11 @@ class CustomizationService {
         if (languageIds) {
             query.put('languageIds', languageIds.join(','))
         }
-        if (parameters) {
-            if (parameters.exclude) {
-                query.put('exclude', parameters.exclude.join(','))
-            }
+        if (exclude) {
+                query.put('exclude', exclude.join(','))
+        }
+        if (include) {
+            query.put('include', include.join(','))
         }
 
         String path = "/api/catalog/$catalogId/product/$productId"
@@ -127,9 +128,15 @@ class CustomizationService {
                 query: query
             ])
         } catch (Exception e) {
+            if(e instanceof HttpResponseException){
+                if(e.response.data.status == 404){
+                    throw new BadRequestException("Error 404: No such Product found [catalogId:$catalogId, productId:$productId]")
+                }
+            }
+
             handleException(e)
         }
-        
+
         new Response(response.data)
     }
 
@@ -190,6 +197,12 @@ class InternalServerErrorException extends RuntimeException {
 
 class NotAuthorizedException extends RuntimeException {
     public NotAuthorizedException(String message) {
+        super(message)
+    }
+}
+
+class BadRequestException extends RuntimeException {
+    public BadRequestException(String message) {
         super(message)
     }
 }
