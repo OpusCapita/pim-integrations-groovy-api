@@ -30,7 +30,7 @@ class CustomizationService {
     private RESTClient restClient
     private final static Integer TIMEOUT = new Integer(1000)
 
-    private Closure pingPath = { -> "/api/ping"}
+    private Closure pingPath = {-> "/api/ping"}
     private Closure productPath = {catalogId, productId -> "/api/catalog/$catalogId/product/$productId"}
 
     /**
@@ -68,24 +68,15 @@ class CustomizationService {
      * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
      */
     public Response ping() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
-        def response
 
-        try {
-            response = restClient.get([path: pingPath(),
-                contentType: ContentType.APPLICATION_JSON,
-                query: [
-                    token: accessToken
-                ]
-            ])
-        } catch (Exception e) {
-            handleException(e)
-        }
+        String path = pingPath()
+        Response response = restGet(path)
 
-        new Response(response.data)
+        return response
     }
 
     /**
-     * Creates a product for data consumption
+     * Creates a product
      * @param  productId ProductId of the desired product
      * @param  catalogId CatalogId of the desired product
      * @param  languageIds   Optional - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
@@ -108,22 +99,31 @@ class CustomizationService {
      * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.<br>
      * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
      */
-    public Response getProduct(String catalogId, String productId, ArrayList <String> languageIds = [], ArrayList <String> exclude = [] , ArrayList <String> include = []) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
+    public Response getProduct(String catalogId, String productId, ArrayList < String > languageIds = [], ArrayList < String > exclude = [], ArrayList < String > include = []) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
 
-        def response
-        def query = [token: accessToken]
+        def query = [: ]
 
         if (languageIds) {
             query.put('languageIds', languageIds.join(','))
         }
         if (exclude) {
-                query.put('exclude', exclude.join(','))
+            query.put('exclude', exclude.join(','))
         }
         if (include) {
             query.put('include', include.join(','))
         }
 
-        String path = productPath(catalogId,productId)
+        String path = productPath(catalogId, productId)
+
+        Response response = restGet(path, query)
+
+        return response
+    }
+
+    private Response restGet(String path, LinkedHashMap query = [: ]) {
+
+        def response
+        query.put('token', accessToken)
 
         try {
             response = restClient.get([path: path,
@@ -131,16 +131,13 @@ class CustomizationService {
                 query: query
             ])
         } catch (Exception e) {
-            if(e instanceof HttpResponseException){
-                if(e.response.data.status == 404){
-                    throw new BadRequestException("Error 404: No such Product found [catalogId:$catalogId, productId:$productId]")
-                }
+            if(e instanceof HttpResponseException && e.response.data.status == 404){
+                return new Response()
             }
-
             handleException(e)
         }
 
-        new Response(response.data)
+        return new Response(response.data)
     }
 
     private static void handleException(Exception e) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException {
@@ -177,19 +174,31 @@ class CustomizationService {
 }
 
 class Response {
-    private LazyMap json
-    private boolean isEmpty
+    private def value
+    private int status
+    private boolean isEmpty = false
 
     public Response(LazyMap json) {
-        this.json = json
+        value = json.result
+        status = json.status
     }
 
-    public def getValue() {
-        json.result
+    public Response() {
+        value = []
+        status = 404
+        isEmpty = true
     }
 
-    public def getStatus() {
-        json.status
+    public def getValue(){
+        value
+    }
+
+    public int getStatus(){
+        status
+    }
+
+    public boolean getIsEmpty(){
+        isEmpty
     }
 }
 
@@ -201,12 +210,6 @@ class InternalServerErrorException extends RuntimeException {
 
 class NotAuthorizedException extends RuntimeException {
     public NotAuthorizedException(String message) {
-        super(message)
-    }
-}
-
-class BadRequestException extends RuntimeException {
-    public BadRequestException(String message) {
         super(message)
     }
 }
