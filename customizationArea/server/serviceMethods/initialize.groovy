@@ -36,6 +36,7 @@ class CustomizationService {
     private Closure generalAttributePath = { -> "/api/attribute"}
     private Closure classificationPath = {classificationId -> "${generalClassificationPath()}/$classificationId"}
     private Closure classificationGroupPath = {classificationId, classificationGroupId -> "/api/classification/$classificationId/classificationGroup/$classificationGroupId"}
+    private Closure classificationGroupChildrenPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/classificationGroup"}
     private Closure classificationGroupsPath = {classificationId -> "${classificationPath(classificationId)}/classificationGroup"}
     private Closure attributePath = {attributeId -> "${generalAttributePath()}/$attributeId"}
     private Closure attributesByClassificationPath = {classificationId -> "${classificationPath(classificationId)}/attribute"}
@@ -187,6 +188,33 @@ class CustomizationService {
     public Response getClassificationGroup(String classificationId, String classificationGroupId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = classificationGroupPath(classificationId, classificationGroupId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
+     * Retrieve a Subgroups of a ClassificationGroup
+     * @param  classificationId             ClassificationId
+     * @param  classificationGroupId        ClassificationGroupId
+     * @return                              List of classificationGroups
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getClassificationGroupChildren(String classificationId, String classificationGroupId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = classificationGroupChildrenPath(classificationId, classificationGroupId)
 
         Response response = restGet(path)
 
