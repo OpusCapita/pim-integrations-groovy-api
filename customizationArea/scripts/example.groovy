@@ -21,6 +21,3 @@ try {
     // For example, if InternalServerErrorException is thrown. An Error code and a detailed description is provided
     // See the Groovy API Doc for more details
 }
-ctx.productVariantService.getVariants(master,true).collect{
-    ctx.externalProductTransformationService.transformToExternalProduct(it,externalProductLanguages)
-}
