@@ -660,9 +660,6 @@ class CustomizationService {
         return response
     }
 
-
-
-
     private Response restGet(String path, LinkedHashMap query = [: ]) {
 
         def response
