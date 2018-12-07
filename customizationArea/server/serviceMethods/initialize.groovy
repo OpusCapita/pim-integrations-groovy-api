@@ -28,16 +28,29 @@ public class Initialize {
 class CustomizationService {
     private String accessToken
     private RESTClient restClient
-    private final static Integer TIMEOUT = new Integer(1000)
+    private final static Integer TIMEOUT = new Integer(3000)
 
     private Closure pingPath = {-> "/api/ping"}
+
     private Closure productPath = {catalogId, productId -> "/api/catalog/$catalogId/product/$productId"}
+    private Closure productAttributeValuesPath = {catalogId, productId -> "${productPath(catalogId, productId)}/attributeValue"}
+    private Closure productClassificationGroupsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/classificationGroup"}
+    private Closure productAssortmentsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/contract"}
+    private Closure productPricesPath = {catalogId, productId -> "${productPath(catalogId, productId)}/price"}
+    private Closure productRelationsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/relation"}
+    private Closure productReverseRelationsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/reverseRelation"}
+    private Closure productDocumentsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/document"}
+    private Closure productVariantsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/variant"}
+
     private Closure generalClassificationPath = { -> "/api/classification"}
-    private Closure generalAttributePath = { -> "/api/attribute"}
     private Closure classificationPath = {classificationId -> "${generalClassificationPath()}/$classificationId"}
     private Closure classificationGroupPath = {classificationId, classificationGroupId -> "/api/classification/$classificationId/classificationGroup/$classificationGroupId"}
     private Closure classificationGroupChildrenPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/classificationGroup"}
+    private Closure classificationGroupAttributeValuesPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/attributeValue"}
+    private Closure productsByClassificationGroupPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/product"}
     private Closure classificationGroupsPath = {classificationId -> "${classificationPath(classificationId)}/classificationGroup"}
+
+    private Closure generalAttributePath = { -> "/api/attribute"}
     private Closure attributePath = {attributeId -> "${generalAttributePath()}/$attributeId"}
     private Closure attributesByClassificationPath = {classificationId -> "${classificationPath(classificationId)}/attribute"}
     private Closure attributesByClassificationGroupPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/attribute"}
@@ -195,6 +208,33 @@ class CustomizationService {
     }
 
     /**
+     * Retrieve the attributeValues of a classificationGroup
+     * @param  classificationId             ClassificationId
+     * @param  classificationGroupId        ClassificationGroupId
+     * @return                              List of attributeValues
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getClassificationGroupAttributeValues(String classificationId, String classificationGroupId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = classificationGroupAttributeValuesPath(classificationId, classificationGroupId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
      * Retrieve a Subgroups of a ClassificationGroup
      * @param  classificationId             ClassificationId
      * @param  classificationGroupId        ClassificationGroupId
@@ -275,7 +315,7 @@ class CustomizationService {
     }
 
     /**
-     * Retrieve all Attributes assigned to a Classification
+     * Retrieve all Attributes assigned to a ClassificationGroup
      * @param  classificationId             ClassificationId
      * @param  classificationGroupId        ClassificationGroupId
      * @return                              List of Attributes
@@ -295,6 +335,33 @@ class CustomizationService {
     public Response getAttributesByClassificationGroup(String classificationId, String classificationGroupId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = attributesByClassificationGroupPath(classificationId, classificationGroupId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
+     * Retrieve all products assigned to a ClassificationGroup
+     * @param  classificationId             ClassificationId
+     * @param  classificationGroupId        ClassificationGroupId
+     * @return                              List of Products
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getProductsByClassificationGroup(String classificationId, String classificationGroupId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = productsByClassificationGroupPath(classificationId, classificationGroupId)
 
         Response response = restGet(path)
 
@@ -376,6 +443,224 @@ class CustomizationService {
 
         return response
     }
+
+    /**
+     * Retrieve all attributeValues of a Product
+     * @param  catalogId                    CatalogId
+     * @param  productId                    ProductId
+     * @return                              List of ProductAttributeValues
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getProductAttributeValues(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = productAttributeValuesPath(catalogId, productId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
+     * Retrieve all ClassificationGroups of a Product
+     * @param  catalogId                    CatalogId
+     * @param  productId                    ProductId
+     * @return                              List of ClassificationGroups
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getProductClassificationGroups(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = productClassificationGroupsPath(catalogId, productId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
+     * Retrieve all ContractetProducts of a Product
+     * @param  catalogId                    CatalogId
+     * @param  productId                    ProductId
+     * @return                              List of ContractetProducts
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getProductAssortments(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = productAssortmentsPath(catalogId, productId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
+     * Retrieve all Prices of a Product
+     * @param  catalogId                    CatalogId
+     * @param  productId                    ProductId
+     * @return                              List of Prices
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getProductPrices(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = productPricesPath(catalogId, productId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
+     * Retrieve all relations of a Product
+     * @param  catalogId                    CatalogId
+     * @param  productId                    ProductId
+     * @return                              List of relations
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getProductRelations(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = productRelationsPath(catalogId, productId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
+     * Retrieve all reverse-relations of a Product
+     * @param  catalogId                    CatalogId
+     * @param  productId                    ProductId
+     * @return                              List of ReverseRelations
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getProductReverseRelations(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = productReverseRelationsPath(catalogId, productId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
+     * Retrieve all documents of a Product
+     * @param  catalogId                    CatalogId
+     * @param  productId                    ProductId
+     * @return                              List of documents
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getProductDocuments(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = productDocumentsPath(catalogId, productId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
+     * Retrieve all variants of a Product
+     * @param  catalogId                    CatalogId
+     * @param  productId                    ProductId
+     * @return                              List of variants
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getProductVariants(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = productVariantsPath(catalogId, productId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+
 
 
     private Response restGet(String path, LinkedHashMap query = [: ]) {
