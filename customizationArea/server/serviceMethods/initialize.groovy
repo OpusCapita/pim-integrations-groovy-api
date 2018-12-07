@@ -278,11 +278,6 @@ class CustomizationService {
                 query: query
             ])
         } catch (Exception e) {
-            println e
-            println e.response.data
-            println e.response
-            println e.response.data?.result
-            println e.message
             if(e instanceof HttpResponseException && e.response.data.status == 404){
                 return new Response([],404,true)
             }
@@ -296,7 +291,7 @@ class CustomizationService {
         switch (e.class) {
             case HttpResponseException:
                 if (!e.response.data) {
-                    throw new UnknownHostException("Error 402: Host is not available this might be due to invalid host or port.")
+                    throw new UnknownHostException("Error 402: Host is not available. This might be due to invalid host or port.")
                 }
 
                 def responseStatus = e.response.data.status
@@ -318,7 +313,7 @@ class CustomizationService {
                 throw e
 
             case [UnknownHostException, HttpHostConnectException, ConnectTimeoutException]:
-                throw new UnknownHostException("Error 402: Host is not available this might be due to invalid host or port. Reason: $e.message")
+                throw new UnknownHostException("Error 402: Host is not available. This might be due to invalid host or port. Reason: $e.message")
             default:
                 throw e
         }
