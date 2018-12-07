@@ -33,8 +33,10 @@ class CustomizationService {
     private Closure pingPath = {-> "/api/ping"}
     private Closure productPath = {catalogId, productId -> "/api/catalog/$catalogId/product/$productId"}
     private Closure generalClassificationPath = { -> "/api/classification"}
+    private Closure generalAttributePath = { -> "/api/attribute"}
     private Closure classificationPath = {classificationId -> "${generalClassificationPath()}/$classificationId"}
     private Closure classificationGroupPath = {classificationId, classificationGroupId -> "/api/classification/$classificationId/classificationGroup/$classificationGroupId"}
+    private Closure attributePath = {attributeId -> "${generalAttributePath()}/$attributeId"}
     private Closure attributesByClassificationPath = {classificationId -> "${classificationPath(classificationId)}/attribute"}
     private Closure attributesByClassificationGroupPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/attribute"}
 
@@ -244,7 +246,7 @@ class CustomizationService {
 
     /**
      * Retrieve all Classifications
-     * @return                              all Classifications
+     * @return                              List of all Classifications
      * @throws NotAuthorizedException       <br>
      * 401 NotAuthorizedException - The token you have provided is not valid.
      * @throws UnknownHostException         <br>
@@ -266,6 +268,57 @@ class CustomizationService {
 
         return response
     }
+
+    /**
+     * Retrieve all Attributes
+     * @return                              List of all Attributes
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getAllAttributes() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = generalAttributePath()
+
+        Response response = restGet(path)
+
+        return response
+    }
+
+    /**
+     * Retrieve all Attributes
+     * @return                              List of all Attributes
+     * @throws NotAuthorizedException       <br>
+     * 401 NotAuthorizedException - The token you have provided is not valid.
+     * @throws UnknownHostException         <br>
+     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws InternalServerErrorException <br>
+     * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+     * @throws PIMAccessDeniedException     <br>
+     * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.<br>
+     * @throws PIMUnreachableException      <br>
+     * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+     * @throws PIMInternalErrorException    <br>
+     * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+     */
+    public Response getAttribute(String attributeId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+
+        String path = attributePath(attributeId)
+
+        Response response = restGet(path)
+
+        return response
+    }
+
 
     private Response restGet(String path, LinkedHashMap query = [: ]) {
 
