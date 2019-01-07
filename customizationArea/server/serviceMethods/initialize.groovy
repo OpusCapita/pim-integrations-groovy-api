@@ -80,9 +80,7 @@ class CustomizationService {
      * Checks your installation by connecting to PIM.
      * @return pong on success, or a descriptive error on failure.
      * @throws NotAuthorizedException<br>
-     * 401 NotAuthorizedException - The token you have provided is not valid.
      * @throws UnknownHostException<br>
-     * 402 Unknown Host Error: The host you have provided is not available.
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -107,8 +105,7 @@ class CustomizationService {
      * Available values : attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
      * @return           A Response that contains the product
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -142,8 +139,7 @@ class CustomizationService {
      * @param  classificationId             ClassificationId
      * @return                              classification
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -169,8 +165,7 @@ class CustomizationService {
      * @param  classificationGroupId        ClassificationGroupId
      * @return                              classificationGroup
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -191,8 +186,7 @@ class CustomizationService {
      * @param  classificationGroupId        ClassificationGroupId
      * @return                              List of attributeValues
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -213,8 +207,7 @@ class CustomizationService {
      * @param  classificationGroupId        ClassificationGroupId
      * @return                              List of classificationGroups
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -234,8 +227,7 @@ class CustomizationService {
      * @param  classificationId             ClassificationId
      * @return                              List of classificationGroups
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -255,8 +247,7 @@ class CustomizationService {
      * @param  classificationId             ClassificationId
      * @return                              List of Attributes
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -277,8 +268,7 @@ class CustomizationService {
      * @param  classificationGroupId        ClassificationGroupId
      * @return                              List of Attributes
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -299,8 +289,7 @@ class CustomizationService {
      * @param  classificationGroupId        ClassificationGroupId
      * @return                              List of Products
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -319,8 +308,7 @@ class CustomizationService {
      * Retrieve all Classifications
      * @return                              List of all Classifications
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -339,8 +327,7 @@ class CustomizationService {
      * Retrieve all Attributes
      * @return                              List of all Attributes
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -360,8 +347,7 @@ class CustomizationService {
      * @param  attributeId                  attributeId
      * @return                              attribute
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -382,8 +368,7 @@ class CustomizationService {
      * @param  productId                    ProductId
      * @return                              List of ProductAttributeValues
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -404,8 +389,7 @@ class CustomizationService {
      * @param  productId                    ProductId
      * @return                              List of ClassificationGroups
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -426,8 +410,7 @@ class CustomizationService {
      * @param  productId                    ProductId
      * @return                              List of ContractetProducts
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -448,8 +431,7 @@ class CustomizationService {
      * @param  productId                    ProductId
      * @return                              List of Prices
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -470,8 +452,7 @@ class CustomizationService {
      * @param  productId                    ProductId
      * @return                              List of relations
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -492,8 +473,7 @@ class CustomizationService {
      * @param  productId                    ProductId
      * @return                              List of ReverseRelations
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -514,8 +494,7 @@ class CustomizationService {
      * @param  productId                    ProductId
      * @return                              List of documents
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
@@ -536,8 +515,7 @@ class CustomizationService {
      * @param  productId                    ProductId
      * @return                              List of variants
      * @throws NotAuthorizedException
-     * @throws UnknownHostException         <br>
-     * 402 Unknown Host Error: The host you have provided is not available.
+     * @throws UnknownHostException
      * @throws InternalServerErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
