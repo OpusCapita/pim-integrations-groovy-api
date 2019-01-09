@@ -10,13 +10,12 @@ import javax.ws.rs.NotAuthorizedException
 public class Initialize {
     /**
     * Initialize customizationService that provides several methods for customization
-    * @param  host                         The URL PIT runs on
+    * @param  host                         The PIT Host
     * @param  accessToken                  Accesstoken that is provided by the PIT
-    * @param  port                         The port PIT runs on
     * @throws IllegalArgumentException     Host or port is not valid.
      */
-    CustomizationService execute(String host, String accessToken, def port = null) throws IllegalArgumentException {
-        new CustomizationService(host, accessToken, port)
+    CustomizationService execute(String host, String accessToken) throws IllegalArgumentException {
+        new CustomizationService(host, accessToken)
     }
 }
 
@@ -24,7 +23,7 @@ public class Initialize {
 class CustomizationService {
     private String accessToken
     private RESTClient restClient
-    private final static Integer TIMEOUT = new Integer(3000)
+    private final static Integer TIMEOUT = new Integer(60000)
 
     private Closure pingPath = {-> "/api/ping"}
 
@@ -53,16 +52,13 @@ class CustomizationService {
 
     /**
      * Creates customizationService that provides several methods for customization
-     * @param  host                         The URL PIT runs on
+     * @param  host                         The PIT Host
      * @param  accessToken                  Accesstoken that is provided by the PIT
-     * @param  port                         The port PIT runs on
      * @throws IllegalArgumentException     Host or port is not valid.
      */
-    public CustomizationService(String host, String accessToken, def port = null)
+    public CustomizationService(String host, String accessToken)
     throws IllegalArgumentException {
-
-        String portString = port ? ":$port" : ''
-        String url = host + portString
+        String url = host
 
 
         if (!isValidURL(url)) {
@@ -111,21 +107,15 @@ class CustomizationService {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProduct(String catalogId, String productId, ArrayList < String > languageIds = [],
+    public Response getProduct(String catalogId, String productId, ArrayList<String> languageIds = [],
         ArrayList < String > exclude = [], ArrayList < String > include = [])
         throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
-        def query = [: ]
+        def query = [:]
+        query.put('languageIds', languageIds.join(','))
+        query.put('exclude', exclude.join(','))
+        query.put('include', include.join(','))
 
-        if (languageIds) {
-            query.put('languageIds', languageIds.join(','))
-        }
-        if (exclude) {
-            query.put('exclude', exclude.join(','))
-        }
-        if (include) {
-            query.put('include', include.join(','))
-        }
 
         String path = productPath(catalogId, productId)
 
@@ -137,7 +127,7 @@ class CustomizationService {
     /**
      * Retrieve a classification
      * @param  classificationId             ClassificationId
-     * @return                              classification
+     * @return classification
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -147,12 +137,10 @@ class CustomizationService {
      */
     public Response getClassification(String classificationId, ArrayList<String> include = []) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException{
 
-        def query = [: ]
+        def query = [:]
         String path = classificationPath(classificationId)
 
-        if (include) {
             query.put('include', include.join(','))
-        }
 
         Response response = restGet(path, query)
 
@@ -163,7 +151,7 @@ class CustomizationService {
      * Retrieve a classificationGroup
      * @param  classificationId             ClassificationId
      * @param  classificationGroupId        ClassificationGroupId
-     * @return                              classificationGroup
+     * @return classificationGroup
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -184,7 +172,7 @@ class CustomizationService {
      * Retrieve the attributeValues of a classificationGroup
      * @param  classificationId             ClassificationId
      * @param  classificationGroupId        ClassificationGroupId
-     * @return                              List of attributeValues
+     * @return List of attributeValues
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -205,7 +193,7 @@ class CustomizationService {
      * Retrieve a Subgroups of a ClassificationGroup
      * @param  classificationId             ClassificationId
      * @param  classificationGroupId        ClassificationGroupId
-     * @return                              List of classificationGroups
+     * @return List of classificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -225,7 +213,7 @@ class CustomizationService {
     /**
      * Retrieve all classificationGroup from a specific classification
      * @param  classificationId             ClassificationId
-     * @return                              List of classificationGroups
+     * @return List of classificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -245,7 +233,7 @@ class CustomizationService {
     /**
      * Retrieve all Attributes assigned to a Classification
      * @param  classificationId             ClassificationId
-     * @return                              List of Attributes
+     * @return List of Attributes
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -266,7 +254,7 @@ class CustomizationService {
      * Retrieve all Attributes assigned to a ClassificationGroup
      * @param  classificationId             ClassificationId
      * @param  classificationGroupId        ClassificationGroupId
-     * @return                              List of Attributes
+     * @return List of Attributes
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -287,7 +275,7 @@ class CustomizationService {
      * Retrieve all products assigned to a ClassificationGroup
      * @param  classificationId             ClassificationId
      * @param  classificationGroupId        ClassificationGroupId
-     * @return                              List of Products
+     * @return List of Products
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -306,7 +294,7 @@ class CustomizationService {
 
     /**
      * Retrieve all Classifications
-     * @return                              List of all Classifications
+     * @return List of all Classifications
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -325,7 +313,7 @@ class CustomizationService {
 
     /**
      * Retrieve all Attributes
-     * @return                              List of all Attributes
+     * @return List of all Attributes
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -345,7 +333,7 @@ class CustomizationService {
     /**
      * Retrieve an Attribute
      * @param  attributeId                  attributeId
-     * @return                              attribute
+     * @return attribute
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -366,7 +354,7 @@ class CustomizationService {
      * Retrieve all attributeValues of a Product
      * @param  catalogId                    CatalogId
      * @param  productId                    ProductId
-     * @return                              List of ProductAttributeValues
+     * @return List of ProductAttributeValues
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -387,7 +375,7 @@ class CustomizationService {
      * Retrieve all ClassificationGroups of a Product
      * @param  catalogId                    CatalogId
      * @param  productId                    ProductId
-     * @return                              List of ClassificationGroups
+     * @return List of ClassificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -408,7 +396,7 @@ class CustomizationService {
      * Retrieve all ContractetProducts of a Product
      * @param  catalogId                    CatalogId
      * @param  productId                    ProductId
-     * @return                              List of ContractetProducts
+     * @return List of ContractetProducts
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -429,7 +417,7 @@ class CustomizationService {
      * Retrieve all Prices of a Product
      * @param  catalogId                    CatalogId
      * @param  productId                    ProductId
-     * @return                              List of Prices
+     * @return List of Prices
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -450,7 +438,7 @@ class CustomizationService {
      * Retrieve all relations of a Product
      * @param  catalogId                    CatalogId
      * @param  productId                    ProductId
-     * @return                              List of relations
+     * @return List of relations
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -471,7 +459,7 @@ class CustomizationService {
      * Retrieve all reverse-relations of a Product
      * @param  catalogId                    CatalogId
      * @param  productId                    ProductId
-     * @return                              List of ReverseRelations
+     * @return List of ReverseRelations
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -492,7 +480,7 @@ class CustomizationService {
      * Retrieve all documents of a Product
      * @param  catalogId                    CatalogId
      * @param  productId                    ProductId
-     * @return                              List of documents
+     * @return List of documents
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -513,7 +501,7 @@ class CustomizationService {
      * Retrieve all variants of a Product
      * @param  catalogId                    CatalogId
      * @param  productId                    ProductId
-     * @return                              List of variants
+     * @return List of variants
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws InternalServerErrorException
@@ -530,7 +518,7 @@ class CustomizationService {
         return response
     }
 
-    private Response restGet(String path, LinkedHashMap query = [: ]) {
+    private Response restGet(String path, LinkedHashMap query = [:]) {
 
         def response
         query.put('token', accessToken)
@@ -550,30 +538,38 @@ class CustomizationService {
         return new Response(response.data.result,response.data.status,false)
     }
 
+    private static getMatchingHttpResponseException(error){
+        def responseStatus = error.response.data.status
+        def responseMessage = error.response.data.message
+        String errorMessage = "Error $responseStatus: $responseMessage"
+        switch(responseStatus){
+        case 401:
+            return new NotAuthorizedException(errorMessage)
+            break;
+        case 580:
+            return new PIMAccessDeniedException(errorMessage)
+            break;
+        case 581:
+            return new PIMUnreachableException(errorMessage)
+            break;
+        case 582: 
+            return new PIMInternalErrorException(errorMessage)
+        case {it >= 500}:
+            return new InternalServerErrorException(errorMessage)
+            break;
+        default:
+            return error;
+        break;}
+    }
     private static void handleException(Exception e) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
         switch (e.class) {
             case HttpResponseException:
                 if (!e.response.data) {
                     throw new UnknownHostException("Error 402: Host is not available. This might be due to invalid host or port.")
                 }
-
-                def responseStatus = e.response.data.status
-                def responseMessage = e.response.data.message
-                String errorMessage = "Error $responseStatus: $responseMessage"
-
-                if (responseStatus == 401) {
-                    throw new NotAuthorizedException(errorMessage)
-                } else if (responseStatus == 580) {
-                    throw new PIMAccessDeniedException(errorMessage)
-                } else if (responseStatus == 581) {
-                    throw new PIMUnreachableException(errorMessage)
-                } else if (responseStatus == 582) {
-                    throw new PIMInternalErrorException(errorMessage)
-                }else if (responseStatus >= 500) {
-                    throw new InternalServerErrorException(errorMessage)
-                }
-
-                throw e
+                def error = getMatchingHttpResponseException(e)
+                throw error
+                break              
 
             case [UnknownHostException, HttpHostConnectException, ConnectTimeoutException]:
                 throw new UnknownHostException("Error 402: Host is not available. This might be due to invalid host or port. Reason: $e.message")
