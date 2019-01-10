@@ -530,12 +530,12 @@ class CustomizationService {
             ])
         } catch (Exception e) {
             if(e instanceof HttpResponseException && e.response.data.status == 404){
-                return new Response([],404,true)
+                return new Response([])
             }
             handleException(e)
         }
 
-        return new Response(response.data.result,response.data.status,false)
+        return new Response(response.data.result)
     }
 
     private static getMatchingHttpResponseException(error){
@@ -559,7 +559,8 @@ class CustomizationService {
             break;
         default:
             return error;
-        break;}
+        break;
+        }
     }
     private static void handleException(Exception e) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
         switch (e.class) {
@@ -587,21 +588,15 @@ class CustomizationService {
 
 class Response {
     private def value
-    private int status
     private boolean isEmpty = false
 
-    public Response(def value, int status, boolean isEmpty) {
+    public Response(def value) {
         this.value = value
-        this.status = status
-        this.isEmpty = isEmpty
+        isEmpty = value ? false : true
     }
 
     public def getValue(){
         value
-    }
-
-    public int getStatus(){
-        status
     }
 
     public boolean getIsEmpty(){
@@ -609,7 +604,7 @@ class Response {
     }
 }
 /**
- * 500 Internal Server Error - Occurs only on unknown errors in PIT. If you encounter a 500, this is most likely a bug in PIT.
+ * Internal Server Error - Occurs only on unknown errors in PIT. If you encounter an Internal Server Error, this is most likely a bug in PIT.
  */
 class InternalServerErrorException extends RuntimeException {
     public InternalServerErrorException(String message) {
@@ -617,7 +612,7 @@ class InternalServerErrorException extends RuntimeException {
     }
 }
 /**
- * 401 NotAuthorizedException - The token you have provided is not valid.
+ * NotAuthorizedException - The token you have provided is not valid.
  */
 class NotAuthorizedException extends RuntimeException {
     public NotAuthorizedException(String message) {
@@ -626,7 +621,7 @@ class NotAuthorizedException extends RuntimeException {
 }
 
 /**
- * 580 PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.
+ * PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.
  */
 class PIMAccessDeniedException extends RuntimeException {
     public PIMAccessDeniedException(String message) {
@@ -634,7 +629,7 @@ class PIMAccessDeniedException extends RuntimeException {
     }
 }
 /**
- * 581 PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
+ * PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.
  */
 class PIMUnreachableException extends RuntimeException {
     public PIMUnreachableException(String message) {
@@ -642,7 +637,7 @@ class PIMUnreachableException extends RuntimeException {
     }
 }
 /**
- * 582 PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
+ * PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. This is most likely a bug in PIM.
  */
 class PIMInternalErrorException extends RuntimeException {
     public PIMInternalErrorException(String message) {
