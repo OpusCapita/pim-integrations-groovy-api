@@ -12,6 +12,7 @@ public class Initialize {
     * Initialize customizationService that provides several methods for customization
     * @param  host                         The PIT Host
     * @param  accessToken                  Accesstoken that is provided by the PIT
+    * @example execute("http://your-host.de:5000", "api-token")
     * @throws IllegalArgumentException     Host or port is not valid.
      */
     CustomizationService execute(String host, String accessToken) throws IllegalArgumentException {
@@ -566,14 +567,14 @@ class CustomizationService {
         switch (e.class) {
             case HttpResponseException:
                 if (!e.response.data) {
-                    throw new UnknownHostException("Error 402: Host is not available. This might be due to invalid host or port.")
+                    throw new UnknownHostException("Host is not available. This might be due to invalid host or port.")
                 }
                 def error = getMatchingHttpResponseException(e)
                 throw error
                 break              
 
             case [UnknownHostException, HttpHostConnectException, ConnectTimeoutException]:
-                throw new UnknownHostException("Error 402: Host is not available. This might be due to invalid host or port. Reason: $e.message")
+                throw new UnknownHostException("Host is not available. This might be due to invalid host or port. Reason: $e.message")
             default:
                 throw e
         }
