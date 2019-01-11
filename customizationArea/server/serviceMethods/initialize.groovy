@@ -568,6 +568,9 @@ class CustomizationService {
         case 401:
             return new NotAuthorizedException(errorMessage)
             break;
+        case 500: 
+            return new PITInternalErrorException(errorMessage)
+            break;
         case 580:
             return new PIMAccessDeniedException(errorMessage)
             break;
@@ -576,7 +579,8 @@ class CustomizationService {
             break;
         case 582: 
             return new PIMInternalErrorException(errorMessage)
-        case {it >= 500}:
+            break;
+        case {it > 500}:
             return new GroovyAPIInternalErrorException(errorMessage)
             break;
         default:
