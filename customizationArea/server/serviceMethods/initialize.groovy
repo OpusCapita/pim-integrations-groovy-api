@@ -78,12 +78,12 @@ class CustomizationService {
      * @return pong on success, or a descriptive error on failure.
      * @throws NotAuthorizedException<br>
      * @throws UnknownHostException<br>
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response ping() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response ping() throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = pingPath()
         Response response = restGet(path)
@@ -103,14 +103,14 @@ class CustomizationService {
      * @return           A Response that contains the product
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
     public Response getProduct(String catalogId, String productId, ArrayList<String> languageIds = [],
         ArrayList < String > exclude = [], ArrayList < String > include = [])
-        throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+        throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         def query = [:]
         query.put('languageIds', languageIds.join(','))
@@ -131,12 +131,12 @@ class CustomizationService {
      * @return classification
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getClassification(String classificationId, ArrayList<String> include = []) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException{
+    public Response getClassification(String classificationId, ArrayList<String> include = []) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException{
 
         def query = [:]
         String path = classificationPath(classificationId)
@@ -155,12 +155,12 @@ class CustomizationService {
      * @return classificationGroup
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getClassificationGroup(String classificationId, String classificationGroupId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getClassificationGroup(String classificationId, String classificationGroupId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = classificationGroupPath(classificationId, classificationGroupId)
 
@@ -176,12 +176,12 @@ class CustomizationService {
      * @return List of attributeValues
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getClassificationGroupAttributeValues(String classificationId, String classificationGroupId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getClassificationGroupAttributeValues(String classificationId, String classificationGroupId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = classificationGroupAttributeValuesPath(classificationId, classificationGroupId)
 
@@ -197,12 +197,12 @@ class CustomizationService {
      * @return List of classificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getClassificationGroupChildren(String classificationId, String classificationGroupId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getClassificationGroupChildren(String classificationId, String classificationGroupId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = classificationGroupChildrenPath(classificationId, classificationGroupId)
 
@@ -217,12 +217,12 @@ class CustomizationService {
      * @return List of classificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getClassificationGroupsByClassification(String classificationId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getClassificationGroupsByClassification(String classificationId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = classificationGroupsPath(classificationId)
 
@@ -237,12 +237,12 @@ class CustomizationService {
      * @return List of Attributes
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getAttributesByClassification(String classificationId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getAttributesByClassification(String classificationId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = attributesByClassificationPath(classificationId)
 
@@ -258,12 +258,12 @@ class CustomizationService {
      * @return List of Attributes
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getAttributesByClassificationGroup(String classificationId, String classificationGroupId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getAttributesByClassificationGroup(String classificationId, String classificationGroupId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = attributesByClassificationGroupPath(classificationId, classificationGroupId)
 
@@ -279,12 +279,12 @@ class CustomizationService {
      * @return List of Products
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductsByClassificationGroup(String classificationId, String classificationGroupId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getProductsByClassificationGroup(String classificationId, String classificationGroupId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = productsByClassificationGroupPath(classificationId, classificationGroupId)
 
@@ -298,12 +298,12 @@ class CustomizationService {
      * @return List of all Classifications
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getAllClassifications() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getAllClassifications() throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = generalClassificationPath()
 
@@ -317,12 +317,12 @@ class CustomizationService {
      * @return List of all Attributes
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getAllAttributes() throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getAllAttributes() throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = generalAttributePath()
 
@@ -337,12 +337,12 @@ class CustomizationService {
      * @return attribute
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getAttribute(String attributeId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getAttribute(String attributeId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = attributePath(attributeId)
 
@@ -358,12 +358,12 @@ class CustomizationService {
      * @return List of ProductAttributeValues
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductAttributeValues(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getProductAttributeValues(String catalogId, String productId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = productAttributeValuesPath(catalogId, productId)
 
@@ -379,12 +379,12 @@ class CustomizationService {
      * @return List of ClassificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductClassificationGroups(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getProductClassificationGroups(String catalogId, String productId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = productClassificationGroupsPath(catalogId, productId)
 
@@ -400,12 +400,12 @@ class CustomizationService {
      * @return List of ContractetProducts
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductAssortments(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getProductAssortments(String catalogId, String productId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = productAssortmentsPath(catalogId, productId)
 
@@ -421,12 +421,12 @@ class CustomizationService {
      * @return List of Prices
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductPrices(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getProductPrices(String catalogId, String productId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = productPricesPath(catalogId, productId)
 
@@ -442,12 +442,12 @@ class CustomizationService {
      * @return List of relations
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductRelations(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getProductRelations(String catalogId, String productId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = productRelationsPath(catalogId, productId)
 
@@ -463,12 +463,12 @@ class CustomizationService {
      * @return List of ReverseRelations
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductReverseRelations(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getProductReverseRelations(String catalogId, String productId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = productReverseRelationsPath(catalogId, productId)
 
@@ -484,12 +484,12 @@ class CustomizationService {
      * @return List of documents
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductDocuments(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getProductDocuments(String catalogId, String productId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = productDocumentsPath(catalogId, productId)
 
@@ -505,12 +505,12 @@ class CustomizationService {
      * @return List of variants
      * @throws NotAuthorizedException
      * @throws UnknownHostException
-     * @throws InternalServerErrorException
+     * @throws GroovyAPIInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductVariants(String catalogId, String productId) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    public Response getProductVariants(String catalogId, String productId) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
 
         String path = productVariantsPath(catalogId, productId)
 
@@ -556,14 +556,14 @@ class CustomizationService {
         case 582: 
             return new PIMInternalErrorException(errorMessage)
         case {it >= 500}:
-            return new InternalServerErrorException(errorMessage)
+            return new GroovyAPIInternalErrorException(errorMessage)
             break;
         default:
             return error;
         break;
         }
     }
-    private static void handleException(Exception e) throws NotAuthorizedException, InternalServerErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
+    private static void handleException(Exception e) throws NotAuthorizedException, GroovyAPIInternalErrorException, UnknownHostException, PIMAccessDeniedException, PIMUnreachableException, PIMInternalErrorException {
         switch (e.class) {
             case HttpResponseException:
                 if (!e.response.data) {
@@ -607,8 +607,8 @@ class Response {
 /**
  * Internal Server Error - Occurs only on unknown errors in PIT. If you encounter an Internal Server Error, this is most likely a bug in PIT.
  */
-class InternalServerErrorException extends RuntimeException {
-    public InternalServerErrorException(String message) {
+class GroovyAPIInternalErrorException extends RuntimeException {
+    public GroovyAPIInternalErrorException(String message) {
         super(message)
     }
 }
