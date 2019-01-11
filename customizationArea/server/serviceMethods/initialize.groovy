@@ -79,6 +79,7 @@ class CustomizationService {
      * @throws NotAuthorizedException<br>
      * @throws UnknownHostException<br>
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -104,6 +105,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -132,6 +134,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -156,6 +159,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -177,6 +181,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -198,6 +203,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -218,6 +224,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -238,6 +245,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -259,6 +267,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -280,6 +289,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -299,6 +309,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -318,6 +329,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -338,6 +350,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -359,6 +372,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -380,6 +394,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -401,6 +416,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -422,6 +438,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -443,6 +460,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -464,6 +482,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -485,6 +504,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -506,6 +526,7 @@ class CustomizationService {
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
      * @throws PIMAccessDeniedException
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
@@ -642,6 +663,14 @@ class PIMUnreachableException extends RuntimeException {
  */
 class PIMInternalErrorException extends RuntimeException {
     public PIMInternalErrorException(String message) {
+        super(message)
+    }
+}
+/**
+ * PIT Internal Error Exception - The connection between PIT and the Groovy API was successful, but PIT replied with a 500. This is most likely a bug in PIT.
+ */
+class PITInternalErrorException extends RuntimeException {
+    public PITInternalErrorException(String message) {
         super(message)
     }
 }
