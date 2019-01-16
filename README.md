@@ -1,5 +1,5 @@
-# PIM integrations groovy api
-This Service exposes methods for standard customization. All you need is an AccessToken and the corresponding URL from the PIT (PIM-integrations-tool) 
+# PIM Integrations Groovy API
+This Service exposes methods for standard customization. All you need is an access token  and the URL to the [PIM Integrations Tool](https://github.com/OpusCapita/pim-integrations-tool). Please check the documentation within the PIM integrations tool for further details.
 
 ## Contributors
 If you wish to contribute, please open a pull request.
