@@ -2,15 +2,8 @@
     "name": "pim-integrations-groovy-api",
     "version": "0.1.0",
     "description": "",
-    "main": "index.js",
-    "dependencies": {},
-    "devDependencies": {
-        "husky": "^1.1.2"
-    },
-    "husky": {
-        "hooks": {
-            "pre-push": "groovydoc -sourcepath . -d ./build/groovydoc customizationArea.server.serviceMethods && git add . && git commit -m \"Add: groovydoc\""
-        }
+    "scripts": {
+        "build": "groovydoc -notimestamp -noversionstamp -charset utf8 -fileEncoding utf8 -stylesheetfile ./.groovydoc/style.css -sourcepath . -d ./build/groovydoc customizationArea.server.serviceMethods"
     },
     "repository": {
         "type": "git",

@@ -24,7 +24,7 @@
 
 <title>DefaultPackage</title>
 <meta name="keywords" content="DefaultPackage package">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <link rel ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" title="Style">
 <link href="../groovy.ico" type="image/x-icon" rel="shortcut icon">
 <link href="../groovy.ico" type="image/x-icon" rel="icon">
@@ -90,19 +90,19 @@ function windowTitle()
                     </tr>
 <tr class="altColor">
                             <td class="colOne">
-                                <strong><a href="CustomizationService.html" title="class in DefaultPackage">
-                                    CustomizationService
+                                <strong><a href="PimApi.html" title="class in DefaultPackage">
+                                    PimApi
                                 </a></strong>
                             </td>
-                            <td>Provides methods for customization tasks</td>
+                            <td>Entry point to the PIM Api, to be used from scripts in the PIM customization area.</td>
                         </tr>
 <tr class="altColor">
                             <td class="colOne">
-                                <strong><a href="Initialize.html" title="class in DefaultPackage">
-                                    Initialize
+                                <strong><a href="PitGroovyApi.html" title="class in DefaultPackage">
+                                    PitGroovyApi
                                 </a></strong>
                             </td>
-                            <td></td>
+                            <td>The main API object.</td>
                         </tr>
 <tr class="altColor">
                             <td class="colOne">
@@ -134,16 +134,56 @@ function windowTitle()
                     </tr>
 <tr class="altColor">
                             <td class="colOne">
-                                <strong><a href="InternalServerErrorException.html" title="class in DefaultPackage">
-                                    InternalServerErrorException
+                                <strong><a href="GroovyAPIInternalErrorException.html" title="class in DefaultPackage">
+                                    GroovyAPIInternalErrorException
                                 </a></strong>
                             </td>
-                            <td></td>
+                            <td>Internal Server Error - Occurs only on unknown errors in PIT. </td>
                         </tr>
 <tr class="altColor">
                             <td class="colOne">
                                 <strong><a href="NotAuthorizedException.html" title="class in DefaultPackage">
                                     NotAuthorizedException
+                                </a></strong>
+                            </td>
+                            <td>NotAuthorizedException - The token you have provided is not valid.</td>
+                        </tr>
+<tr class="altColor">
+                            <td class="colOne">
+                                <strong><a href="PIMAccessDeniedException.html" title="class in DefaultPackage">
+                                    PIMAccessDeniedException
+                                </a></strong>
+                            </td>
+                            <td>PIM Access Denied - This happens if the PIM user configured in the PIT is not authorized to perform an operation.</td>
+                        </tr>
+<tr class="altColor">
+                            <td class="colOne">
+                                <strong><a href="PIMInternalErrorException.html" title="class in DefaultPackage">
+                                    PIMInternalErrorException
+                                </a></strong>
+                            </td>
+                            <td>PIM Internal Error Exception - The connection between PIT and PIM was successful, but PIM replied with a 500. </td>
+                        </tr>
+<tr class="altColor">
+                            <td class="colOne">
+                                <strong><a href="PIMUnreachableException.html" title="class in DefaultPackage">
+                                    PIMUnreachableException
+                                </a></strong>
+                            </td>
+                            <td>PIM Unreachable - The connection between PIT and PIM was unsuccessful, most likely because your configuration of the host is wrong.</td>
+                        </tr>
+<tr class="altColor">
+                            <td class="colOne">
+                                <strong><a href="PITInternalErrorException.html" title="class in DefaultPackage">
+                                    PITInternalErrorException
+                                </a></strong>
+                            </td>
+                            <td>PIT Internal Error Exception - The connection between PIT and the Groovy API was successful, but PIT replied with a 500. </td>
+                        </tr>
+<tr class="altColor">
+                            <td class="colOne">
+                                <strong><a href="PimApiException.html" title="class in DefaultPackage">
+                                    PimApiException
                                 </a></strong>
                             </td>
                             <td></td>
