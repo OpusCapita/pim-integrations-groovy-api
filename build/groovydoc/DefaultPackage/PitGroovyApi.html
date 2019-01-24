@@ -169,25 +169,37 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getAllClassifications()">getAllClassifications</a></strong>()</code><br>Retrieve all Classifications</td>
+                            <td class="colLast"><code><strong><a href="#getAllCatalogs()">getAllCatalogs</a></strong>()</code><br>Retrieve all Catalogs</td>
                         </tr>
                         
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getAttribute(java.lang.String)">getAttribute</a></strong>(java.lang.String attributeId)</code><br>Retrieve an Attribute</td>
+                            <td class="colLast"><code><strong><a href="#getAllClassifications()">getAllClassifications</a></strong>()</code><br>Retrieve all Classifications</td>
                         </tr>
                         
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getAttributesByClassification(java.lang.String)">getAttributesByClassification</a></strong>(java.lang.String classificationId)</code><br>Retrieve all Attributes assigned to a Classification</td>
+                            <td class="colLast"><code><strong><a href="#getAttribute(java.lang.String)">getAttribute</a></strong>(java.lang.String attributeId)</code><br>Retrieve an Attribute</td>
                         </tr>
                         
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
+                            <td class="colLast"><code><strong><a href="#getAttributesByClassification(java.lang.String)">getAttributesByClassification</a></strong>(java.lang.String classificationId)</code><br>Retrieve all Attributes assigned to a Classification</td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getAttributesByClassificationGroup(java.lang.String, java.lang.String)">getAttributesByClassificationGroup</a></strong>(java.lang.String classificationId, java.lang.String classificationGroupId)</code><br>Retrieve all Attributes assigned to a ClassificationGroup</td>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
+                            <td class="colLast"><code><strong><a href="#getCatalog(java.lang.String)">getCatalog</a></strong>(java.lang.String attributeId)</code><br>Retrieve an Catalog</td>
                         </tr>
                         
                         <tr class="rowColor">
@@ -302,7 +314,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         
                         <tr class="altColor">
                             <td class="colFirst"><code>class java.lang.Object</code></td>
-                            <td class="colLast"><code>java.lang.Object#wait(long, int), java.lang.Object#wait(long), java.lang.Object#wait(), java.lang.Object#equals(java.lang.Object), java.lang.Object#toString(), java.lang.Object#hashCode(), java.lang.Object#getClass(), java.lang.Object#notify(), java.lang.Object#notifyAll()</code></td>
+                            <td class="colLast"><code>java.lang.Object#wait(long), java.lang.Object#wait(long, int), java.lang.Object#wait(), java.lang.Object#equals(java.lang.Object), java.lang.Object#toString(), java.lang.Object#hashCode(), java.lang.Object#getClass(), java.lang.Object#notify(), java.lang.Object#notifyAll()</code></td>
                         </tr>
                     </table>
                    </ul>
@@ -364,6 +376,15 @@ if (location.href.indexOf('is-external=true') == -1) {
                             </li>
                         </ul>
                     
+                        <a name="getAllCatalogs()"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllCatalogs</strong>()</h4>
+                                <p> Retrieve all Catalogs<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Returns:</B></DT><DD>List of all Catalogs</DD></DL></p>
+                            </li>
+                        </ul>
+                    
                         <a name="getAllClassifications()"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
@@ -397,6 +418,15 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAttributesByClassificationGroup</strong>(java.lang.String classificationId, java.lang.String classificationGroupId)</h4>
                                 <p> Retrieve all Attributes assigned to a ClassificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Returns:</B></DT><DD>List of Attributes</DD></DL></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="getCatalog(java.lang.String)"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getCatalog</strong>(java.lang.String attributeId)</h4>
+                                <p> Retrieve an Catalog<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -                   catalogId</DD></DL><DL><DT><B>Returns:</B></DT><DD>attribute</DD></DL></p>
                             </li>
                         </ul>
                     

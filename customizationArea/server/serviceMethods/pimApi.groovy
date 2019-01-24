@@ -20,7 +20,7 @@ public class PimApi {
     HashMap execute() throws IllegalArgumentException {
         [
           initialize: { String host, String accessToken ->
-            new CustomizationService(host, accessToken)
+            new PitGroovyApi(host, accessToken)
           } 
         ]
     }
@@ -58,6 +58,9 @@ class PitGroovyApi {
     private Closure attributePath = {attributeId -> "${generalAttributePath()}/$attributeId"}
     private Closure attributesByClassificationPath = {classificationId -> "${classificationPath(classificationId)}/attribute"}
     private Closure attributesByClassificationGroupPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/attribute"}
+
+    private Closure generalCatalogsPath = { -> "/api/catalog"}
+    private Closure catalogPath = {catalogId -> "${generalCatalogsPath()}/$catalogId"}
 
     /**
      * Creates a new API object with the given url and access token.
@@ -446,6 +449,39 @@ class PitGroovyApi {
      */
     public Response getProductVariants(String catalogId, String productId) {
         String path = productVariantsPath(catalogId, productId)
+        restGet(path)
+    }
+
+    /**
+     * Retrieve all Catalogs
+     * @return List of all Catalogs
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllCatalogs() {
+        String path = generalCatalogsPath()
+        restGet(path)
+    }
+
+    /**
+     * Retrieve an Catalog
+     * @param  catalogId                  catalogId
+     * @return attribute
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getCatalog(String attributeId) {
+        String path = catalogPath(attributeId)
         restGet(path)
     }
 
