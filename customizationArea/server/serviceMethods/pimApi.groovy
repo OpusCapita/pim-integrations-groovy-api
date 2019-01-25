@@ -293,7 +293,7 @@ class PitGroovyApi {
 
     /**
      * Retrieve an Attribute
-     * @param  attributeId                  attributeId
+     * @param  attributeId attributeId
      * @return attribute
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -310,8 +310,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all attributeValues of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of ProductAttributeValues
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -328,8 +328,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all ClassificationGroups of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of ClassificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -346,8 +346,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all Contracts of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of Contractsf
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -364,8 +364,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all Prices of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of Prices
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -382,8 +382,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all relations of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of relations
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -400,8 +400,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all reverse-relations of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of ReverseRelations
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -418,8 +418,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all documents of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of documents
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -436,8 +436,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all variants of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of variants
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -535,7 +535,7 @@ class PitGroovyApi {
         switch (e.class) {
             case HttpResponseException:
                 if (!e.response.data) {
-                    throw new UnknownHostException("Host is not available. This might be due to invalid host or port.")
+ throw new UnknownHostException("Host is not available. This might be due to invalid host or port.")
                 }
                 def error = getMatchingHttpResponseException(e)
                 throw error
