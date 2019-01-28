@@ -39,7 +39,7 @@ class PitGroovyApi {
     private Closure productPath = {catalogId, productId -> "/api/catalog/$catalogId/product/$productId"}
     private Closure productAttributeValuesPath = {catalogId, productId -> "${productPath(catalogId, productId)}/attributeValue"}
     private Closure productClassificationGroupsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/classificationGroup"}
-    private Closure productContractPath = {catalogId, productId -> "${productPath(catalogId, productId)}/contract"}
+    private Closure productAssortmentPath = {catalogId, productId -> "${productPath(catalogId, productId)}/assortment"}
     private Closure productPricesPath = {catalogId, productId -> "${productPath(catalogId, productId)}/price"}
     private Closure productRelationsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/relation"}
     private Closure productReverseRelationsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/reverseRelation"}
@@ -61,6 +61,9 @@ class PitGroovyApi {
 
     private Closure generalCatalogsPath = { -> "/api/catalog"}
     private Closure catalogPath = {catalogId -> "${generalCatalogsPath()}/$catalogId"}
+
+    private Closure generalContractsPath = { -> "/api/contract"}
+    private Closure contractPath = {contractId -> "${generalContractsPath()}/$contractId"}
 
     /**
      * Creates a new API object with the given url and access token.
@@ -345,10 +348,10 @@ class PitGroovyApi {
     }
 
     /**
-     * Retrieve all Contracts of a Product
+     * Retrieve all Assortments of a Product
      * @param  catalogId CatalogId
      * @param  productId ProductId
-     * @return List of Contractsf
+     * @return List of Assortments
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
@@ -357,8 +360,8 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductContracts(String catalogId, String productId) {
-        String path = productContractPath(catalogId, productId)
+    public Response getProductAssortments(String catalogId, String productId) {
+        String path = productAssortmentPath(catalogId, productId)
         restGet(path)
     }
 
@@ -470,7 +473,7 @@ class PitGroovyApi {
 
     /**
      * Retrieve an Catalog
-     * @param  catalogId                  catalogId
+     * @param  catalogId catalogId
      * @return attribute
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -480,8 +483,42 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getCatalog(String attributeId) {
-        String path = catalogPath(attributeId)
+    public Response getCatalog(String catalogId) {
+        String path = catalogPath(catalogId)
+        restGet(path)
+    }
+
+    /**
+     * Retrieve all Contracts
+     * @return List of all Contracts
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllContracts() {
+        String path = generalContractsPath()
+        restGet(path)
+    }
+
+    /**
+     * Retrieve an Contract
+     * @param  contractId contractId
+     * @return contract
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getContract(String contractId) {
+        String path = contractPath(contractId)
         restGet(path)
     }
 
