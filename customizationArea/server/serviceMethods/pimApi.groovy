@@ -505,7 +505,7 @@ class PitGroovyApi {
     }
 
     /**
-     * Retrieve an Contract
+     * Retrieve a Contract
      * @param  contractId contractId
      * @return contract
      * @throws NotAuthorizedException
