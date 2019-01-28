@@ -12,9 +12,9 @@ import javax.ws.rs.NotAuthorizedException
 */
 public class PimApi {
    /**
-   * This method is implicitly executed whenever you call <tt>ctx.PitGroovyApi.pimApi()</tt>.
+   * This method is implicitly executed whenever you call <tt>ctx.customizationService.pimApi()</tt>.
    * Use the <tt>initialize</tt>-method of its return value to instantiate a new API object.
-   * In other words: <tt>ctx.PitGroovyApi.pimApi().initialize(host, accessToken)</tt> calls the constructor of 
+   * In other words: <tt>ctx.customizationService.pimApi().initialize(host, accessToken)</tt> calls the constructor of 
    * {@link PitGroovyApi} and returns the new object..
    */
     HashMap execute() throws IllegalArgumentException {
