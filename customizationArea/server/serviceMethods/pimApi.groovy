@@ -20,7 +20,7 @@ public class PimApi {
     HashMap execute() throws IllegalArgumentException {
         [
           initialize: { String host, String accessToken ->
-            new CustomizationService(host, accessToken)
+            new PitGroovyApi(host, accessToken)
           } 
         ]
     }
@@ -58,6 +58,9 @@ class PitGroovyApi {
     private Closure attributePath = {attributeId -> "${generalAttributePath()}/$attributeId"}
     private Closure attributesByClassificationPath = {classificationId -> "${classificationPath(classificationId)}/attribute"}
     private Closure attributesByClassificationGroupPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/attribute"}
+
+    private Closure generalCatalogsPath = { -> "/api/catalog"}
+    private Closure catalogPath = {catalogId -> "${generalCatalogsPath()}/$catalogId"}
 
     /**
      * Creates a new API object with the given url and access token.
@@ -290,7 +293,7 @@ class PitGroovyApi {
 
     /**
      * Retrieve an Attribute
-     * @param  attributeId                  attributeId
+     * @param  attributeId attributeId
      * @return attribute
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -307,8 +310,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all attributeValues of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of ProductAttributeValues
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -325,8 +328,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all ClassificationGroups of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of ClassificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -343,8 +346,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all Contracts of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of Contractsf
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -361,8 +364,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all Prices of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of Prices
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -379,8 +382,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all relations of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of relations
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -397,8 +400,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all reverse-relations of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of ReverseRelations
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -415,8 +418,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all documents of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of documents
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -433,8 +436,8 @@ class PitGroovyApi {
 
     /**
      * Retrieve all variants of a Product
-     * @param  catalogId                    CatalogId
-     * @param  productId                    ProductId
+     * @param  catalogId CatalogId
+     * @param  productId ProductId
      * @return List of variants
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -446,6 +449,39 @@ class PitGroovyApi {
      */
     public Response getProductVariants(String catalogId, String productId) {
         String path = productVariantsPath(catalogId, productId)
+        restGet(path)
+    }
+
+    /**
+     * Retrieve all Catalogs
+     * @return List of all Catalogs
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllCatalogs() {
+        String path = generalCatalogsPath()
+        restGet(path)
+    }
+
+    /**
+     * Retrieve an Catalog
+     * @param  catalogId                  catalogId
+     * @return attribute
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getCatalog(String attributeId) {
+        String path = catalogPath(attributeId)
         restGet(path)
     }
 
@@ -499,7 +535,7 @@ class PitGroovyApi {
         switch (e.class) {
             case HttpResponseException:
                 if (!e.response.data) {
-                    throw new UnknownHostException("Host is not available. This might be due to invalid host or port.")
+ throw new UnknownHostException("Host is not available. This might be due to invalid host or port.")
                 }
                 def error = getMatchingHttpResponseException(e)
                 throw error
