@@ -64,6 +64,9 @@ class PitGroovyApi {
 
     private Closure generalContractsPath = { -> "/api/contract"}
     private Closure contractPath = {contractId -> "${generalContractsPath()}/$contractId"}
+    
+    private Closure generalSuppliersPath = { -> "/api/supplier"}
+    private Closure supplierPath = {supplierId -> "${generalSuppliersPath()}/$supplierId"}
 
     private Closure generalManufacturersPath = { -> "/api/manufacturer"}
     private Closure manufacturerPath = {contractId -> "${generalManufacturersPath()}/$manufacturerId"}
@@ -524,6 +527,39 @@ class PitGroovyApi {
         String path = contractPath(contractId)
         restGet(path)
     }
+/**
+     * Retrieve a Supplier
+     * @param  supplierId supplierId
+     * @return supplier
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getSupplier(String supplierId) {
+        String path = supplierPath(supplierId)
+        restGet(path)
+    }
+    /**
+     * Retrieve all Suppliers
+     * @return List of all Suppliers
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllSuppliers() {
+        String path = generalSuppliersPath()
+        restGet(path)
+    }
+
 
     /**
      * Retrieve all Manufacturers
