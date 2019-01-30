@@ -65,6 +65,9 @@ class PitGroovyApi {
     private Closure generalContractsPath = { -> "/api/contract"}
     private Closure contractPath = {contractId -> "${generalContractsPath()}/$contractId"}
 
+    private Closure generalManufacturersPath = { -> "/api/manufacturer"}
+    private Closure manufacturerPath = {contractId -> "${generalManufacturersPath()}/$manufacturerId"}
+
     /**
      * Creates a new API object with the given url and access token.
      * @param  url The URL to the PIT installation, for example: <tt>http://example.com:5000</tt>
@@ -519,6 +522,40 @@ class PitGroovyApi {
 
     public Response getContract(String contractId) {
         String path = contractPath(contractId)
+        restGet(path)
+    }
+
+    /**
+     * Retrieve all Manufacturers
+     * @return List of all Manufacturers
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllManufacturers() {
+        String path = generalManufacturersPath()
+        restGet(path)
+    }
+
+    /**
+     * Retrieve a Manufacturer
+     * @param  manufacturerId manufacturerId
+     * @return manufacturer
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getManufacturer(String manufacturerId) {
+        String path = manufacturerPath(manufacturerId)
         restGet(path)
     }
 
