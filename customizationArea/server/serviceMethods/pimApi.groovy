@@ -68,6 +68,9 @@ class PitGroovyApi {
     private Closure generalSuppliersPath = { -> "/api/supplier"}
     private Closure supplierPath = {supplierId -> "${generalSuppliersPath()}/$supplierId"}
 
+    private Closure generalManufacturersPath = { -> "/api/manufacturer"}
+    private Closure manufacturerPath = {manufacturerId -> "${generalManufacturersPath()}/$manufacturerId"}
+
     /**
      * Creates a new API object with the given url and access token.
      * @param  url The URL to the PIT installation, for example: <tt>http://example.com:5000</tt>
@@ -557,6 +560,40 @@ class PitGroovyApi {
         restGet(path)
     }
 
+
+    /**
+     * Retrieve all Manufacturers
+     * @return List of all Manufacturers
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllManufacturers() {
+        String path = generalManufacturersPath()
+        restGet(path)
+    }
+
+    /**
+     * Retrieve a Manufacturer
+     * @param  manufacturerId manufacturerId
+     * @return manufacturer
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getManufacturer(String manufacturerId) {
+        String path = manufacturerPath(manufacturerId)
+        restGet(path)
+    }
 
     private Response restGet(String path, LinkedHashMap query = [:]) {
         def response
