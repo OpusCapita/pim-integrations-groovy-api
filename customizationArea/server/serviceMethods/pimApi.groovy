@@ -69,7 +69,7 @@ class PitGroovyApi {
     private Closure supplierPath = {supplierId -> "${generalSuppliersPath()}/$supplierId"}
 
     private Closure generalManufacturersPath = { -> "/api/manufacturer"}
-    private Closure manufacturerPath = {contractId -> "${generalManufacturersPath()}/$manufacturerId"}
+    private Closure manufacturerPath = {manufacturerId -> "${generalManufacturersPath()}/$manufacturerId"}
 
     /**
      * Creates a new API object with the given url and access token.
