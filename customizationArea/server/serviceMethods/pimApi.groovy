@@ -598,26 +598,6 @@ class PitGroovyApi {
         restGet(path)
     }
 
-    private Response restGet(String path, LinkedHashMap query = [:]) {
-        def response
-        query.put('token', accessToken)
-        try {
-            response = restClient.get([path: path,
-                contentType: ContentType.APPLICATION_JSON,
-                query: query
-            ])
-        } catch (Exception e) {
-            if(e instanceof HttpResponseException && e.response.data.status == 404){
-                return new Response([])
-            }
-            handleException(e)
-        }
-
-        return new Response(response.data.result)
-    }
-
-
-
     /**
      * Retrieve all AttributeSections
      * @return List of all AttributeSections
@@ -648,7 +628,7 @@ class PitGroovyApi {
      */
 
     public Response getAttributeSection(String attributeSectionId) {
-        String path = manufacturerPath(attributeSectionId)
+        String path = attributeSectionPath(attributeSectionId)
         restGet(path)
     }
 
