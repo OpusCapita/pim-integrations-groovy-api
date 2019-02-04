@@ -70,6 +70,9 @@ class PitGroovyApi {
 
     private Closure generalManufacturersPath = { -> "/api/manufacturer"}
     private Closure manufacturerPath = {manufacturerId -> "${generalManufacturersPath()}/$manufacturerId"}
+        
+    private Closure generalAttributeSectionPath = { -> "/api/attributeSection"}
+    private Closure attributeSectionPath = {attributeSectionId -> "${generalAttributeSectionPath()}/$attributeSectionId"}
 
     /**
      * Creates a new API object with the given url and access token.
@@ -612,6 +615,61 @@ class PitGroovyApi {
 
         return new Response(response.data.result)
     }
+
+
+
+    /**
+     * Retrieve all AttributeSections
+     * @return List of all AttributeSections
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllAttributeSections() {
+        String path = generalAttributeSectionPath()
+        restGet(path)
+    }
+
+    /**
+     * Retrieve an AttributeSection
+     * @param  attributeSectionId attributeSectionId
+     * @return attributeSection
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getAttributeSection(String attributeSectionId) {
+        String path = manufacturerPath(attributeSectionId)
+        restGet(path)
+    }
+
+    private Response restGet(String path, LinkedHashMap query = [:]) {
+        def response
+        query.put('token', accessToken)
+        try {
+            response = restClient.get([path: path,
+                contentType: ContentType.APPLICATION_JSON,
+                query: query
+            ])
+        } catch (Exception e) {
+            if(e instanceof HttpResponseException && e.response.data.status == 404){
+                return new Response([])
+            }
+            handleException(e)
+        }
+
+        return new Response(response.data.result)
+    }
+
 
     private static getMatchingHttpResponseException(error){
         def responseStatus = error.response.data.status
