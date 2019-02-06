@@ -610,7 +610,7 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllPriceTypes() {
-        String path = generalPriceTypesPath()
+        String path = generalPriceTypePath()
         restGet(path)
     }
 
