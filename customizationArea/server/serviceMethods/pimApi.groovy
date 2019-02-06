@@ -70,6 +70,9 @@ class PitGroovyApi {
 
     private Closure generalManufacturersPath = { -> "/api/manufacturer"}
     private Closure manufacturerPath = {manufacturerId -> "${generalManufacturersPath()}/$manufacturerId"}
+    
+    private Closure generalPriceTypePath = { -> "/api/priceType"}
+    private Closure priceTypePath = {priceTypeId -> "${generalPriceTypePath()}/$priceTypeId"}
 
     /**
      * Creates a new API object with the given url and access token.
@@ -592,6 +595,40 @@ class PitGroovyApi {
 
     public Response getManufacturer(String manufacturerId) {
         String path = manufacturerPath(manufacturerId)
+        restGet(path)
+    }
+
+/**
+     * Retrieve all PriceTypes
+     * @return List of all PriceTypes
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllPriceTypes() {
+        String path = generalPriceTypesPath()
+        restGet(path)
+    }
+
+    /**
+     * Retrieve a PriceType
+     * @param  priceTypeId priceTypeId
+     * @return priceType
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getPriceType(String priceTypeId) {
+        String path = priceTypePath(priceTypeId)
         restGet(path)
     }
 
