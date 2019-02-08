@@ -77,6 +77,9 @@ class PitGroovyApi {
     private Closure generalAttributeSectionPath = { -> "/api/attributeSection"}
     private Closure attributeSectionPath = {attributeSectionId -> "${generalAttributeSectionPath()}/$attributeSectionId"}
 
+    private Closure generalUnitOfMeasurePath = { -> "/api/unitOfMeasure"}
+    private Closure unitOfMeasurePath = {unitOfMeasureId -> "${generalUnitOfMeasurePath()}/$unitOfMeasureId"}
+
     /**
      * Creates a new API object with the given url and access token.
      * @param  url The URL to the PIT installation, for example: <tt>http://example.com:5000</tt>
@@ -635,7 +638,6 @@ class PitGroovyApi {
         restGet(path)
     }
 
-
     /**
      * Retrieve all PriceTypes
      * @return List of all PriceTypes
@@ -670,7 +672,40 @@ class PitGroovyApi {
         restGet(path)
     }
 
+    /**
+     * Retrieve all UnitOfMeasures
+     * @return List of all UnitOfMeasures
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllUnitOfMeasures() {
+        String path = generalUnitOfMeasurePath()
+        restGet(path)
+    }
 
+    /**
+     * Retrieve an UnitOfMeasure
+     * @param  unitOfMeasureId unitOfMeasureId
+     * @return unitOfMeasure
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getUnitOfMeasure(String unitOfMeasureId) {
+        String path = unitOfMeasurePath(unitOfMeasureId)
+        restGet(path)
+    }
+    
     private Response restGet(String path, LinkedHashMap query = [:]) {
         def response
         query.put('token', accessToken)
