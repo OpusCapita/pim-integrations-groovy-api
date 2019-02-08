@@ -163,49 +163,61 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getAllAttributes()">getAllAttributes</a></strong>()</code><br>Retrieve all Attributes</td>
+                            <td class="colLast"><code><strong><a href="#getAllAttributeSections()">getAllAttributeSections</a></strong>()</code><br>Retrieve all AttributeSections</td>
                         </tr>
                         
                         <tr class="rowColor">
+                            <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
+                            <td class="colLast"><code><strong><a href="#getAllAttributes()">getAllAttributes</a></strong>()</code><br>Retrieve all Attributes</td>
+                        </tr>
+                        
+                        <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getAllCatalogs()">getAllCatalogs</a></strong>()</code><br>Retrieve all Catalogs</td>
                         </tr>
                         
-                        <tr class="altColor">
+                        <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getAllClassifications()">getAllClassifications</a></strong>()</code><br>Retrieve all Classifications</td>
                         </tr>
                         
-                        <tr class="rowColor">
+                        <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getAllContracts()">getAllContracts</a></strong>()</code><br>Retrieve all Contracts</td>
                         </tr>
                         
-                        <tr class="altColor">
+                        <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getAllManufacturers()">getAllManufacturers</a></strong>()</code><br>Retrieve all Manufacturers</td>
                         </tr>
                         
-                        <tr class="rowColor">
+                        <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getAllPriceTypes()">getAllPriceTypes</a></strong>()</code><br>Retrieve all PriceTypes</td>
                         </tr>
                         
-                        <tr class="altColor">
+                        <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getAllSuppliers()">getAllSuppliers</a></strong>()</code><br>Retrieve all Suppliers</td>
                         </tr>
                         
-                        <tr class="rowColor">
+                        <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getAttribute(java.lang.String)">getAttribute</a></strong>(java.lang.String attributeId)</code><br>Retrieve an Attribute</td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
+                            <td class="colLast"><code><strong><a href="#getAttributeSection(java.lang.String)">getAttributeSection</a></strong>(java.lang.String attributeSectionId)</code><br>Retrieve an AttributeSection</td>
                         </tr>
                         
                         <tr class="altColor">
@@ -271,7 +283,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getPriceType(java.lang.String)">getPriceType</a></strong>(java.lang.String priceTypeId)</code><br>Retrieve a PriceType</td>
+                            <td class="colLast"><code><strong><a href="#getPriceType(java.lang.String)">getPriceType</a></strong>(java.lang.String priceTypeId)</code><br>Retrieve an PriceType</td>
                         </tr>
                         
                         <tr class="rowColor">
@@ -415,6 +427,15 @@ if (location.href.indexOf('is-external=true') == -1) {
                 </a>
                     <h3>Method Detail</h3>
                     
+                        <a name="getAllAttributeSections()"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllAttributeSections</strong>()</h4>
+                                <p> Retrieve all AttributeSections<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Returns:</B></DT><DD>List of all AttributeSections</DD></DL></p>
+                            </li>
+                        </ul>
+                    
                         <a name="getAllAttributes()"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
@@ -484,6 +505,15 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAttribute</strong>(java.lang.String attributeId)</h4>
                                 <p> Retrieve an Attribute<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>attributeId</code> -  attributeId</DD></DL><DL><DT><B>Returns:</B></DT><DD>attribute</DD></DL></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="getAttributeSection(java.lang.String)"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAttributeSection</strong>(java.lang.String attributeSectionId)</h4>
+                                <p> Retrieve an AttributeSection<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Parameters:</B></DT><DD><code>attributeSectionId</code> -  attributeSectionId</DD></DL><DL><DT><B>Returns:</B></DT><DD>attributeSection</DD></DL></p>
                             </li>
                         </ul>
                     
@@ -581,7 +611,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getPriceType</strong>(java.lang.String priceTypeId)</h4>
-                                <p> Retrieve a PriceType<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+                                <p> Retrieve an PriceType<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>priceTypeId</code> -  priceTypeId</DD></DL><DL><DT><B>Returns:</B></DT><DD>priceType</DD></DL></p>
                             </li>
                         </ul>

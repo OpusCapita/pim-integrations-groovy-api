@@ -73,6 +73,9 @@ class PitGroovyApi {
     
     private Closure generalPriceTypePath = { -> "/api/priceType"}
     private Closure priceTypePath = {priceTypeId -> "${generalPriceTypePath()}/$priceTypeId"}
+        
+    private Closure generalAttributeSectionPath = { -> "/api/attributeSection"}
+    private Closure attributeSectionPath = {attributeSectionId -> "${generalAttributeSectionPath()}/$attributeSectionId"}
 
     /**
      * Creates a new API object with the given url and access token.
@@ -598,7 +601,42 @@ class PitGroovyApi {
         restGet(path)
     }
 
-/**
+    /**
+     * Retrieve all AttributeSections
+     * @return List of all AttributeSections
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllAttributeSections() {
+        String path = generalAttributeSectionPath()
+        restGet(path)
+    }
+
+    /**
+     * Retrieve an AttributeSection
+     * @param  attributeSectionId attributeSectionId
+     * @return attributeSection
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getAttributeSection(String attributeSectionId) {
+        String path = attributeSectionPath(attributeSectionId)
+        restGet(path)
+    }
+
+
+    /**
      * Retrieve all PriceTypes
      * @return List of all PriceTypes
      * @throws NotAuthorizedException
@@ -615,7 +653,7 @@ class PitGroovyApi {
     }
 
     /**
-     * Retrieve a PriceType
+     * Retrieve an PriceType
      * @param  priceTypeId priceTypeId
      * @return priceType
      * @throws NotAuthorizedException
@@ -631,6 +669,7 @@ class PitGroovyApi {
         String path = priceTypePath(priceTypeId)
         restGet(path)
     }
+
 
     private Response restGet(String path, LinkedHashMap query = [:]) {
         def response
@@ -649,6 +688,7 @@ class PitGroovyApi {
 
         return new Response(response.data.result)
     }
+
 
     private static getMatchingHttpResponseException(error){
         def responseStatus = error.response.data.status
