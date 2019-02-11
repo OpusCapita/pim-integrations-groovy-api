@@ -70,6 +70,9 @@ class PitGroovyApi {
 
     private Closure generalManufacturersPath = { -> "/api/manufacturer"}
     private Closure manufacturerPath = {manufacturerId -> "${generalManufacturersPath()}/$manufacturerId"}
+    
+    private Closure generalPriceTypePath = { -> "/api/priceType"}
+    private Closure priceTypePath = {priceTypeId -> "${generalPriceTypePath()}/$priceTypeId"}
         
     private Closure generalAttributeSectionPath = { -> "/api/attributeSection"}
     private Closure attributeSectionPath = {attributeSectionId -> "${generalAttributeSectionPath()}/$attributeSectionId"}
@@ -631,6 +634,42 @@ class PitGroovyApi {
         String path = attributeSectionPath(attributeSectionId)
         restGet(path)
     }
+
+
+    /**
+     * Retrieve all PriceTypes
+     * @return List of all PriceTypes
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllPriceTypes() {
+        String path = generalPriceTypePath()
+        restGet(path)
+    }
+
+    /**
+     * Retrieve an PriceType
+     * @param  priceTypeId priceTypeId
+     * @return priceType
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getPriceType(String priceTypeId) {
+        String path = priceTypePath(priceTypeId)
+        restGet(path)
+    }
+
 
     private Response restGet(String path, LinkedHashMap query = [:]) {
         def response
