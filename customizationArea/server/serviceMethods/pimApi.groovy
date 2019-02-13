@@ -61,6 +61,7 @@ class PitGroovyApi {
 
     private Closure generalCatalogsPath = { -> "/api/catalog"}
     private Closure catalogPath = {catalogId -> "${generalCatalogsPath()}/$catalogId"}
+    private Closure allProductsByCatalogPath = {catalogId -> "${generalCatalogsPath()}/$catalogId/product"}
 
     private Closure generalContractsPath = { -> "/api/contract"}
     private Closure contractPath = {contractId -> "${generalContractsPath()}/$contractId"}
@@ -500,6 +501,23 @@ class PitGroovyApi {
      */
     public Response getCatalog(String catalogId) {
         String path = catalogPath(catalogId)
+        restGet(path)
+    }
+
+     /**
+     * Retrieve all Products off an Catalog
+     * @param  catalogId catalogId
+     * @return attribute
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllProductsByCatalogId(String catalogId) {
+        String path = allProductsByCatalogPath(catalogId)
         restGet(path)
     }
 
