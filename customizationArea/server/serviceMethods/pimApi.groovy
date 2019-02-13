@@ -505,7 +505,7 @@ class PitGroovyApi {
     }
 
      /**
-     * Retrieve all Products off an Catalog
+     * Retrieve all Products from a Catalog
      * @param  catalogId catalogId
      * @return attribute
      * @throws NotAuthorizedException
