@@ -81,6 +81,9 @@ class PitGroovyApi {
     private Closure generalUnitOfMeasurePath = { -> "/api/unitOfMeasure"}
     private Closure unitOfMeasurePath = {unitOfMeasureId -> "${generalUnitOfMeasurePath()}/$unitOfMeasureId"}
 
+    private Closure generalDocumentPath =  { -> "/api/document"}
+    private Closure documentPath = {documentId -> "${generalDocumentPath()}/$documentId"}
+
     /**
      * Creates a new API object with the given url and access token.
      * @param  url The URL to the PIT installation, for example: <tt>http://example.com:5000</tt>
@@ -721,6 +724,24 @@ class PitGroovyApi {
 
     public Response getUnitOfMeasure(String unitOfMeasureId) {
         String path = unitOfMeasurePath(unitOfMeasureId)
+        restGet(path)
+    }
+
+        /**
+     * Retrieve a Document
+     * @param  documentId documentId
+     * @return document
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getDocument(String documentId) {
+        String path = documentPath(documentId)
         restGet(path)
     }
     
