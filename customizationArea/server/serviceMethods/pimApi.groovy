@@ -2,6 +2,7 @@ import org.apache.commons.validator.routines.UrlValidator
 import javax.ws.rs.InternalServerErrorException
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
+import groovyx.net.http.URIBuilder
 import org.apache.http.entity.ContentType
 import org.apache.http.conn.ConnectTimeoutException
 import org.apache.http.conn.HttpHostConnectException
@@ -80,6 +81,9 @@ class PitGroovyApi {
 
     private Closure generalUnitOfMeasurePath = { -> "/api/unitOfMeasure"}
     private Closure unitOfMeasurePath = {unitOfMeasureId -> "${generalUnitOfMeasurePath()}/$unitOfMeasureId"}
+
+    private Closure generalDocumentPath =  { -> "/api/document"}
+    private Closure documentPath = {documentId -> "${generalDocumentPath()}/$documentId"}
 
     /**
      * Creates a new API object with the given url and access token.
@@ -723,15 +727,36 @@ class PitGroovyApi {
         String path = unitOfMeasurePath(unitOfMeasureId)
         restGet(path)
     }
+
+        /**
+     * Retrieve a Document
+     * @param  documentId documentId
+     * @return document
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getDocument(String documentId) {
+        def encodedDocumentId = URLEncoder.encode(documentId,'UTF-8')
+        String path = documentPath(encodedDocumentId)
+        restGet(path,[meta:true])
+    }
     
     private Response restGet(String path, LinkedHashMap query = [:]) {
         def response
         query.put('token', accessToken)
+        def uri = new URIBuilder(new URI(restClient.uri.toString() + path))
         try {
-            response = restClient.get([path: path,
+            response = restClient.get([uri: uri,
                 contentType: ContentType.APPLICATION_JSON,
                 query: query
             ])
+
         } catch (Exception e) {
             if(e instanceof HttpResponseException && e.response.data.status == 404){
                 return new Response([])
