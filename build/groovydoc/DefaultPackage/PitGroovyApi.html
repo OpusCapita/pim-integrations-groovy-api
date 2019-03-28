@@ -253,7 +253,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getClassification(java.lang.String, ArrayList<String>)">getClassification</a></strong>(java.lang.String classificationId, ArrayList&lt;String&gt; include = [])</code><br>Retrieve a classification</td>
+                            <td class="colLast"><code><strong><a href="#getClassification(java.lang.String, def)">getClassification</a></strong>(java.lang.String classificationId, java.lang.Object options = [:])</code><br>Retrieve a classification</td>
                         </tr>
                         
                         <tr class="altColor">
@@ -307,7 +307,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getProduct(java.lang.String, java.lang.String, ArrayList<String>, ArrayList<String>, ArrayList<String>)">getProduct</a></strong>(java.lang.String catalogId, java.lang.String productId, ArrayList&lt;String&gt; languageIds = [], ArrayList&lt;String&gt; exclude = [], ArrayList&lt;String&gt; include = [])</code><br>Retrieve a product</td>
+                            <td class="colLast"><code><strong><a href="#getProduct(java.lang.String, java.lang.String, HashMap)">getProduct</a></strong>(java.lang.String catalogId, java.lang.String productId, <a href='../HashMap.html'>HashMap</a> options = [:])</code><br>Retrieve a product</td>
                         </tr>
                         
                         <tr class="rowColor">
@@ -398,7 +398,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         
                         <tr class="altColor">
                             <td class="colFirst"><code>class java.lang.Object</code></td>
-                            <td class="colLast"><code>java.lang.Object#wait(long, int), java.lang.Object#wait(long), java.lang.Object#wait(), java.lang.Object#equals(java.lang.Object), java.lang.Object#toString(), java.lang.Object#hashCode(), java.lang.Object#getClass(), java.lang.Object#notify(), java.lang.Object#notifyAll()</code></td>
+                            <td class="colLast"><code>java.lang.Object#wait(long), java.lang.Object#wait(long, int), java.lang.Object#wait(), java.lang.Object#equals(java.lang.Object), java.lang.Object#toString(), java.lang.Object#hashCode(), java.lang.Object#getClass(), java.lang.Object#notify(), java.lang.Object#notifyAll()</code></td>
                         </tr>
                     </table>
                    </ul>
@@ -586,10 +586,10 @@ if (location.href.indexOf('is-external=true') == -1) {
                             </li>
                         </ul>
                     
-                        <a name="getClassification(java.lang.String, ArrayList<String>)"><!-- --></a>
+                        <a name="getClassification(java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getClassification</strong>(java.lang.String classificationId, ArrayList&lt;String&gt; include = [])</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getClassification</strong>(java.lang.String classificationId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve a classification<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Returns:</B></DT><DD>classification</DD></DL></p>
                             </li>
@@ -667,14 +667,22 @@ if (location.href.indexOf('is-external=true') == -1) {
                             </li>
                         </ul>
                     
-                        <a name="getProduct(java.lang.String, java.lang.String, ArrayList<String>, ArrayList<String>, ArrayList<String>)"><!-- --></a>
+                        <a name="getProduct(java.lang.String, java.lang.String, HashMap)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProduct</strong>(java.lang.String catalogId, java.lang.String productId, ArrayList&lt;String&gt; languageIds = [], ArrayList&lt;String&gt; exclude = [], ArrayList&lt;String&gt; include = [])</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProduct</strong>(java.lang.String catalogId, java.lang.String productId, <a href='../HashMap.html'>HashMap</a> options = [:])</h4>
                                 <p> Retrieve a product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>productId</code> -  ProductId of the desired product</DD><DD><code>catalogId</code> -  CatalogId of the desired product</DD><DD><code>languageIds</code> -    Optional - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.</DD><DD><code>exclude</code> -    Optional - A list of field ids. If defined, the result will not include the defined fields. If not provided, all fields will be returned.
- Available values : attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants</DD><DD><code>include</code> -    Optional - A list of field ids. If defined, the result will include the defined fields.
- Available values : attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants</DD></DL><DL><DT><B>Returns:</B></DT><DD>A Response that contains the product</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>productId</code> -  ProductId of the desired product</DD><DD><code>catalogId</code> -  CatalogId of the desired product</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
+ <p>
+ Key: exclude - A list of field ids. If defined, the result will include the defined fields.
+ <p>
+ Available values - attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
+ <p>
+ Key: include - A list of field ids. If defined, the result will include the defined fields.
+ <p>
+ Available values - attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants</DD></DL><DL><DT><B>Returns:</B></DT><DD>A Response that contains the product</DD></DL></p>
                             </li>
                         </ul>
                     

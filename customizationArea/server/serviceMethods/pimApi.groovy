@@ -124,11 +124,17 @@ class PitGroovyApi {
      * Retrieve a product
      * @param  productId ProductId of the desired product
      * @param  catalogId CatalogId of the desired product
-     * @param  languageIds   Optional - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
-     * @param  exclude   Optional - A list of field ids. If defined, the result will not include the defined fields. If not provided, all fields will be returned.
-     * Available values : attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
-     * @param  include   Optional - A list of field ids. If defined, the result will include the defined fields.
-     * Available values : attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
+     * @param  options Optional
+     * <p>
+     * Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
+     * <p>
+     * Key: exclude - A list of field ids. If defined, the result will include the defined fields.
+     * <p>
+     * Available values - attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
+     * <p>
+     * Key: include - A list of field ids. If defined, the result will include the defined fields.
+     * <p>
+     * Available values - attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
      * @return           A Response that contains the product
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -138,8 +144,12 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProduct(String catalogId, String productId, ArrayList<String> languageIds = [],
-        ArrayList < String > exclude = [], ArrayList < String > include = []) {
+
+    public Response getProduct(String catalogId, String productId, HashMap options = [:]) {
+
+        def languageIds = options.languageIds
+        def exclude = options.exclude
+        def include = options.include
 
         def query = [:]
         query.put('languageIds', languageIds.join(','))
@@ -161,7 +171,9 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getClassification(String classificationId, ArrayList<String> include = [])  {
+    public Response getClassification(String classificationId, options = [:])  {
+        def include = options.include
+
         def query = [:]
         String path = classificationPath(classificationId)
         query.put('include', include.join(','))
