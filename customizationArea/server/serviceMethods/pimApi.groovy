@@ -128,13 +128,13 @@ class PitGroovyApi {
      * <p>
      * Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
      * <p>
-     * Key: exclude - If defined, the result will include the defined fields.
+     * Key: exclude - A list of field ids. If defined, the result will include the defined fields.
      * <p>
-     * Available values - A comma seperated list of field ids: attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
+     * Available values - attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
      * <p>
-     * Key: include - If defined, the result will include the defined fields.
+     * Key: include - A list of field ids. If defined, the result will include the defined fields.
      * <p>
-     * Available values - A comma seperated list of field ids: attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
+     * Available values - attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
      * @return           A Response that contains the product
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -152,9 +152,9 @@ class PitGroovyApi {
         def include = options.include
 
         def query = [:]
-        query.put('languageIds', languageIds)
-        query.put('exclude', exclude)
-        query.put('include', include)
+        query.put('languageIds', languageIds.join(','))
+        query.put('exclude', exclude.join(','))
+        query.put('include', include.join(','))
 
         String path = productPath(catalogId, productId)
         restGet(path, query)
@@ -176,7 +176,7 @@ class PitGroovyApi {
 
         def query = [:]
         String path = classificationPath(classificationId)
-        query.put('include', include)
+        query.put('include', include.join(','))
         restGet(path, query)
     }
 
