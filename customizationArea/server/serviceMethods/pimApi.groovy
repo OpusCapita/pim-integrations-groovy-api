@@ -165,8 +165,8 @@ class PitGroovyApi {
      * @param classificationId ClassificationId
      * @param options Optional
      * <p>
-     * include: fields which should be included
-     * </p>
+     * key: include - Fields which should be included
+     * <p>
      * @return classification
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -191,7 +191,7 @@ class PitGroovyApi {
      * @param  classificationGroupId ClassificationGroupId
      * @param  options Optional
      * <p>
-     * Key: sort - the field which should be used for sorting. Available values are classificationGroupId and statusId
+     * Key: sort - The field which should be used for sorting. Available values are classificationGroupId and statusId
      * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -311,7 +311,7 @@ class PitGroovyApi {
      * @param  classificationGroupId ClassificationGroupId
      * @param  options Optional
      * <p>
-     * Key: sort - the field which should be used for sorting. Available values are productId and statusId
+     * Key: sort - The field which should be used for sorting. Available values are productId and statusId
      * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -552,7 +552,7 @@ class PitGroovyApi {
     /**
      * Retrieve all Catalogs
      * <p>
-     * Key: sort - the field which should be used for sorting. Available values are catalogId and statusId
+     * Key: sort - The field which should be used for sorting. Available values are catalogId and statusId
      * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -602,7 +602,7 @@ class PitGroovyApi {
      * @param  catalogId catalogId
      * @param  options Optional
      * <p>
-     * Key: sort - the field which should be used for sorting. Available values are productId and statusId
+     * Key: sort - The field which should be used for sorting. Available values are productId and statusId
      * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -634,7 +634,7 @@ class PitGroovyApi {
      * Retrieve all Contracts
      * @param  options Optional
      * <p>
-     * Key: sort - the field which should be used for sorting. Available values are contractId and statusId
+     * Key: sort - The field which should be used for sorting. Available values are contractId and statusId
      * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
