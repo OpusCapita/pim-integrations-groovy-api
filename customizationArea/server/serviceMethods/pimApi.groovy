@@ -85,6 +85,8 @@ class PitGroovyApi {
     private Closure generalDocumentPath =  { -> "/api/document"}
     private Closure documentPath = {documentId -> "${generalDocumentPath()}/$documentId"}
 
+    private Closure generalBoilerplatesPath = { -> "/api/boilerplates"}
+    private Closure boilerplatesPath = {boilerplatesId -> "${generalBoilerplatesPath()}/$boilerplatesId"}
     /**
      * Creates a new API object with the given url and access token.
      * @param  url The URL to the PIT installation, for example: <tt>http://example.com:5000</tt>
@@ -757,6 +759,40 @@ class PitGroovyApi {
         def encodedDocumentId = URLEncoder.encode(documentId,'UTF-8')
         String path = documentPath(encodedDocumentId)
         restGet(path,[meta:true])
+    }
+
+      /**
+     * Retrieve all boilerplates
+     * @return List of all boilerplates
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllBoilerplates() {
+        String path = generalBoilerplatesPath()
+        restGet(path)
+    }
+
+    /**
+     * Retrieve an boilerplates
+     * @param  boilerplatesId boilerplatesId
+     * @return boilerplates
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getBoilerplates(String boilerplatesId) {
+        String path = boilerplatesPath(boilerplatesId)
+        restGet(path)
     }
     
     private Response restGet(String path, LinkedHashMap query = [:]) {
