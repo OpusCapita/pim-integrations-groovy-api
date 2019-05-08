@@ -778,8 +778,8 @@ class PitGroovyApi {
     }
 
     /**
-     * Retrieve an boilerplates
-     * @param  boilerplatesId boilerplatesId
+     * Retrieve an boilerplate
+     * @param  boilerplateId boilerplateId
      * @return boilerplates
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -790,8 +790,8 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
 
-    public Response getBoilerplates(String boilerplatesId) {
-        String path = boilerplatesPath(boilerplatesId)
+    public Response getBoilerplates(String boilerplateId) {
+        String path = boilerplatesPath(boilerplateId)
         restGet(path)
     }
     
