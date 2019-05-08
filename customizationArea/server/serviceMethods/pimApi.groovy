@@ -778,7 +778,7 @@ class PitGroovyApi {
     }
 
     /**
-     * Retrieve an boilerplate
+     * Retrieve a boilerplate
      * @param  boilerplateId boilerplateId
      * @return boilerplates
      * @throws NotAuthorizedException
