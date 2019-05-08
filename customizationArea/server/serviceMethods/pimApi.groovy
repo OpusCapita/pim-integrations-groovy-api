@@ -918,6 +918,10 @@ class PitGroovyApi {
       /**
      * Retrieve all boilerplates
      * @return List of all boilerplates
+     * @param  options Optional
+     * <p>
+     * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+     * <p>
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
