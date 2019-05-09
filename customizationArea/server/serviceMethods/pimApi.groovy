@@ -941,7 +941,7 @@ class PitGroovyApi {
             query.put("sort", sort)
         }
         String path = generalBoilerplatePath()
-        restGet(path)
+        restGet(path,query)
     }
 
     /**
