@@ -253,7 +253,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getBoilerplates(java.lang.String)">getBoilerplates</a></strong>(java.lang.String boilerplateId)</code><br>Retrieve a boilerplate</td>
+                            <td class="colLast"><code><strong><a href="#getBoilerplate(java.lang.String)">getBoilerplate</a></strong>(java.lang.String boilerplateId)</code><br>Retrieve a boilerplate</td>
                         </tr>
                         
                         <tr class="altColor">
@@ -492,7 +492,10 @@ if (location.href.indexOf('is-external=true') == -1) {
                             <li class="blockList">
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllBoilerplates</strong>()</h4>
                                 <p> Retrieve all boilerplates<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Returns:</B></DT><DD>List of all boilerplates</DD></DL></p>
+     <DL><DT><B>Returns:</B></DT><DD>List of all boilerplates</DD></DL><DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
+ <p>
+ Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+ <p></DD></DL></p>
                             </li>
                         </ul>
                     
@@ -637,10 +640,10 @@ if (location.href.indexOf('is-external=true') == -1) {
                             </li>
                         </ul>
                     
-                        <a name="getBoilerplates(java.lang.String)"><!-- --></a>
+                        <a name="getBoilerplate(java.lang.String)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getBoilerplates</strong>(java.lang.String boilerplateId)</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getBoilerplate</strong>(java.lang.String boilerplateId)</h4>
                                 <p> Retrieve a boilerplate<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>boilerplateId</code> -  boilerplateId</DD></DL><DL><DT><B>Returns:</B></DT><DD>boilerplates</DD></DL></p>
                             </li>
