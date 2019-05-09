@@ -931,7 +931,7 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllBoilerplates() {
-        String path = generalBoilerplatesPath()
+        String path = generalBoilerplatePath()
         restGet(path)
     }
 
