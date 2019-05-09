@@ -930,7 +930,16 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getAllBoilerplates() {
+    public Response getAllBoilerplates(options=[:]) {
+        def query = [:]
+        def sort = options.sort
+        def order = options.order
+        if(order){
+            query.put("order", order)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
         String path = generalBoilerplatePath()
         restGet(path)
     }
