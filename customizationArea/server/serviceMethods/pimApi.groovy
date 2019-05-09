@@ -85,6 +85,8 @@ class PitGroovyApi {
     private Closure generalDocumentPath =  { -> "/api/document"}
     private Closure documentPath = {documentId -> "${generalDocumentPath()}/$documentId"}
 
+    private Closure generalBoilerplatePath = { -> "/api/boilerplate"}
+    private Closure boilerplatePath = {boilerplateId -> "${generalBoilerplatePath()}/$boilerplateId"}
     /**
      * Creates a new API object with the given url and access token.
      * @param  url The URL to the PIT installation, for example: <tt>http://example.com:5000</tt>
@@ -911,6 +913,53 @@ class PitGroovyApi {
         def encodedDocumentId = URLEncoder.encode(documentId,'UTF-8')
         String path = documentPath(encodedDocumentId)
         restGet(path,[meta:true])
+    }
+
+      /**
+     * Retrieve all boilerplates
+     * @return List of all boilerplates
+     * @param  options Optional
+     * <p>
+     * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+     * <p>
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllBoilerplates(options=[:]) {
+        def query = [:]
+        def sort = options.sort
+        def order = options.order
+        if(order){
+            query.put("order", order)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
+        String path = generalBoilerplatePath()
+        restGet(path,query)
+    }
+
+    /**
+     * Retrieve a boilerplate
+     * @param  boilerplateId boilerplateId
+     * @return boilerplates
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+
+    public Response getBoilerplate(String boilerplateId) {
+        String path = boilerplatePath(boilerplateId)
+        restGet(path)
     }
     
     private Response restGet(String path, LinkedHashMap query = [:]) {
