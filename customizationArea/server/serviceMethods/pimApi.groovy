@@ -34,10 +34,10 @@ class PitGroovyApi {
     private String accessToken
     private RESTClient restClient
     private final static Integer TIMEOUT = new Integer(60000)
+    private String pitApiPath = "/pit/api"
+    private Closure pingPath = {-> "/ping"}
 
-    private Closure pingPath = {-> "/api/ping"}
-
-    private Closure productPath = {catalogId, productId -> "/api/catalog/$catalogId/product/$productId"}
+    private Closure productPath = {catalogId, productId -> "/catalog/$catalogId/product/$productId"}
     private Closure productAttributeValuesPath = {catalogId, productId -> "${productPath(catalogId, productId)}/attributeValue"}
     private Closure productClassificationGroupsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/classificationGroup"}
     private Closure productAssortmentPath = {catalogId, productId -> "${productPath(catalogId, productId)}/assortment"}
@@ -47,45 +47,45 @@ class PitGroovyApi {
     private Closure productDocumentsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/document"}
     private Closure productVariantsPath = {catalogId, productId -> "${productPath(catalogId, productId)}/variant"}
 
-    private Closure generalClassificationPath = { -> "/api/classification"}
+    private Closure generalClassificationPath = { -> "/classification"}
     private Closure classificationPath = {classificationId -> "${generalClassificationPath()}/$classificationId"}
-    private Closure classificationGroupPath = {classificationId, classificationGroupId -> "/api/classification/$classificationId/classificationGroup/$classificationGroupId"}
+    private Closure classificationGroupPath = {classificationId, classificationGroupId -> "/classification/$classificationId/classificationGroup/$classificationGroupId"}
     private Closure classificationGroupSubgroupPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/classificationGroup"}
     private Closure classificationGroupAttributeValuesPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/attributeValue"}
     private Closure productsByClassificationGroupPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/product"}
     private Closure classificationGroupsPath = {classificationId -> "${classificationPath(classificationId)}/classificationGroup"}
 
-    private Closure generalAttributePath = { -> "/api/attribute"}
+    private Closure generalAttributePath = { -> "/attribute"}
     private Closure attributePath = {attributeId -> "${generalAttributePath()}/$attributeId"}
     private Closure attributesByClassificationPath = {classificationId -> "${classificationPath(classificationId)}/attribute"}
     private Closure attributesByClassificationGroupPath = {classificationId, classificationGroupId -> "${classificationGroupPath(classificationId, classificationGroupId)}/attribute"}
 
-    private Closure generalCatalogsPath = { -> "/api/catalog"}
+    private Closure generalCatalogsPath = { -> "/catalog"}
     private Closure catalogPath = {catalogId -> "${generalCatalogsPath()}/$catalogId"}
     private Closure allProductsByCatalogPath = {catalogId -> "${generalCatalogsPath()}/$catalogId/product"}
 
-    private Closure generalContractsPath = { -> "/api/contract"}
+    private Closure generalContractsPath = { -> "/contract"}
     private Closure contractPath = {contractId -> "${generalContractsPath()}/$contractId"}
     
-    private Closure generalSuppliersPath = { -> "/api/supplier"}
+    private Closure generalSuppliersPath = { -> "/supplier"}
     private Closure supplierPath = {supplierId -> "${generalSuppliersPath()}/$supplierId"}
 
-    private Closure generalManufacturersPath = { -> "/api/manufacturer"}
+    private Closure generalManufacturersPath = { -> "/manufacturer"}
     private Closure manufacturerPath = {manufacturerId -> "${generalManufacturersPath()}/$manufacturerId"}
     
-    private Closure generalPriceTypePath = { -> "/api/priceType"}
+    private Closure generalPriceTypePath = { -> "/priceType"}
     private Closure priceTypePath = {priceTypeId -> "${generalPriceTypePath()}/$priceTypeId"}
         
-    private Closure generalAttributeSectionPath = { -> "/api/attributeSection"}
+    private Closure generalAttributeSectionPath = { -> "/attributeSection"}
     private Closure attributeSectionPath = {attributeSectionId -> "${generalAttributeSectionPath()}/$attributeSectionId"}
 
-    private Closure generalUnitOfMeasurePath = { -> "/api/unitOfMeasure"}
+    private Closure generalUnitOfMeasurePath = { -> "/unitOfMeasure"}
     private Closure unitOfMeasurePath = {unitOfMeasureId -> "${generalUnitOfMeasurePath()}/$unitOfMeasureId"}
 
-    private Closure generalDocumentPath =  { -> "/api/document"}
+    private Closure generalDocumentPath =  { -> "/document"}
     private Closure documentPath = {documentId -> "${generalDocumentPath()}/$documentId"}
 
-    private Closure generalBoilerplatePath = { -> "/api/boilerplate"}
+    private Closure generalBoilerplatePath = { -> "/boilerplate"}
     private Closure boilerplatePath = {boilerplateId -> "${generalBoilerplatePath()}/$boilerplateId"}
     /**
      * Creates a new API object with the given url and access token.
@@ -965,7 +965,7 @@ class PitGroovyApi {
     private Response restGet(String path, LinkedHashMap query = [:]) {
         def response
         query.put('token', accessToken)
-        def uri = new URIBuilder(new URI(restClient.uri.toString() + path))
+        def uri = new URIBuilder(new URI(restClient.uri.toString() + pitApiPath + path))
         try {
             response = restClient.get([uri: uri,
                 contentType: ContentType.APPLICATION_JSON,
