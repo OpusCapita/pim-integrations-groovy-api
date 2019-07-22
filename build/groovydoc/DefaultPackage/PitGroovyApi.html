@@ -217,6 +217,30 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
+                            <td class="colLast"><code><strong><a href="#getAllProductsByClassificationGroup(java.lang.String, java.lang.String, def)">getAllProductsByClassificationGroup</a></strong>(java.lang.String classificationId, java.lang.String classificationGroupId, java.lang.Object options = [:])</code><br>Retrieve all products assigned to a ClassificationGroup</td>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
+                            <td class="colLast"><code><strong><a href="#getAllProductsByClassificationId(java.lang.String, def)">getAllProductsByClassificationId</a></strong>(java.lang.String classificationId, java.lang.Object options = [:])</code><br>Retrieve all Products from a Classification</td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
+                            <td class="colLast"><code><strong><a href="#getAllProductsByContractId(java.lang.String, def)">getAllProductsByContractId</a></strong>(java.lang.String contractId, java.lang.Object options = [:])</code><br>Retrieve all Products from a Contract</td>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
+                            <td class="colLast"><code><strong><a href="#getAllProductsBySupplierId(java.lang.String, def)">getAllProductsBySupplierId</a></strong>(java.lang.String supplierId, java.lang.Object options = [:])</code><br>Retrieve all Products from a Supplier</td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getAllSuppliers(def)">getAllSuppliers</a></strong>(java.lang.Object options = [:])</code><br>Retrieve all Suppliers</td>
                         </tr>
                         
@@ -373,22 +397,16 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getProductsByClassificationGroup(java.lang.String, java.lang.String, def)">getProductsByClassificationGroup</a></strong>(java.lang.String classificationId, java.lang.String classificationGroupId, java.lang.Object options = [:])</code><br>Retrieve all products assigned to a ClassificationGroup</td>
-                        </tr>
-                        
-                        <tr class="altColor">
-                            <td class="colFirst"><code></code></td>
-                            <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getSupplier(java.lang.String)">getSupplier</a></strong>(java.lang.String supplierId)</code><br>Retrieve a Supplier</td>
                         </tr>
                         
-                        <tr class="rowColor">
+                        <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#getUnitOfMeasure(java.lang.String)">getUnitOfMeasure</a></strong>(java.lang.String unitOfMeasureId)</code><br>Retrieve an UnitOfMeasure</td>
                         </tr>
                         
-                        <tr class="altColor">
+                        <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
                             <td class="colLast"><code><strong><a href="#ping()">ping</a></strong>()</code><br>Checks your installation.</td>
@@ -471,6 +489,9 @@ if (location.href.indexOf('is-external=true') == -1) {
      <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+ <p>
+ <p>
+ Key: sort - The field which should be used for sorting. Available values are attributeSectionId and orderNo
  <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of all AttributeSections</DD></DL></p>
                             </li>
                         </ul>
@@ -482,6 +503,9 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <p> Retrieve all Attributes
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+ <p>
+ <p>
+ Key: sort - The field which should be used for sorting. Available values are attributeId and orderNo
  <p><DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Returns:</B></DT><DD>List of all Attributes</DD></DL></p>
                             </li>
@@ -576,7 +600,67 @@ if (location.href.indexOf('is-external=true') == -1) {
  <p>
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
- <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>attribute</DD></DL></p>
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of products</DD></DL></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="getAllProductsByClassificationGroup(java.lang.String, java.lang.String, def)"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllProductsByClassificationGroup</strong>(java.lang.String classificationId, java.lang.String classificationGroupId, java.lang.Object options = [:])</h4>
+                                <p> Retrieve all products assigned to a ClassificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: sort - The field which should be used for sorting. Available values are productId and statusId
+ <p>
+ <p>
+ Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of Products</DD></DL></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="getAllProductsByClassificationId(java.lang.String, def)"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllProductsByClassificationId</strong>(java.lang.String classificationId, java.lang.Object options = [:])</h4>
+                                <p> Retrieve all Products from a Classification<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  classificationId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: sort - The field which should be used for sorting. Available values are productId and statusId
+ <p>
+ <p>
+ Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of products</DD></DL></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="getAllProductsByContractId(java.lang.String, def)"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllProductsByContractId</strong>(java.lang.String contractId, java.lang.Object options = [:])</h4>
+                                <p> Retrieve all Products from a Contract<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Parameters:</B></DT><DD><code>contractId</code> -  contractId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: sort - The field which should be used for sorting. Available values are productId and statusId
+ <p>
+ <p>
+ Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of products</DD></DL></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="getAllProductsBySupplierId(java.lang.String, def)"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllProductsBySupplierId</strong>(java.lang.String supplierId, java.lang.Object options = [:])</h4>
+                                <p> Retrieve all Products from a Supplier<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Parameters:</B></DT><DD><code>supplierId</code> -  supplierId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: sort - The field which should be used for sorting. Available values are productId and statusId
+ <p>
+ <p>
+ Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of products</DD></DL></p>
                             </li>
                         </ul>
                     
@@ -654,7 +738,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                             <li class="blockList">
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getCatalog</strong>(java.lang.String catalogId)</h4>
                                 <p> Retrieve an Catalog<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  catalogId</DD></DL><DL><DT><B>Returns:</B></DT><DD>attribute</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  catalogId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of Catalogs</DD></DL></p>
                             </li>
                         </ul>
                     
@@ -666,6 +750,9 @@ if (location.href.indexOf('is-external=true') == -1) {
      <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>options</code> -  Optional
  <p>
  key: include - Fields which should be included
+ <p>
+ <p>
+ Key: sort - The field which should be used for sorting. Available values are classificationId and orderNo
  <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>classification</DD></DL></p>
                             </li>
                         </ul>
@@ -677,7 +764,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <p> Retrieve a classificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId</DD><DD><code>options</code> -  Optional
  <p>
- Key: sort - The field which should be used for sorting. Available values are classificationGroupId and statusId
+ Key: sort - The field which should be used for sorting. Available values are classificationGroupId, orderNo and statusId
  <p>
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -836,21 +923,6 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductVariants</strong>(java.lang.String catalogId, java.lang.String productId)</h4>
                                 <p> Retrieve all variants of a Product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of variants</DD></DL></p>
-                            </li>
-                        </ul>
-                    
-                        <a name="getProductsByClassificationGroup(java.lang.String, java.lang.String, def)"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductsByClassificationGroup</strong>(java.lang.String classificationId, java.lang.String classificationGroupId, java.lang.Object options = [:])</h4>
-                                <p> Retrieve all products assigned to a ClassificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId</DD><DD><code>options</code> -  Optional
- <p>
- Key: sort - The field which should be used for sorting. Available values are productId and statusId
- <p>
- <p>
- Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
- <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of Products</DD></DL></p>
                             </li>
                         </ul>
                     
