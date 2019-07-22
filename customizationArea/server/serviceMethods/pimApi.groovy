@@ -64,6 +64,10 @@ class PitGroovyApi {
     private Closure catalogPath = {catalogId -> "${generalCatalogsPath()}/$catalogId"}
     private Closure allProductsByCatalogPath = {catalogId -> "${generalCatalogsPath()}/$catalogId/product"}
 
+    private Closure allProductsByClassificationPath = {classificationId -> "${generalClassificationPath()}/$classificationId/product"}
+    private Closure allProductsByContractPath = {contractId -> "${generalContractsPath()}/$contractId/product"}
+    private Closure allProductsBySupplierPath = {supplierId -> "${generalSuppliersPath()}/$supplierId/product"}
+
     private Closure generalContractsPath = { -> "/contract"}
     private Closure contractPath = {contractId -> "${generalContractsPath()}/$contractId"}
     
@@ -169,6 +173,9 @@ class PitGroovyApi {
      * <p>
      * key: include - Fields which should be included
      * <p>
+     * <p>
+     * Key: sort - The field which should be used for sorting. Available values are classificationId and orderNo
+     * <p>
      * @return classification
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -179,9 +186,16 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getClassification(String classificationId, options = [:])  {
-        def include = options.include
-
         def query = [:]
+        def include = options.include
+        def sort = options.sort
+        def order = options.order
+        if(order){
+            query.put("order", order)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
         String path = classificationPath(classificationId)
         query.put('include', include.join(','))
         restGet(path, query)
@@ -193,7 +207,7 @@ class PitGroovyApi {
      * @param  classificationGroupId ClassificationGroupId
      * @param  options Optional
      * <p>
-     * Key: sort - The field which should be used for sorting. Available values are classificationGroupId and statusId
+     * Key: sort - The field which should be used for sorting. Available values are classificationGroupId, orderNo and statusId
      * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -327,7 +341,7 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductsByClassificationGroup(String classificationId, String classificationGroupId, options=[:]) {
+    public Response getAllProductsByClassificationGroup(String classificationId, String classificationGroupId, options=[:]) {
         def query = [:]
         def sort = options.sort
         def order = options.order
@@ -371,6 +385,9 @@ class PitGroovyApi {
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
+     * <p>
+     * Key: sort - The field which should be used for sorting. Available values are attributeId and orderNo
+     * <p>
      * @return List of all Attributes
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -382,9 +399,13 @@ class PitGroovyApi {
      */
     public Response getAllAttributes(options = [:]) {
         def query = [:]
+        def sort = options.sort
         def order = options.order
         if(order){
             query.put("order", order)
+        }
+        if(sort){
+            query.put("sort", sort)
         }
         String path = generalAttributePath()
         restGet(path, query)
@@ -585,7 +606,7 @@ class PitGroovyApi {
     /**
      * Retrieve an Catalog
      * @param  catalogId catalogId
-     * @return attribute
+     * @return List of Catalogs
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
@@ -609,7 +630,7 @@ class PitGroovyApi {
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
-     * @return attribute
+     * @return List of products
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
@@ -629,6 +650,103 @@ class PitGroovyApi {
             query.put("sort", sort)
         }
         String path = allProductsByCatalogPath(catalogId)
+        restGet(path, query)
+    }
+
+    /**
+     * Retrieve all Products from a Supplier
+     * @param  supplierId supplierId
+     * @param  options Optional
+     * <p>
+     * Key: sort - The field which should be used for sorting. Available values are productId and statusId
+     * <p>
+     * <p>
+     * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+     * <p>
+     * @return List of products
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllProductsBySupplierId(String supplierId, options=[:]) {
+        def query = [:]
+        def sort = options.sort
+        def order = options.order
+        if(order){
+            query.put("order", order)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
+        String path = allProductsBySupplierPath(supplierId)
+        restGet(path, query)
+    }
+     /**
+     * Retrieve all Products from a Classification
+     * @param  classificationId classificationId
+     * @param  options Optional
+     * <p>
+     * Key: sort - The field which should be used for sorting. Available values are productId and statusId
+     * <p>
+     * <p>
+     * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+     * <p>
+     * @return List of products
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllProductsByClassificationId(String classificationId, options=[:]) {
+        def query = [:]
+        def sort = options.sort
+        def order = options.order
+        if(order){
+            query.put("order", order)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
+        String path = allProductsByClassificationPath(classificationId)
+        restGet(path, query)
+    }
+     /**
+     * Retrieve all Products from a Contract
+     * @param  contractId contractId
+     * @param  options Optional
+     * <p>
+     * Key: sort - The field which should be used for sorting. Available values are productId and statusId
+     * <p>
+     * <p>
+     * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+     * <p>
+     * @return List of products
+     * @throws NotAuthorizedException
+     * @throws UnknownHostException
+     * @throws GroovyAPIInternalErrorException
+     * @throws PITInternalErrorException
+     * @throws PIMAccessDeniedException
+     * @throws PIMUnreachableException
+     * @throws PIMInternalErrorException
+     */
+    public Response getAllProductsByContractId(String contractId, options=[:]) {
+        def query = [:]
+        def sort = options.sort
+        def order = options.order
+        if(order){
+            query.put("order", order)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
+        String path = allProductsByContractPath(contractId)
         restGet(path, query)
     }
 
@@ -773,6 +891,9 @@ class PitGroovyApi {
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
+     * <p>
+     * Key: sort - The field which should be used for sorting. Available values are attributeSectionId and orderNo
+     * <p>
      * @return List of all AttributeSections
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -784,9 +905,13 @@ class PitGroovyApi {
      */
     public Response getAllAttributeSections(options=[:]) {
         def query = [:]
+        def sort = options.sort
         def order = options.order
         if(order){
             query.put("order", order)
+        }
+        if(sort){
+            query.put("sort", sort)
         }
         String path = generalAttributeSectionPath()
         restGet(path, query)
