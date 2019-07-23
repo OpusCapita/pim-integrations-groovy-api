@@ -332,6 +332,24 @@ class PitGroovyApi {
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
+     * <p>
+     * Key: catalogId - If set, products will be filtered by this catalogId
+     * <p>
+     * <p>
+     * Key: supplierId - If set, products will be filtered by this supplierId
+     * <p>
+     * <p>
+     * Key: contractId - If set, products will be filtered by this contractId
+     * <p>
+     * <p>
+     * Key: classificationId - If set, products will be filtered by this classificationId
+     * <p>
+     * <p>
+     * Key: statusIdFrom - If set, only products with at least this statusId will be returned
+     * <p>
+     * <p>
+     * Key: statusIdTo - If set, only products with at most this statusId will be returned
+     * <p>
      * @return List of Products
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -342,17 +360,8 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllProductsByClassificationGroup(String classificationId, String classificationGroupId, options=[:]) {
-        def query = [:]
-        def sort = options.sort
-        def order = options.order
-        if(order){
-            query.put("order", order)
-        }
-        if(sort){
-            query.put("sort", sort)
-        }
         String path = productsByClassificationGroupPath(classificationId, classificationGroupId)
-        restGet(path, query)
+        restGet(path, options)
     }
 
     /**
@@ -630,6 +639,24 @@ class PitGroovyApi {
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
+     * <p>
+     * Key: supplierId - If set, products will be filtered by this supplierId
+     * <p>
+     * <p>
+     * Key: contractId - If set, products will be filtered by this contractId
+     * <p>
+     * <p>
+     * Key: classificationId - If set, products will be filtered by this classificationId
+     * <p>
+     * <p>
+     * Key: classificationGroupId - If set, products will be filtered by this classificationGroupId
+     * <p>
+     * <p>
+     * Key: statusIdFrom - If set, only products with at least this statusId will be returned
+     * <p>
+     * <p>
+     * Key: statusIdTo - If set, only products with at most this statusId will be returned
+     * <p>
      * @return List of products
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -640,17 +667,8 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllProductsByCatalogId(String catalogId, options=[:]) {
-        def query = [:]
-        def sort = options.sort
-        def order = options.order
-        if(order){
-            query.put("order", order)
-        }
-        if(sort){
-            query.put("sort", sort)
-        }
         String path = allProductsByCatalogPath(catalogId)
-        restGet(path, query)
+        restGet(path, options)
     }
 
     /**
@@ -663,6 +681,24 @@ class PitGroovyApi {
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
+     * <p>
+     * Key: catalogId - If set, products will be filtered by this catalogId
+     * <p>
+     * <p>
+     * Key: contractId - If set, products will be filtered by this contractId
+     * <p>
+     * <p>
+     * Key: classificationId - If set, products will be filtered by this classificationId
+     * <p>
+     * <p>
+     * Key: classificationGroupId - If set, products will be filtered by this classificationGroupId
+     * <p>
+     * <p>
+     * Key: statusIdFrom - If set, only products with at least this statusId will be returned
+     * <p>
+     * <p>
+     * Key: statusIdTo - If set, only products with at most this statusId will be returned
+     * <p>
      * @return List of products
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -673,17 +709,8 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllProductsBySupplierId(String supplierId, options=[:]) {
-        def query = [:]
-        def sort = options.sort
-        def order = options.order
-        if(order){
-            query.put("order", order)
-        }
-        if(sort){
-            query.put("sort", sort)
-        }
         String path = allProductsBySupplierPath(supplierId)
-        restGet(path, query)
+        restGet(path, options)
     }
      /**
      * Retrieve all Products from a Classification
@@ -695,6 +722,24 @@ class PitGroovyApi {
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
+     * <p>
+     * Key: catalogId - If set, products will be filtered by this catalogId
+     * <p>
+     * <p>
+     * Key: supplierId - If set, products will be filtered by this supplierId
+     * <p>
+     * <p>
+     * Key: contractId - If set, products will be filtered by this contractId
+     * <p>
+     * <p>
+     * Key: classificationGroupId - If set, products will be filtered by this classificationGroupId
+     * <p>
+     * <p>
+     * Key: statusIdFrom - If set, only products with at least this statusId will be returned
+     * <p>
+     * <p>
+     * Key: statusIdTo - If set, only products with at most this statusId will be returned
+     * <p>
      * @return List of products
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -705,17 +750,8 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllProductsByClassificationId(String classificationId, options=[:]) {
-        def query = [:]
-        def sort = options.sort
-        def order = options.order
-        if(order){
-            query.put("order", order)
-        }
-        if(sort){
-            query.put("sort", sort)
-        }
         String path = allProductsByClassificationPath(classificationId)
-        restGet(path, query)
+        restGet(path, options)
     }
      /**
      * Retrieve all Products from a Contract
@@ -727,6 +763,24 @@ class PitGroovyApi {
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
+     * <p>
+     * Key: catalogId - If set, products will be filtered by this catalogId
+     * <p>
+     * <p>
+     * Key: supplierId - If set, products will be filtered by this supplierId
+     * <p>
+     * <p>
+     * Key: classificationId - If set, products will be filtered by this classificationId
+     * <p>
+     * <p>
+     * Key: classificationGroupId - If set, products will be filtered by this classificationGroupId
+     * <p>
+     * <p>
+     * Key: statusIdFrom - If set, only products with at least this statusId will be returned
+     * <p>
+     * <p>
+     * Key: statusIdTo - If set, only products with at most this statusId will be returned
+     * <p>
      * @return List of products
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -737,17 +791,8 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllProductsByContractId(String contractId, options=[:]) {
-        def query = [:]
-        def sort = options.sort
-        def order = options.order
-        if(order){
-            query.put("order", order)
-        }
-        if(sort){
-            query.put("sort", sort)
-        }
         String path = allProductsByContractPath(contractId)
-        restGet(path, query)
+        restGet(path, options)
     }
 
     /**
