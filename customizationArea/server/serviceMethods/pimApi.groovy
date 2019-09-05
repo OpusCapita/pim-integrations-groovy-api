@@ -445,7 +445,7 @@ class PitGroovyApi {
      * Key: variantId - The id of the variant. If provided, the values are returned for the variant instead of the product
      * <p>
      * <p>
-     * Key: languageIds - A comma-separated list of language ids(String). If defined, all language-specific fields will be filtered to only include languages with the matching languageId. If not provided, all language-specific fields are returned in all languages
+     * Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
      * <p>
      * @param  catalogId CatalogId
      * @param  productId ProductId
@@ -466,7 +466,7 @@ class PitGroovyApi {
             query.put("variantId", variantId)
         }
         if(languageIds){
-            query.put("languageIds", languageIds)
+            query.put("languageIds", languageIds.join(","))
         }
         String path = productAttributeValuesPath(catalogId, productId)
         restGet(path, query)
