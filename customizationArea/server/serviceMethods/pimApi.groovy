@@ -445,7 +445,7 @@ class PitGroovyApi {
      * Key: variantId - The id of the variant. If provided, the values are returned for the variant instead of the product
      * <p>
      * <p>
-     * Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
+     * Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages
      * <p>
      * @param  catalogId CatalogId
      * @param  productId ProductId
