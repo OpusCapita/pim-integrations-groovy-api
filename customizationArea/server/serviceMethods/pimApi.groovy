@@ -158,10 +158,15 @@ class PitGroovyApi {
         def include = options.include
 
         def query = [:]
-        query.put('languageIds', languageIds.join(','))
-        query.put('exclude', exclude.join(','))
-        query.put('include', include.join(','))
-
+        if(languageIds){
+            query.put('languageIds', languageIds.join(','))    
+        }
+        if(exclude){
+            query.put('exclude', exclude.join(','))
+        }
+        if(include){
+            query.put('include', include.join(','))
+        }
         String path = productPath(catalogId, productId)
         restGet(path, query)
     }
