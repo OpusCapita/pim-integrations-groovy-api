@@ -201,8 +201,11 @@ class PitGroovyApi {
         if(sort){
             query.put("sort", sort)
         }
+        if(include){
+            query.put('include', include.join(','))
+        }
         String path = classificationPath(classificationId)
-        query.put('include', include.join(','))
+        
         restGet(path, query)
     }
 
