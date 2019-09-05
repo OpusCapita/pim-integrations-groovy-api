@@ -355,7 +355,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getProductAttributeValues(java.lang.String, java.lang.String)">getProductAttributeValues</a></strong>(java.lang.String catalogId, java.lang.String productId)</code><br>Retrieve all attributeValues of a Product</td>
+                            <td class="colLast"><code><strong><a href="#getProductAttributeValues(java.lang.String, java.lang.String, def)">getProductAttributeValues</a></strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</code><br>Retrieve all attributeValues of a Product</td>
                         </tr>
                         
                         <tr class="rowColor">
@@ -500,14 +500,14 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllAttributes</strong>(java.lang.Object options = [:])</h4>
-                                <p> Retrieve all Attributes
+                                <p> Retrieve all Attributes<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
  <p>
  <p>
  Key: sort - The field which should be used for sorting. Available values are attributeId and orderNo
- <p><DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Returns:</B></DT><DD>List of all Attributes</DD></DL></p>
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of all Attributes</DD></DL></p>
                             </li>
                         </ul>
                     
@@ -953,12 +953,18 @@ if (location.href.indexOf('is-external=true') == -1) {
                             </li>
                         </ul>
                     
-                        <a name="getProductAttributeValues(java.lang.String, java.lang.String)"><!-- --></a>
+                        <a name="getProductAttributeValues(java.lang.String, java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductAttributeValues</strong>(java.lang.String catalogId, java.lang.String productId)</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductAttributeValues</strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all attributeValues of a Product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of ProductAttributeValues</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
+ <p>
+ Key: variantId - The id of the variant. If provided, the values are returned for the variant instead of the product
+ <p>
+ <p>
+ Key: languageIds - A comma-separated list of language ids(String). If defined, all language-specific fields will be filtered to only include languages with the matching languageId. If not provided, all language-specific fields are returned in all languages
+ <p></DD><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of ProductAttributeValues</DD></DL></p>
                             </li>
                         </ul>
                     
