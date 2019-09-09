@@ -241,9 +241,15 @@ class PitGroovyApi {
     }
 
     /**
-     * Retrieve a Subgroup of a ClassificationGroup
+     * Retrieve a list of Subgroups from a ClassificationGroup
      * @param classificationId ClassificationId
      * @param classificationGroupId ClassificationGroupId
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
      * @return List of classificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -253,9 +259,18 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getClassificationGroupSubgroups(String classificationId, String classificationGroupId) {
+    public Response getClassificationGroupSubgroups(String classificationId, String classificationGroupId, options = [:]) {
+        def limit = options.limit
+        def offset = options.offset
+        def query = [:]
+        if(limit){
+            query.put('limit', limit)
+        }
+        if(offset){
+            query.put('offset', offset)
+        }
         String path = classificationGroupSubgroupPath(classificationId, classificationGroupId)
-        restGet(path)
+        restGet(path, query)
     }
 
     /**
@@ -390,7 +405,7 @@ class PitGroovyApi {
         def catalogId = options.catalogId
         def supplierId = options.supplierId
         def contractId = options.contractId
-        def classificationId = options.classificationId
+        def filterByClassificationId = options.filterByClassificationId
         def statusIdFrom = options.statusIdFrom
         def statusIdTo = options.statusIdTo
         def query = [:]
@@ -415,8 +430,8 @@ class PitGroovyApi {
         if(contractId){
             query.put("contractId", contractId)
         }
-        if(classificationId){
-            query.put("classificationId", classificationId)
+        if(filterByClassificationId){
+            query.put("classificationId", filterByClassificationId)
         }
         if(statusIdFrom){
             query.put("statusIdFrom", statusIdFrom)
@@ -852,13 +867,13 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getAllProductsByCatalogId(String catalogId, options=[:]) {
+    public Response getAllProductsByCatalogId(String catalogId, options = [:]) {
         def limit = options.limit
         def offset = options.offset
         def sort = options.sort
         def order = options.order
-        def catalogId = options.catalogId
-        def supplierId = options.supplierId
+        def filterByCatalogId = options.filterByCatalogId
+        def filterBySupplierId = options.filterBySupplierId
         def contractId = options.contractId
         def classificationId = options.classificationId
         def statusIdFrom = options.statusIdFrom
@@ -876,11 +891,11 @@ class PitGroovyApi {
         if(order){
             query.put("order", order)
         }
-        if(catalogId){
-            query.put("catalogId", catalogId)
+        if(filterByCatalogId){
+            query.put("catalogId", filterByCatalogId)
         }
-        if(supplierId){
-            query.put("supplierId", supplierId)
+        if(filterBySupplierId){
+            query.put("supplierId", filterBySupplierId)
         }
         if(contractId){
             query.put("contractId", contractId)
@@ -947,7 +962,7 @@ class PitGroovyApi {
         def sort = options.sort
         def order = options.order
         def catalogId = options.catalogId
-        def supplierId = options.supplierId
+        def filterBySupplierId = options.filterBySupplierId
         def contractId = options.contractId
         def classificationId = options.classificationId
         def statusIdFrom = options.statusIdFrom
@@ -968,8 +983,8 @@ class PitGroovyApi {
         if(catalogId){
             query.put("catalogId", catalogId)
         }
-        if(supplierId){
-            query.put("supplierId", supplierId)
+        if(filterBySupplierId){
+            query.put("filterBySupplierId", filterBySupplierId)
         }
         if(contractId){
             query.put("contractId", contractId)
@@ -1037,7 +1052,7 @@ class PitGroovyApi {
         def catalogId = options.catalogId
         def supplierId = options.supplierId
         def contractId = options.contractId
-        def classificationId = options.classificationId
+        def filterByClassificationId = options.filterByClassificationId
         def statusIdFrom = options.statusIdFrom
         def statusIdTo = options.statusIdTo
         def query = [:]
@@ -1062,8 +1077,8 @@ class PitGroovyApi {
         if(contractId){
             query.put("contractId", contractId)
         }
-        if(classificationId){
-            query.put("classificationId", classificationId)
+        if(filterByClassificationId){
+            query.put("classificationId", filterByClassificationId)
         }
         if(statusIdFrom){
             query.put("statusIdFrom", statusIdFrom)
@@ -1124,7 +1139,7 @@ class PitGroovyApi {
         def order = options.order
         def catalogId = options.catalogId
         def supplierId = options.supplierId
-        def contractId = options.contractId
+        def filterByContractId = options.filterByContractId
         def classificationId = options.classificationId
         def statusIdFrom = options.statusIdFrom
         def statusIdTo = options.statusIdTo
@@ -1147,8 +1162,8 @@ class PitGroovyApi {
         if(supplierId){
             query.put("supplierId", supplierId)
         }
-        if(contractId){
-            query.put("contractId", contractId)
+        if(filterByContractId){
+            query.put("contractId", filterByContractId)
         }
         if(classificationId){
             query.put("classificationId", classificationId)

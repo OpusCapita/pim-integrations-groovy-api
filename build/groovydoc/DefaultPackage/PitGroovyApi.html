@@ -307,7 +307,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getClassificationGroupSubgroups(java.lang.String, java.lang.String)">getClassificationGroupSubgroups</a></strong>(java.lang.String classificationId, java.lang.String classificationGroupId)</code><br>Retrieve a Subgroup of a ClassificationGroup</td>
+                            <td class="colLast"><code><strong><a href="#getClassificationGroupSubgroups(java.lang.String, java.lang.String, def)">getClassificationGroupSubgroups</a></strong>(java.lang.String classificationId, java.lang.String classificationGroupId, java.lang.Object options = [:])</code><br>Retrieve a list of Subgroups from a ClassificationGroup</td>
                         </tr>
                         
                         <tr class="rowColor">
@@ -939,12 +939,18 @@ if (location.href.indexOf('is-external=true') == -1) {
                             </li>
                         </ul>
                     
-                        <a name="getClassificationGroupSubgroups(java.lang.String, java.lang.String)"><!-- --></a>
+                        <a name="getClassificationGroupSubgroups(java.lang.String, java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getClassificationGroupSubgroups</strong>(java.lang.String classificationId, java.lang.String classificationGroupId)</h4>
-                                <p> Retrieve a Subgroup of a ClassificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of classificationGroups</DD></DL></p>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getClassificationGroupSubgroups</strong>(java.lang.String classificationId, java.lang.String classificationGroupId, java.lang.Object options = [:])</h4>
+                                <p> Retrieve a list of Subgroups from a ClassificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId
+ <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of classificationGroups</DD></DL></p>
                             </li>
                         </ul>
                     
