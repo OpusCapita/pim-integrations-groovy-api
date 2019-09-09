@@ -515,6 +515,13 @@ class PitGroovyApi {
 
     /**
      * Retrieve all attributeValues of a Product
+     * @param  options Optional
+     * <p>
+     * Key: variantId - The id of the variant. If provided, the values are returned for the variant instead of the product
+     * <p>
+     * <p>
+     * Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages
+     * <p>
      * @param  catalogId CatalogId
      * @param  productId ProductId
      * @param  options Optional
@@ -533,13 +540,16 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductAttributeValues(String catalogId, String productId, options = [:]) {
-        def languageIds = options.languageIds
-        def variantId = options.variantId
-
+    public Response getProductAttributeValues(String catalogId, String productId, def options=[:]) {
         def query = [:]
-        query.put('languageIds', languageIds.join(','))
-        query.put('variantId', variantId) 
+        def variantId = options.variantId
+        def languageIds = options.languageIds
+        if(variantId){
+            query.put("variantId", variantId)
+        }
+        if(languageIds){
+            query.put("languageIds", languageIds.join(","))
+        }
         String path = productAttributeValuesPath(catalogId, productId)
         restGet(path, query)
     }
