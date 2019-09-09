@@ -161,11 +161,18 @@ class PitGroovyApi {
         def variantId = options.variantId
 
         def query = [:]
-        query.put('languageIds', languageIds.join(','))
-        query.put('exclude', exclude.join(','))
-        query.put('include', include.join(','))
-        query.put("variantId", variantId)
-
+        if(languageIds){
+            query.put('languageIds', languageIds.join(','))    
+        }
+        if(exclude){
+            query.put('exclude', exclude.join(','))
+        }
+        if(include){
+            query.put('include', include.join(','))
+        }
+        if(variantId){
+            query.put('variantId', variantId)
+        }
         String path = productPath(catalogId, productId)
         restGet(path, query)
     }
@@ -189,8 +196,11 @@ class PitGroovyApi {
     public Response getClassification(String classificationId, options = [:])  {
         def query = [:]
         def include = options.include
+        if(include){
+            query.put('include', include.join(','))
+        }
         String path = classificationPath(classificationId)
-        query.put('include', include.join(','))
+        
         restGet(path, query)
     }
 
