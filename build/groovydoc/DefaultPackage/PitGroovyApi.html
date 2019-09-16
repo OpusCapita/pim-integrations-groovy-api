@@ -698,9 +698,6 @@ if (location.href.indexOf('is-external=true') == -1) {
  Key: contractId - If set, products will be filtered by this contractId
  <p>
  <p>
- Key: classificationGroupId - If set, products will be filtered by this classificationGroupId
- <p>
- <p>
  Key: statusIdFrom - If set, only products with at least this statusId will be returned
  <p>
  <p>
@@ -1050,13 +1047,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                             <li class="blockList">
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductAttributeValues</strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all attributeValues of a Product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
- <p>
- Key: variantId - The id of the variant. If provided, the values are returned for the variant instead of the product
- <p>
- <p>
- Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages
- <p></DD><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD><DD><code>options</code> -  Optional
+     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD><DD><code>options</code> -  Optional
  <p>
  Key: variantId - If set, the values are returned for the variant instead of the product.
  <p>

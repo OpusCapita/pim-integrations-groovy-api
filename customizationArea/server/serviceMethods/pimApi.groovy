@@ -380,9 +380,6 @@ class PitGroovyApi {
      * Key: contractId - If set, products will be filtered by this contractId
      * <p>
      * <p>
-     * Key: classificationGroupId - If set, products will be filtered by this classificationGroupId
-     * <p>
-     * <p>
      * Key: statusIdFrom - If set, only products with at least this statusId will be returned
      * <p>
      * <p>
@@ -404,8 +401,7 @@ class PitGroovyApi {
         def order = options.order
         def catalogId = options.catalogId
         def supplierId = options.supplierId
-        def contractId = options.contractI
-        def classificationGroupId = options.classificationGroupId
+        def contractId = options.contractId
         def statusIdFrom = options.statusIdFrom
         def statusIdTo = options.statusIdTo
         def query = [:]
@@ -429,9 +425,6 @@ class PitGroovyApi {
         }
         if(contractId){
             query.put("contractId", contractId)
-        }
-         if(classificationGroupId){
-            query.put("classificationGroupId", classificationGroupId)
         }
         if(statusIdFrom){
             query.put("statusIdFrom", statusIdFrom)
@@ -540,13 +533,6 @@ class PitGroovyApi {
 
     /**
      * Retrieve all attributeValues of a Product
-     * @param  options Optional
-     * <p>
-     * Key: variantId - The id of the variant. If provided, the values are returned for the variant instead of the product
-     * <p>
-     * <p>
-     * Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages
-     * <p>
      * @param  catalogId CatalogId
      * @param  productId ProductId
      * @param  options Optional
