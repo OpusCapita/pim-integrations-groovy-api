@@ -509,10 +509,10 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <p> Retrieve all Attributes<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
  <p>
- Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100
  <p>
  <p>
- Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ Key: offset - The field which should be used to determine how many items to skip at the beginning
  <p>
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -572,7 +572,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <p> Retrieve all Classifications<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
  <p>
- Key: sort - The field which should be used for sorting. Available values are productId and statusId
+ Key: sort - The field which should be used for sorting. Available values are classificationId and orderNo
  <p>
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -677,10 +677,10 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <p> Retrieve all products assigned to a ClassificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId</DD><DD><code>options</code> -  Optional
  <p>
- Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100
  <p>
  <p>
- Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ Key: offset - The field which should be used to determine how many items to skip at the beginning
  <p>
  <p>
  Key: sort - The field which should be used for sorting. Available values are productId and statusId
@@ -698,7 +698,7 @@ if (location.href.indexOf('is-external=true') == -1) {
  Key: contractId - If set, products will be filtered by this contractId
  <p>
  <p>
- Key: classificationId - If set, products will be filtered by this classificationId
+ Key: classificationGroupId - If set, products will be filtered by this classificationGroupId
  <p>
  <p>
  Key: statusIdFrom - If set, only products with at least this statusId will be returned
@@ -967,7 +967,7 @@ if (location.href.indexOf('is-external=true') == -1) {
  Key: offset - The field which should be used to determine how many items to skip at the beginning.
  <p>
  <p>
- Key: sort - The field which should be used for sorting. Available values are productId and statusId
+ Key: sort - The field which should be used for sorting. Available values are classificationGroupId, statusId and orderNo.
  <p>
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending

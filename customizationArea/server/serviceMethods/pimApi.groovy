@@ -284,7 +284,7 @@ class PitGroovyApi {
      * Key: offset - The field which should be used to determine how many items to skip at the beginning.
      * <p>
      * <p>
-     * Key: sort - The field which should be used for sorting. Available values are productId and statusId
+     * Key: sort - The field which should be used for sorting. Available values are classificationGroupId, statusId and orderNo.
      * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -359,10 +359,10 @@ class PitGroovyApi {
      * @param  classificationGroupId ClassificationGroupId
      * @param  options Optional
      * <p>
-     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100
      * <p>
      * <p>
-     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning
      * <p>
      * <p>
      * Key: sort - The field which should be used for sorting. Available values are productId and statusId
@@ -380,7 +380,7 @@ class PitGroovyApi {
      * Key: contractId - If set, products will be filtered by this contractId
      * <p>
      * <p>
-     * Key: classificationId - If set, products will be filtered by this classificationId
+     * Key: classificationGroupId - If set, products will be filtered by this classificationGroupId
      * <p>
      * <p>
      * Key: statusIdFrom - If set, only products with at least this statusId will be returned
@@ -404,8 +404,8 @@ class PitGroovyApi {
         def order = options.order
         def catalogId = options.catalogId
         def supplierId = options.supplierId
-        def contractId = options.contractId
-        def filterByClassificationId = options.filterByClassificationId
+        def contractId = options.contractI
+        def classificationGroupId = options.classificationGroupId
         def statusIdFrom = options.statusIdFrom
         def statusIdTo = options.statusIdTo
         def query = [:]
@@ -430,8 +430,8 @@ class PitGroovyApi {
         if(contractId){
             query.put("contractId", contractId)
         }
-        if(filterByClassificationId){
-            query.put("classificationId", filterByClassificationId)
+         if(classificationGroupId){
+            query.put("classificationGroupId", classificationGroupId)
         }
         if(statusIdFrom){
             query.put("statusIdFrom", statusIdFrom)
@@ -447,7 +447,7 @@ class PitGroovyApi {
      * Retrieve all Classifications
      * @param  options Optional
      * <p>
-     * Key: sort - The field which should be used for sorting. Available values are productId and statusId
+     * Key: sort - The field which should be used for sorting. Available values are classificationId and orderNo
      * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -479,10 +479,10 @@ class PitGroovyApi {
      * Retrieve all Attributes
      * @param options Optional
      * <p>
-     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100
      * <p>
      * <p>
-     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning
      * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
@@ -737,10 +737,13 @@ class PitGroovyApi {
     public Response getProductDocuments(String catalogId, String productId, options = [:]) {
         def languageIds = options.languageIds
         def variantId = options.variantId
-
         def query = [:]
-        query.put('languageIds', languageIds.join(','))
-        query.put('variantId', variantId)
+        if(languageIds){
+            query.put('languageIds', languageIds.join(','))
+        }
+        if(variantId){
+            query.put('variantId', variantId)
+        }
         String path = productDocumentsPath(catalogId, productId)
         restGet(path, query)
     }
@@ -792,7 +795,7 @@ class PitGroovyApi {
         def sort = options.sort
         def order = options.order
         def limit = options.limit
-        def offset
+        def offset = options.offset
         if(order){
             query.put("order", order)
         }
@@ -872,10 +875,10 @@ class PitGroovyApi {
         def offset = options.offset
         def sort = options.sort
         def order = options.order
-        def filterByCatalogId = options.filterByCatalogId
-        def filterBySupplierId = options.filterBySupplierId
+        def supplierId = options.supplierId
         def contractId = options.contractId
         def classificationId = options.classificationId
+        def classificationGroupdId = options.classificationGroupId
         def statusIdFrom = options.statusIdFrom
         def statusIdTo = options.statusIdTo
         def query = [:]
@@ -891,17 +894,17 @@ class PitGroovyApi {
         if(order){
             query.put("order", order)
         }
-        if(filterByCatalogId){
-            query.put("catalogId", filterByCatalogId)
-        }
-        if(filterBySupplierId){
-            query.put("supplierId", filterBySupplierId)
+        if(supplierId){
+            query.put("supplierId", supplierId)
         }
         if(contractId){
             query.put("contractId", contractId)
         }
         if(classificationId){
             query.put("classificationId", classificationId)
+        }
+        if(classificationGroupId){
+            query.put("classificationGroupId", classificationGroupId)
         }
         if(statusIdFrom){
             query.put("statusIdFrom", statusIdFrom)
@@ -962,9 +965,9 @@ class PitGroovyApi {
         def sort = options.sort
         def order = options.order
         def catalogId = options.catalogId
-        def filterBySupplierId = options.filterBySupplierId
         def contractId = options.contractId
         def classificationId = options.classificationId
+        def classificationGroupId = options.classificationGroupId
         def statusIdFrom = options.statusIdFrom
         def statusIdTo = options.statusIdTo
         def query = [:]
@@ -983,14 +986,14 @@ class PitGroovyApi {
         if(catalogId){
             query.put("catalogId", catalogId)
         }
-        if(filterBySupplierId){
-            query.put("filterBySupplierId", filterBySupplierId)
-        }
         if(contractId){
             query.put("contractId", contractId)
         }
         if(classificationId){
             query.put("classificationId", classificationId)
+        }
+        if(classificationGroupId){
+            query.put("classificationGroupId", classificationGroupId)
         }
         if(statusIdFrom){
             query.put("statusIdFrom", statusIdFrom)
@@ -1052,7 +1055,7 @@ class PitGroovyApi {
         def catalogId = options.catalogId
         def supplierId = options.supplierId
         def contractId = options.contractId
-        def filterByClassificationId = options.filterByClassificationId
+        def classificationGroupId = options.classificationGroupId
         def statusIdFrom = options.statusIdFrom
         def statusIdTo = options.statusIdTo
         def query = [:]
@@ -1077,8 +1080,8 @@ class PitGroovyApi {
         if(contractId){
             query.put("contractId", contractId)
         }
-        if(filterByClassificationId){
-            query.put("classificationId", filterByClassificationId)
+        if(classificationGroupId){
+            query.put("classificationGroupId", classificationGroupId)
         }
         if(statusIdFrom){
             query.put("statusIdFrom", statusIdFrom)
@@ -1139,8 +1142,8 @@ class PitGroovyApi {
         def order = options.order
         def catalogId = options.catalogId
         def supplierId = options.supplierId
-        def filterByContractId = options.filterByContractId
         def classificationId = options.classificationId
+        def classificationGroupId = options.classificationGroupId
         def statusIdFrom = options.statusIdFrom
         def statusIdTo = options.statusIdTo
         def query = [:]
@@ -1162,11 +1165,11 @@ class PitGroovyApi {
         if(supplierId){
             query.put("supplierId", supplierId)
         }
-        if(filterByContractId){
-            query.put("contractId", filterByContractId)
-        }
         if(classificationId){
             query.put("classificationId", classificationId)
+        }
+        if(classificationGroupId){
+            query.put("classificationGroupId", classificationGroupId)
         }
         if(statusIdFrom){
             query.put("statusIdFrom", statusIdFrom)
