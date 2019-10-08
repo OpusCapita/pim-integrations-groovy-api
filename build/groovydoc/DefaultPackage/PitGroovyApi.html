@@ -295,7 +295,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getClassificationGroup(java.lang.String, java.lang.String, def)">getClassificationGroup</a></strong>(java.lang.String classificationId, java.lang.String classificationGroupId, java.lang.Object options = [:])</code><br>Retrieve a classificationGroup</td>
+                            <td class="colLast"><code><strong><a href="#getClassificationGroup(java.lang.String, java.lang.String)">getClassificationGroup</a></strong>(java.lang.String classificationId, java.lang.String classificationGroupId)</code><br>Retrieve a classificationGroup</td>
                         </tr>
                         
                         <tr class="rowColor">
@@ -307,13 +307,13 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getClassificationGroupSubgroup(java.lang.String, java.lang.String)">getClassificationGroupSubgroup</a></strong>(java.lang.String classificationId, java.lang.String classificationGroupId)</code><br>Retrieve a Subgroups of a ClassificationGroup</td>
+                            <td class="colLast"><code><strong><a href="#getClassificationGroupSubgroups(java.lang.String, java.lang.String, def)">getClassificationGroupSubgroups</a></strong>(java.lang.String classificationId, java.lang.String classificationGroupId, java.lang.Object options = [:])</code><br>Retrieve a list of Subgroups from a ClassificationGroup</td>
                         </tr>
                         
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getClassificationGroupsByClassification(java.lang.String)">getClassificationGroupsByClassification</a></strong>(java.lang.String classificationId)</code><br>Retrieve all classificationGroup from a specific classification</td>
+                            <td class="colLast"><code><strong><a href="#getClassificationGroupsByClassification(java.lang.String, def)">getClassificationGroupsByClassification</a></strong>(java.lang.String classificationId, java.lang.Object options = [:])</code><br>Retrieve all classificationGroup from a specific classification</td>
                         </tr>
                         
                         <tr class="altColor">
@@ -349,7 +349,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getProductAssortments(java.lang.String, java.lang.String)">getProductAssortments</a></strong>(java.lang.String catalogId, java.lang.String productId)</code><br>Retrieve all Assortments of a Product</td>
+                            <td class="colLast"><code><strong><a href="#getProductAssortments(java.lang.String, java.lang.String, def)">getProductAssortments</a></strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</code><br>Retrieve all Assortments of a Product</td>
                         </tr>
                         
                         <tr class="altColor">
@@ -361,31 +361,31 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getProductClassificationGroups(java.lang.String, java.lang.String)">getProductClassificationGroups</a></strong>(java.lang.String catalogId, java.lang.String productId)</code><br>Retrieve all ClassificationGroups of a Product</td>
+                            <td class="colLast"><code><strong><a href="#getProductClassificationGroups(java.lang.String, java.lang.String, def)">getProductClassificationGroups</a></strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</code><br>Retrieve all ClassificationGroups of a Product</td>
                         </tr>
                         
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getProductDocuments(java.lang.String, java.lang.String)">getProductDocuments</a></strong>(java.lang.String catalogId, java.lang.String productId)</code><br>Retrieve all documents of a Product</td>
+                            <td class="colLast"><code><strong><a href="#getProductDocuments(java.lang.String, java.lang.String, def)">getProductDocuments</a></strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</code><br>Retrieve all documents of a Product</td>
                         </tr>
                         
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getProductPrices(java.lang.String, java.lang.String)">getProductPrices</a></strong>(java.lang.String catalogId, java.lang.String productId)</code><br>Retrieve all Prices of a Product</td>
+                            <td class="colLast"><code><strong><a href="#getProductPrices(java.lang.String, java.lang.String, def)">getProductPrices</a></strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</code><br>Retrieve all Prices of a Product</td>
                         </tr>
                         
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getProductRelations(java.lang.String, java.lang.String)">getProductRelations</a></strong>(java.lang.String catalogId, java.lang.String productId)</code><br>Retrieve all relations of a Product</td>
+                            <td class="colLast"><code><strong><a href="#getProductRelations(java.lang.String, java.lang.String, def)">getProductRelations</a></strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</code><br>Retrieve all relations of a Product</td>
                         </tr>
                         
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code><a href='../DefaultPackage/Response.html'>Response</a></code></td>
-                            <td class="colLast"><code><strong><a href="#getProductReverseRelations(java.lang.String, java.lang.String)">getProductReverseRelations</a></strong>(java.lang.String catalogId, java.lang.String productId)</code><br>Retrieve all reverse-relations of a Product</td>
+                            <td class="colLast"><code><strong><a href="#getProductReverseRelations(java.lang.String, java.lang.String, def)">getProductReverseRelations</a></strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</code><br>Retrieve all reverse-relations of a Product</td>
                         </tr>
                         
                         <tr class="altColor">
@@ -428,7 +428,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         
                         <tr class="altColor">
                             <td class="colFirst"><code>class java.lang.Object</code></td>
-                            <td class="colLast"><code>java.lang.Object#wait(long), java.lang.Object#wait(long, int), java.lang.Object#wait(), java.lang.Object#equals(java.lang.Object), java.lang.Object#toString(), java.lang.Object#hashCode(), java.lang.Object#getClass(), java.lang.Object#notify(), java.lang.Object#notifyAll()</code></td>
+                            <td class="colLast"><code>java.lang.Object#wait(long, int), java.lang.Object#wait(long), java.lang.Object#wait(), java.lang.Object#equals(java.lang.Object), java.lang.Object#toString(), java.lang.Object#hashCode(), java.lang.Object#getClass(), java.lang.Object#notify(), java.lang.Object#notifyAll()</code></td>
                         </tr>
                     </table>
                    </ul>
@@ -488,6 +488,12 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <p> Retrieve all AttributeSections<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
  <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p>
+ <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
  <p>
  <p>
@@ -502,6 +508,12 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllAttributes</strong>(java.lang.Object options = [:])</h4>
                                 <p> Retrieve all Attributes<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
+ <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning
+ <p>
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
  <p>
@@ -518,7 +530,16 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <p> Retrieve all boilerplates<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Returns:</B></DT><DD>List of all boilerplates</DD></DL><DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
  <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p>
+ <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+ <p>
+ <p>
+ Key: sort - The field which should be used for sorting. Available values are boilerplateId and statusId
  <p></DD></DL></p>
                             </li>
                         </ul>
@@ -527,14 +548,20 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllCatalogs</strong>(java.lang.Object options = [:])</h4>
-                                <p> Retrieve all Catalogs
+                                <p> Retrieve all Catalogs<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
+ <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p>
  <p>
  Key: sort - The field which should be used for sorting. Available values are catalogId and statusId
  <p>
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
- <p><DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Returns:</B></DT><DD>List of all Catalogs</DD></DL></p>
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of all Catalogs</DD></DL></p>
                             </li>
                         </ul>
                     
@@ -544,6 +571,9 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllClassifications</strong>(java.lang.Object options = [:])</h4>
                                 <p> Retrieve all Classifications<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
+ <p>
+ Key: sort - The field which should be used for sorting. Available values are classificationId and orderNo
+ <p>
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
  <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of all Classifications</DD></DL></p>
@@ -556,6 +586,12 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllContracts</strong>(java.lang.Object options = [:])</h4>
                                 <p> Retrieve all Contracts<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
+ <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p>
  <p>
  Key: sort - The field which should be used for sorting. Available values are contractId and statusId
  <p>
@@ -571,6 +607,12 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllManufacturers</strong>(java.lang.Object options = [:])</h4>
                                 <p> Retrieve all Manufacturers<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
+ <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p>
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
  <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of all Manufacturers</DD></DL></p>
@@ -595,6 +637,12 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllProductsByCatalogId</strong>(java.lang.String catalogId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all Products from a Catalog<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  catalogId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p>
  <p>
  Key: sort - The field which should be used for sorting. Available values are productId and statusId
  <p>
@@ -629,6 +677,12 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <p> Retrieve all products assigned to a ClassificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId</DD><DD><code>options</code> -  Optional
  <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning
+ <p>
+ <p>
  Key: sort - The field which should be used for sorting. Available values are productId and statusId
  <p>
  <p>
@@ -642,9 +696,6 @@ if (location.href.indexOf('is-external=true') == -1) {
  <p>
  <p>
  Key: contractId - If set, products will be filtered by this contractId
- <p>
- <p>
- Key: classificationId - If set, products will be filtered by this classificationId
  <p>
  <p>
  Key: statusIdFrom - If set, only products with at least this statusId will be returned
@@ -661,6 +712,12 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllProductsByClassificationId</strong>(java.lang.String classificationId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all Products from a Classification<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  classificationId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p>
  <p>
  Key: sort - The field which should be used for sorting. Available values are productId and statusId
  <p>
@@ -695,6 +752,12 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <p> Retrieve all Products from a Contract<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>contractId</code> -  contractId</DD><DD><code>options</code> -  Optional
  <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p>
+ <p>
  Key: sort - The field which should be used for sorting. Available values are productId and statusId
  <p>
  <p>
@@ -728,6 +791,12 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <p> Retrieve all Products from a Supplier<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>supplierId</code> -  supplierId</DD><DD><code>options</code> -  Optional
  <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p>
+ <p>
  Key: sort - The field which should be used for sorting. Available values are productId and statusId
  <p>
  <p>
@@ -760,6 +829,11 @@ if (location.href.indexOf('is-external=true') == -1) {
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAllSuppliers</strong>(java.lang.Object options = [:])</h4>
                                 <p> Retrieve all Suppliers<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
      <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
+ <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
  <p>
  Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
  <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of all Suppliers</DD></DL></p>
@@ -801,7 +875,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                             <li class="blockList">
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getAttributesByClassification</strong>(java.lang.String classificationId)</h4>
                                 <p> Retrieve all Attributes assigned to a Classification<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -              ClassificationId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of Attributes</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of Attributes</DD></DL></p>
                             </li>
                         </ul>
                     
@@ -840,25 +914,16 @@ if (location.href.indexOf('is-external=true') == -1) {
      <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>options</code> -  Optional
  <p>
  key: include - Fields which should be included
- <p>
- <p>
- Key: sort - The field which should be used for sorting. Available values are classificationId and orderNo
  <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>classification</DD></DL></p>
                             </li>
                         </ul>
                     
-                        <a name="getClassificationGroup(java.lang.String, java.lang.String, def)"><!-- --></a>
+                        <a name="getClassificationGroup(java.lang.String, java.lang.String)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getClassificationGroup</strong>(java.lang.String classificationId, java.lang.String classificationGroupId, java.lang.Object options = [:])</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getClassificationGroup</strong>(java.lang.String classificationId, java.lang.String classificationGroupId)</h4>
                                 <p> Retrieve a classificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId</DD><DD><code>options</code> -  Optional
- <p>
- Key: sort - The field which should be used for sorting. Available values are classificationGroupId, orderNo and statusId
- <p>
- <p>
- Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
- <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>classificationGroup</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId</DD></DL><DL><DT><B>Returns:</B></DT><DD>classificationGroup</DD></DL></p>
                             </li>
                         </ul>
                     
@@ -871,21 +936,39 @@ if (location.href.indexOf('is-external=true') == -1) {
                             </li>
                         </ul>
                     
-                        <a name="getClassificationGroupSubgroup(java.lang.String, java.lang.String)"><!-- --></a>
+                        <a name="getClassificationGroupSubgroups(java.lang.String, java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getClassificationGroupSubgroup</strong>(java.lang.String classificationId, java.lang.String classificationGroupId)</h4>
-                                <p> Retrieve a Subgroups of a ClassificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of classificationGroups</DD></DL></p>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getClassificationGroupSubgroups</strong>(java.lang.String classificationId, java.lang.String classificationGroupId, java.lang.Object options = [:])</h4>
+                                <p> Retrieve a list of Subgroups from a ClassificationGroup<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
+     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>classificationGroupId</code> -  ClassificationGroupId
+ <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of classificationGroups</DD></DL></p>
                             </li>
                         </ul>
                     
-                        <a name="getClassificationGroupsByClassification(java.lang.String)"><!-- --></a>
+                        <a name="getClassificationGroupsByClassification(java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getClassificationGroupsByClassification</strong>(java.lang.String classificationId)</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getClassificationGroupsByClassification</strong>(java.lang.String classificationId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all classificationGroup from a specific classification<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -              ClassificationId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of classificationGroups</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>classificationId</code> -  ClassificationId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+ <p>
+ <p>
+ Key: offset - The field which should be used to determine how many items to skip at the beginning.
+ <p>
+ <p>
+ Key: sort - The field which should be used for sorting. Available values are classificationGroupId, statusId and orderNo.
+ <p>
+ <p>
+ Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of classificationGroups</DD></DL></p>
                             </li>
                         </ul>
                     
@@ -940,16 +1023,22 @@ if (location.href.indexOf('is-external=true') == -1) {
  <p>
  Key: include - A list of field ids. If defined, the result will include the defined fields.
  <p>
+ <p>
+ Key: variantId - If set, the values are returned for the variant instead of the product.
+ <p>
  Available values - attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants</DD></DL><DL><DT><B>Returns:</B></DT><DD>A Response that contains the product</DD></DL></p>
                             </li>
                         </ul>
                     
-                        <a name="getProductAssortments(java.lang.String, java.lang.String)"><!-- --></a>
+                        <a name="getProductAssortments(java.lang.String, java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductAssortments</strong>(java.lang.String catalogId, java.lang.String productId)</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductAssortments</strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all Assortments of a Product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of Assortments</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: variantId - If set, the values are returned for the variant instead of the product.
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of Assortments</DD></DL></p>
                             </li>
                         </ul>
                     
@@ -958,58 +1047,76 @@ if (location.href.indexOf('is-external=true') == -1) {
                             <li class="blockList">
                                 <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductAttributeValues</strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all attributeValues of a Product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>options</code> -  Optional
+     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD><DD><code>options</code> -  Optional
  <p>
- Key: variantId - The id of the variant. If provided, the values are returned for the variant instead of the product
+ Key: variantId - If set, the values are returned for the variant instead of the product.
  <p>
  <p>
- Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages
- <p></DD><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of ProductAttributeValues</DD></DL></p>
+ Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of ProductAttributeValues</DD></DL></p>
                             </li>
                         </ul>
                     
-                        <a name="getProductClassificationGroups(java.lang.String, java.lang.String)"><!-- --></a>
+                        <a name="getProductClassificationGroups(java.lang.String, java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductClassificationGroups</strong>(java.lang.String catalogId, java.lang.String productId)</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductClassificationGroups</strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all ClassificationGroups of a Product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of ClassificationGroups</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: variantId - If set, the values are returned for the variant instead of the product.
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of ClassificationGroups</DD></DL></p>
                             </li>
                         </ul>
                     
-                        <a name="getProductDocuments(java.lang.String, java.lang.String)"><!-- --></a>
+                        <a name="getProductDocuments(java.lang.String, java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductDocuments</strong>(java.lang.String catalogId, java.lang.String productId)</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductDocuments</strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all documents of a Product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of documents</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: variantId - If set, the values are returned for the variant instead of the product.
+ <p>
+ <p>
+ Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of documents</DD></DL></p>
                             </li>
                         </ul>
                     
-                        <a name="getProductPrices(java.lang.String, java.lang.String)"><!-- --></a>
+                        <a name="getProductPrices(java.lang.String, java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductPrices</strong>(java.lang.String catalogId, java.lang.String productId)</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductPrices</strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all Prices of a Product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of Prices</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: variantId - If set, the values are returned for the variant instead of the product.
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of Prices</DD></DL></p>
                             </li>
                         </ul>
                     
-                        <a name="getProductRelations(java.lang.String, java.lang.String)"><!-- --></a>
+                        <a name="getProductRelations(java.lang.String, java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductRelations</strong>(java.lang.String catalogId, java.lang.String productId)</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductRelations</strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all relations of a Product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of relations</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: variantId - If set, the values are returned for the variant instead of the product.
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of relations</DD></DL></p>
                             </li>
                         </ul>
                     
-                        <a name="getProductReverseRelations(java.lang.String, java.lang.String)"><!-- --></a>
+                        <a name="getProductReverseRelations(java.lang.String, java.lang.String, def)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductReverseRelations</strong>(java.lang.String catalogId, java.lang.String productId)</h4>
+                                <h4><a href='../DefaultPackage/Response.html'>Response</a> <strong>getProductReverseRelations</strong>(java.lang.String catalogId, java.lang.String productId, java.lang.Object options = [:])</h4>
                                 <p> Retrieve all reverse-relations of a Product<DL><DT><B>throws:</B></DT><DD>NotAuthorizedException</DD></DL><DL><DT><B>throws:</B></DT><DD>UnknownHostException</DD></DL><DL><DT><B>throws:</B></DT><DD>GroovyAPIInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PITInternalErrorException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMAccessDeniedException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMUnreachableException</DD></DL><DL><DT><B>throws:</B></DT><DD>PIMInternalErrorException</DD></DL>
-     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD></DL><DL><DT><B>Returns:</B></DT><DD>List of ReverseRelations</DD></DL></p>
+     <DL><DT><B>Parameters:</B></DT><DD><code>catalogId</code> -  CatalogId</DD><DD><code>productId</code> -  ProductId</DD><DD><code>options</code> -  Optional
+ <p>
+ Key: variantId - If set, the values are returned for the variant instead of the product.
+ <p></DD></DL><DL><DT><B>Returns:</B></DT><DD>List of ReverseRelations</DD></DL></p>
                             </li>
                         </ul>
                     

@@ -140,8 +140,11 @@ class PitGroovyApi {
      * <p>
      * Key: include - A list of field ids. If defined, the result will include the defined fields.
      * <p>
+     * <p>
+     * Key: variantId - If set, the values are returned for the variant instead of the product.
+     * <p>
      * Available values - attributeValues, classificationGroupAssociations, contracts, docAssociations, extProductId, keywords, master , manufacturerId, manufacturerName, mfgProductId, prices, productIdExtension, relations, reverseRelations, salesUnitOfMeasureId, statusId, supplierId, unitOfMeasureId, validFrom , validTo, variants
-     * @return           A Response that contains the product
+     * @return A Response that contains the product
      * @throws NotAuthorizedException
      * @throws UnknownHostException
      * @throws GroovyAPIInternalErrorException
@@ -152,10 +155,10 @@ class PitGroovyApi {
      */
 
     public Response getProduct(String catalogId, String productId, HashMap options = [:]) {
-
         def languageIds = options.languageIds
         def exclude = options.exclude
         def include = options.include
+        def variantId = options.variantId
 
         def query = [:]
         if(languageIds){
@@ -167,6 +170,9 @@ class PitGroovyApi {
         if(include){
             query.put('include', include.join(','))
         }
+        if(variantId){
+            query.put('variantId', variantId)
+        }
         String path = productPath(catalogId, productId)
         restGet(path, query)
     }
@@ -177,9 +183,6 @@ class PitGroovyApi {
      * @param options Optional
      * <p>
      * key: include - Fields which should be included
-     * <p>
-     * <p>
-     * Key: sort - The field which should be used for sorting. Available values are classificationId and orderNo
      * <p>
      * @return classification
      * @throws NotAuthorizedException
@@ -193,14 +196,6 @@ class PitGroovyApi {
     public Response getClassification(String classificationId, options = [:])  {
         def query = [:]
         def include = options.include
-        def sort = options.sort
-        def order = options.order
-        if(order){
-            query.put("order", order)
-        }
-        if(sort){
-            query.put("sort", sort)
-        }
         if(include){
             query.put('include', include.join(','))
         }
@@ -213,13 +208,6 @@ class PitGroovyApi {
      * Retrieve a classificationGroup
      * @param  classificationId ClassificationId
      * @param  classificationGroupId ClassificationGroupId
-     * @param  options Optional
-     * <p>
-     * Key: sort - The field which should be used for sorting. Available values are classificationGroupId, orderNo and statusId
-     * <p>
-     * <p>
-     * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
-     * <p>
      * @return classificationGroup
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -229,18 +217,9 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getClassificationGroup(String classificationId, String classificationGroupId, options=[:]) {
-        def query = [:]
-        def sort = options.sort
-        def order = options.order
-        if(order){
-            query.put("order", order)
-        }
-        if(sort){
-            query.put("sort", sort)
-        }
+    public Response getClassificationGroup(String classificationId, String classificationGroupId) {
         String path = classificationGroupPath(classificationId, classificationGroupId)
-        restGet(path, query)
+        restGet(path)
     }
 
     /**
@@ -262,9 +241,15 @@ class PitGroovyApi {
     }
 
     /**
-     * Retrieve a Subgroups of a ClassificationGroup
+     * Retrieve a list of Subgroups from a ClassificationGroup
      * @param classificationId ClassificationId
      * @param classificationGroupId ClassificationGroupId
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
      * @return List of classificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -274,14 +259,36 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getClassificationGroupSubgroup(String classificationId, String classificationGroupId) {
+    public Response getClassificationGroupSubgroups(String classificationId, String classificationGroupId, options = [:]) {
+        def limit = options.limit
+        def offset = options.offset
+        def query = [:]
+        if(limit){
+            query.put('limit', limit)
+        }
+        if(offset){
+            query.put('offset', offset)
+        }
         String path = classificationGroupSubgroupPath(classificationId, classificationGroupId)
-        restGet(path)
+        restGet(path, query)
     }
 
     /**
      * Retrieve all classificationGroup from a specific classification
-     * @param  classificationId             ClassificationId
+     * @param  classificationId ClassificationId
+     * @param  options Optional
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
+     * <p>
+     * Key: sort - The field which should be used for sorting. Available values are classificationGroupId, statusId and orderNo.
+     * <p>
+     * <p>
+     * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+     * <p>
      * @return List of classificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -291,14 +298,31 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getClassificationGroupsByClassification(String classificationId) {
+    public Response getClassificationGroupsByClassification(String classificationId, options=[:]) {
+        def query = [:]
+        def sort = options.sort
+        def order = options.order
+        def limit = options.limit
+        def offset = options.offset
+        if(order){
+            query.put("order", order)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
+        }
         String path = classificationGroupsPath(classificationId)
-        restGet(path)
+        restGet(path, query)
     }
 
     /**
      * Retrieve all Attributes assigned to a Classification
-     * @param  classificationId             ClassificationId
+     * @param  classificationId ClassificationId
      * @return List of Attributes
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -335,6 +359,12 @@ class PitGroovyApi {
      * @param  classificationGroupId ClassificationGroupId
      * @param  options Optional
      * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning
+     * <p>
+     * <p>
      * Key: sort - The field which should be used for sorting. Available values are productId and statusId
      * <p>
      * <p>
@@ -348,9 +378,6 @@ class PitGroovyApi {
      * <p>
      * <p>
      * Key: contractId - If set, products will be filtered by this contractId
-     * <p>
-     * <p>
-     * Key: classificationId - If set, products will be filtered by this classificationId
      * <p>
      * <p>
      * Key: statusIdFrom - If set, only products with at least this statusId will be returned
@@ -368,13 +395,53 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllProductsByClassificationGroup(String classificationId, String classificationGroupId, options=[:]) {
+        def limit = options.limit
+        def offset = options.offset
+        def sort = options.sort
+        def order = options.order
+        def catalogId = options.catalogId
+        def supplierId = options.supplierId
+        def contractId = options.contractId
+        def statusIdFrom = options.statusIdFrom
+        def statusIdTo = options.statusIdTo
+        def query = [:]
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
+        if(order){
+            query.put("order", order)
+        }
+        if(catalogId){
+            query.put("catalogId", catalogId)
+        }
+        if(supplierId){
+            query.put("supplierId", supplierId)
+        }
+        if(contractId){
+            query.put("contractId", contractId)
+        }
+        if(statusIdFrom){
+            query.put("statusIdFrom", statusIdFrom)
+        }
+        if(statusIdTo){
+            query.put("statusIdTo", statusIdTo)
+        }
         String path = productsByClassificationGroupPath(classificationId, classificationGroupId)
-        restGet(path, options)
+        restGet(path, query)
     }
 
     /**
      * Retrieve all Classifications
      * @param  options Optional
+     * <p>
+     * Key: sort - The field which should be used for sorting. Available values are classificationId and orderNo
+     * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
@@ -390,8 +457,12 @@ class PitGroovyApi {
     public Response getAllClassifications(options = [:]) {
         def query = [:]
         def order = options.order
+        def sort = options.sort
         if(order){
             query.put("order", order)
+        }
+        if(sort){
+            query.put("sort", sort)
         }
         String path = generalClassificationPath()
         restGet(path, query)
@@ -399,7 +470,13 @@ class PitGroovyApi {
 
     /**
      * Retrieve all Attributes
-     * @param  options Optional
+     * @param options Optional
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning
+     * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
@@ -419,11 +496,19 @@ class PitGroovyApi {
         def query = [:]
         def sort = options.sort
         def order = options.order
+        def limit = options.limit
+        def offset = options.offset
         if(order){
             query.put("order", order)
         }
         if(sort){
             query.put("sort", sort)
+        }
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
         }
         String path = generalAttributePath()
         restGet(path, query)
@@ -448,15 +533,15 @@ class PitGroovyApi {
 
     /**
      * Retrieve all attributeValues of a Product
-     * @param  options Optional
-     * <p>
-     * Key: variantId - The id of the variant. If provided, the values are returned for the variant instead of the product
-     * <p>
-     * <p>
-     * Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages
-     * <p>
      * @param  catalogId CatalogId
      * @param  productId ProductId
+     * @param  options Optional
+     * <p>
+     * Key: variantId - If set, the values are returned for the variant instead of the product.
+     * <p>
+     * <p>
+     * Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
+     * <p>
      * @return List of ProductAttributeValues
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -466,7 +551,7 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductAttributeValues(String catalogId, String productId,def options=[:]) {
+    public Response getProductAttributeValues(String catalogId, String productId, def options=[:]) {
         def query = [:]
         def variantId = options.variantId
         def languageIds = options.languageIds
@@ -484,6 +569,10 @@ class PitGroovyApi {
      * Retrieve all ClassificationGroups of a Product
      * @param  catalogId CatalogId
      * @param  productId ProductId
+     * @param  options Optional
+     * <p>
+     * Key: variantId - If set, the values are returned for the variant instead of the product.
+     * <p>
      * @return List of ClassificationGroups
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -493,15 +582,24 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductClassificationGroups(String catalogId, String productId) {
+    public Response getProductClassificationGroups(String catalogId, String productId, options = [:]) {
+        def variantId = options.variantId
+        def query = [:]
+        if(variantId){
+            query.put("variantId", variantId)
+        }
         String path = productClassificationGroupsPath(catalogId, productId)
-        restGet(path)
+        restGet(path, query)
     }
 
     /**
      * Retrieve all Assortments of a Product
      * @param  catalogId CatalogId
      * @param  productId ProductId
+     * @param  options Optional
+     * <p>
+     * Key: variantId - If set, the values are returned for the variant instead of the product.
+     * <p>
      * @return List of Assortments
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -511,15 +609,24 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductAssortments(String catalogId, String productId) {
+    public Response getProductAssortments(String catalogId, String productId, options = [:]) {
+          def variantId = options.variantId
+        def query = [:]
+        if(variantId){
+            query.put("variantId", variantId)
+        }
         String path = productAssortmentPath(catalogId, productId)
-        restGet(path)
+        restGet(path, query)
     }
 
     /**
      * Retrieve all Prices of a Product
      * @param  catalogId CatalogId
      * @param  productId ProductId
+     * @param  options Optional
+     * <p>
+     * Key: variantId - If set, the values are returned for the variant instead of the product.
+     * <p>
      * @return List of Prices
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -529,15 +636,24 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductPrices(String catalogId, String productId) {
+    public Response getProductPrices(String catalogId, String productId, options = [:]) {
+        def variantId = options.variantId
+        def query = [:]
+        if(variantId){
+            query.put("variantId", variantId)
+        }
         String path = productPricesPath(catalogId, productId)
-        restGet(path)
+        restGet(path, query)
     }
 
     /**
      * Retrieve all relations of a Product
      * @param  catalogId CatalogId
      * @param  productId ProductId
+     * @param  options Optional
+     * <p>
+     * Key: variantId - If set, the values are returned for the variant instead of the product.
+     * <p>
      * @return List of relations
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -547,15 +663,24 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductRelations(String catalogId, String productId) {
+    public Response getProductRelations(String catalogId, String productId, options = [:]) {
+        def variantId = options.variantId
+        def query = [:]
+        if(variantId){
+            query.put("variantId", variantId)
+        }
         String path = productRelationsPath(catalogId, productId)
-        restGet(path)
+        restGet(path, query)
     }
 
     /**
      * Retrieve all reverse-relations of a Product
      * @param  catalogId CatalogId
      * @param  productId ProductId
+     * @param  options Optional
+     * <p>
+     * Key: variantId - If set, the values are returned for the variant instead of the product.
+     * <p>
      * @return List of ReverseRelations
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -565,15 +690,27 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductReverseRelations(String catalogId, String productId) {
+    public Response getProductReverseRelations(String catalogId, String productId, options = [:]) {
+        def variantId = options.variantId
+        def query = [:]
+        if(variantId){
+            query.put("variantId", variantId)
+        }
         String path = productReverseRelationsPath(catalogId, productId)
-        restGet(path)
+        restGet(path, query)
     }
 
     /**
      * Retrieve all documents of a Product
      * @param  catalogId CatalogId
      * @param  productId ProductId
+     * @param  options Optional
+     * <p>
+     * Key: variantId - If set, the values are returned for the variant instead of the product.
+     * <p>
+     * <p>
+     * Key: languageIds - All language-specific fields will be filtered to only include languages with the matching languageIds. If not provided, all language-specific fields are returned in all languages.
+     * <p>
      * @return List of documents
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -583,9 +720,18 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getProductDocuments(String catalogId, String productId) {
+    public Response getProductDocuments(String catalogId, String productId, options = [:]) {
+        def languageIds = options.languageIds
+        def variantId = options.variantId
+        def query = [:]
+        if(languageIds){
+            query.put('languageIds', languageIds.join(','))
+        }
+        if(variantId){
+            query.put('variantId', variantId)
+        }
         String path = productDocumentsPath(catalogId, productId)
-        restGet(path)
+        restGet(path, query)
     }
 
     /**
@@ -608,6 +754,13 @@ class PitGroovyApi {
 
     /**
      * Retrieve all Catalogs
+     * @param  options Optional
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
      * <p>
      * Key: sort - The field which should be used for sorting. Available values are catalogId and statusId
      * <p>
@@ -627,12 +780,18 @@ class PitGroovyApi {
         def query = [:]
         def sort = options.sort
         def order = options.order
+        def limit = options.limit
+        def offset = options.offset
         if(order){
             query.put("order", order)
         }
         if(sort){
             query.put("sort", sort)
         }
+        if(offset){
+            query.put("offset", offset)
+        }
+        query.put("limit", limit)
         String path = generalCatalogsPath()
         restGet(path, query)
     }
@@ -658,6 +817,12 @@ class PitGroovyApi {
      * Retrieve all Products from a Catalog
      * @param  catalogId catalogId
      * @param  options Optional
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
      * <p>
      * Key: sort - The field which should be used for sorting. Available values are productId and statusId
      * <p>
@@ -691,15 +856,62 @@ class PitGroovyApi {
      * @throws PIMUnreachableException
      * @throws PIMInternalErrorException
      */
-    public Response getAllProductsByCatalogId(String catalogId, options=[:]) {
+    public Response getAllProductsByCatalogId(String catalogId, options = [:]) {
+        def limit = options.limit
+        def offset = options.offset
+        def sort = options.sort
+        def order = options.order
+        def supplierId = options.supplierId
+        def contractId = options.contractId
+        def classificationId = options.classificationId
+        def classificationGroupdId = options.classificationGroupId
+        def statusIdFrom = options.statusIdFrom
+        def statusIdTo = options.statusIdTo
+        def query = [:]
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
+        if(order){
+            query.put("order", order)
+        }
+        if(supplierId){
+            query.put("supplierId", supplierId)
+        }
+        if(contractId){
+            query.put("contractId", contractId)
+        }
+        if(classificationId){
+            query.put("classificationId", classificationId)
+        }
+        if(classificationGroupId){
+            query.put("classificationGroupId", classificationGroupId)
+        }
+        if(statusIdFrom){
+            query.put("statusIdFrom", statusIdFrom)
+        }
+        if(statusIdTo){
+            query.put("statusIdTo", statusIdTo)
+        }
         String path = allProductsByCatalogPath(catalogId)
-        restGet(path, options)
+        restGet(path, query)
     }
 
     /**
      * Retrieve all Products from a Supplier
      * @param  supplierId supplierId
      * @param  options Optional
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
      * <p>
      * Key: sort - The field which should be used for sorting. Available values are productId and statusId
      * <p>
@@ -734,13 +946,60 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllProductsBySupplierId(String supplierId, options=[:]) {
+        def limit = options.limit
+        def offset = options.offset
+        def sort = options.sort
+        def order = options.order
+        def catalogId = options.catalogId
+        def contractId = options.contractId
+        def classificationId = options.classificationId
+        def classificationGroupId = options.classificationGroupId
+        def statusIdFrom = options.statusIdFrom
+        def statusIdTo = options.statusIdTo
+        def query = [:]
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
+        if(order){
+            query.put("order", order)
+        }
+        if(catalogId){
+            query.put("catalogId", catalogId)
+        }
+        if(contractId){
+            query.put("contractId", contractId)
+        }
+        if(classificationId){
+            query.put("classificationId", classificationId)
+        }
+        if(classificationGroupId){
+            query.put("classificationGroupId", classificationGroupId)
+        }
+        if(statusIdFrom){
+            query.put("statusIdFrom", statusIdFrom)
+        }
+        if(statusIdTo){
+            query.put("statusIdTo", statusIdTo)
+        }
         String path = allProductsBySupplierPath(supplierId)
-        restGet(path, options)
+        restGet(path, query)
     }
      /**
      * Retrieve all Products from a Classification
      * @param  classificationId classificationId
      * @param  options Optional
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
      * <p>
      * Key: sort - The field which should be used for sorting. Available values are productId and statusId
      * <p>
@@ -775,13 +1034,60 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllProductsByClassificationId(String classificationId, options=[:]) {
+        def limit = options.limit
+        def offset = options.offset
+        def sort = options.sort
+        def order = options.order
+        def catalogId = options.catalogId
+        def supplierId = options.supplierId
+        def contractId = options.contractId
+        def classificationGroupId = options.classificationGroupId
+        def statusIdFrom = options.statusIdFrom
+        def statusIdTo = options.statusIdTo
+        def query = [:]
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
+        if(order){
+            query.put("order", order)
+        }
+        if(catalogId){
+            query.put("catalogId", catalogId)
+        }
+        if(supplierId){
+            query.put("supplierId", supplierId)
+        }
+        if(contractId){
+            query.put("contractId", contractId)
+        }
+        if(classificationGroupId){
+            query.put("classificationGroupId", classificationGroupId)
+        }
+        if(statusIdFrom){
+            query.put("statusIdFrom", statusIdFrom)
+        }
+        if(statusIdTo){
+            query.put("statusIdTo", statusIdTo)
+        }
         String path = allProductsByClassificationPath(classificationId)
-        restGet(path, options)
+        restGet(path, query)
     }
      /**
      * Retrieve all Products from a Contract
      * @param  contractId contractId
      * @param  options Optional
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
      * <p>
      * Key: sort - The field which should be used for sorting. Available values are productId and statusId
      * <p>
@@ -816,13 +1122,60 @@ class PitGroovyApi {
      * @throws PIMInternalErrorException
      */
     public Response getAllProductsByContractId(String contractId, options=[:]) {
+        def limit = options.limit
+        def offset = options.offset
+        def sort = options.sort
+        def order = options.order
+        def catalogId = options.catalogId
+        def supplierId = options.supplierId
+        def classificationId = options.classificationId
+        def classificationGroupId = options.classificationGroupId
+        def statusIdFrom = options.statusIdFrom
+        def statusIdTo = options.statusIdTo
+        def query = [:]
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
+        }
+        if(sort){
+            query.put("sort", sort)
+        }
+        if(order){
+            query.put("order", order)
+        }
+        if(catalogId){
+            query.put("catalogId", catalogId)
+        }
+        if(supplierId){
+            query.put("supplierId", supplierId)
+        }
+        if(classificationId){
+            query.put("classificationId", classificationId)
+        }
+        if(classificationGroupId){
+            query.put("classificationGroupId", classificationGroupId)
+        }
+        if(statusIdFrom){
+            query.put("statusIdFrom", statusIdFrom)
+        }
+        if(statusIdTo){
+            query.put("statusIdTo", statusIdTo)
+        }
         String path = allProductsByContractPath(contractId)
-        restGet(path, options)
+        restGet(path, query)
     }
 
     /**
      * Retrieve all Contracts
      * @param  options Optional
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
      * <p>
      * Key: sort - The field which should be used for sorting. Available values are contractId and statusId
      * <p>
@@ -842,11 +1195,19 @@ class PitGroovyApi {
         def query = [:]
         def sort = options.sort
         def order = options.order
+        def limit = options.limit
+        def offset = options.offset
         if(order){
             query.put("order", order)
         }
         if(sort){
             query.put("sort", sort)
+        }
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
         }
         String path = generalContractsPath()
         restGet(path, query)
@@ -890,6 +1251,11 @@ class PitGroovyApi {
      * Retrieve all Suppliers
      * @param  options Optional
      * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
      * @return List of all Suppliers
@@ -904,8 +1270,16 @@ class PitGroovyApi {
     public Response getAllSuppliers(options=[:]) {
         def query = [:]
         def order = options.order
+        def limit = options.limit
+        def offset = options.offset
         if(order){
             query.put("order", order)
+        }
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
         }
         String path = generalSuppliersPath()
         restGet(path, query)
@@ -915,6 +1289,12 @@ class PitGroovyApi {
     /**
      * Retrieve all Manufacturers
      * @param  options Optional
+     * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
      * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
@@ -930,8 +1310,16 @@ class PitGroovyApi {
     public Response getAllManufacturers(options=[:]) {
         def query = [:]
         def order = options.order
+        def limit = options.limit
+        def offset = options.offset
         if(order){
             query.put("order", order)
+        }
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
         }
         String path = generalManufacturersPath()
         restGet(path, query)
@@ -959,6 +1347,12 @@ class PitGroovyApi {
      * Retrieve all AttributeSections
      * @param  options Optional
      * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
+     * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
      * <p>
      * <p>
@@ -977,11 +1371,19 @@ class PitGroovyApi {
         def query = [:]
         def sort = options.sort
         def order = options.order
+        def limit = options.limit
+        def offset = options.offset
         if(order){
             query.put("order", order)
         }
         if(sort){
             query.put("sort", sort)
+        }
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
         }
         String path = generalAttributeSectionPath()
         restGet(path, query)
@@ -1115,7 +1517,16 @@ class PitGroovyApi {
      * @return List of all boilerplates
      * @param  options Optional
      * <p>
+     * Key: limit - The field which should be used for a limit of how much items should returned. By default the value is 100.
+     * <p>
+     * <p>
+     * Key: offset - The field which should be used to determine how many items to skip at the beginning.
+     * <p>
+     * <p>
      * Key: order - The order in which the result should be sorted. Available values are asc for ascending and desc for descending
+     * <p>
+     * <p>
+     * Key: sort - The field which should be used for sorting. Available values are boilerplateId and statusId
      * <p>
      * @throws NotAuthorizedException
      * @throws UnknownHostException
@@ -1129,11 +1540,19 @@ class PitGroovyApi {
         def query = [:]
         def sort = options.sort
         def order = options.order
+        def limit = options.limit
+        def offset = options.offset
         if(order){
             query.put("order", order)
         }
         if(sort){
             query.put("sort", sort)
+        }
+        if(limit){
+            query.put("limit", limit)
+        }
+        if(offset){
+            query.put("offset", offset)
         }
         String path = generalBoilerplatePath()
         restGet(path,query)
