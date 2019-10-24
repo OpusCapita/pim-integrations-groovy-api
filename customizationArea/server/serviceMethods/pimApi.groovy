@@ -791,7 +791,9 @@ class PitGroovyApi {
         if(offset){
             query.put("offset", offset)
         }
-        query.put("limit", limit)
+        if(limit){
+            query.put("limit", limit)
+        }
         String path = generalCatalogsPath()
         restGet(path, query)
     }
@@ -1592,8 +1594,7 @@ class PitGroovyApi {
             }
             handleException(e)
         }
-
-        return new Response(response.data.result)
+        return new Response(response.data)
     }
 
 
@@ -1651,15 +1652,27 @@ class PitGroovyApi {
 
 class Response {
     private def value
+    private def meta
+    private def status
     private boolean isEmpty = false
 
-    public Response(def value) {
-        this.value = value
+    public Response(def receivedData) {
+        this.value = receivedData.result
+        this.meta = receivedData.meta
+        this.status = receivedData.status
         isEmpty = value ? false : true
     }
 
     public def getValue(){
         value
+    }
+
+    public def getMeta(){
+        meta
+    }
+
+    public def getStatus(){
+        status
     }
 
     public boolean getIsEmpty(){
