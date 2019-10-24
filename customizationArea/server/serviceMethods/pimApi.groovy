@@ -1656,10 +1656,10 @@ class Response {
     private def status
     private boolean isEmpty = false
 
-    public Response(def recievedData) {
-        this.value = recievedData.result
-        this.meta = recievedData.meta
-        this.status = recievedData.status
+    public Response(def receivedData) {
+        this.value = receivedData.result
+        this.meta = receivedData.meta
+        this.status = receivedData.status
         isEmpty = value ? false : true
     }
 
